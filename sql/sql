@@ -1,0 +1,32 @@
+DROP DATABASE controle_frequencia;
+CREATE DATABASE controle_frequencia;
+USE controle_frequencia;
+
+CREATE TABLE usuarios (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(255) NOT NULL,
+    email VARCHAR(255) NOT NULL,
+    senha VARCHAR(255) NOT NULL,
+    telefone VARCHAR(20),
+    tipo_usuario VARCHAR(50)
+);
+
+CREATE TABLE tipo_usuario (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    tipo ENUM('Professor', 'Funcionário de suporte ao aluno', 'Funcionário de manutenção', 'Funcionário de segurança', 'Estagiário') NOT NULL
+);
+
+CREATE TABLE frequencia (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(255) NOT NULL,
+    tipo_usuario VARCHAR(255) NOT NULL,
+    dia date,
+    hora time,
+    presenca ENUM('Presente', 'Ausente') NOT NULL
+);
+
+INSERT INTO usuarios (nome, email, senha, telefone, tipo_usuario) VALUES ('Claudio', 'claudio@admin.com', '123', '83911112222', 'Administrador');
+
+
+select * from usuarios;
+select * from frequencia;
