@@ -45,6 +45,7 @@ $resultUsuarios = mysqli_query($conexao, $queryUsuarios);
                 <a href="principal.php"> <button id="butao_selecionado">Início</button></a>
                 <a href="funcionarios.php"><button>Funcionários</button></a>
                 <a href="frequencia_funcionarios.php"><button>Frequência dos funcionários</button></a>
+                <a href="perfil.php"><button>Perfil</button></a>
                 <a href="javascript:void(0);" onclick="confirmarSaida();"> <button class="butao">Sair</button></a>
             </ul>
         </div>

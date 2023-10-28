@@ -45,6 +45,7 @@ $resultUsuarios = mysqli_query($conexao, $queryUsuarios);
                 <a href="principal.php"> <button id="butao_selecionado">Início</button></a>
                 <a href="funcionarios.php"><button>Funcionários</button></a>
                 <a href="frequencia_funcionarios.php"><button>Frequência dos funcionários</button></a>
+                <a href="perfil.php"><button>Perfil</button></a>
                 <a href="javascript:void(0);" onclick="confirmarSaida();"> <button class="butao">Sair</button></a>
             </ul>
         </div>
@@ -56,7 +57,7 @@ while ($rowUsuario = mysqli_fetch_assoc($resultUsuarios)) {
     $tipoUsuario = $rowUsuario['tipo_usuario'];
 
     // Consulta SQL para obter os funcionários de um tipo de usuário específico
-    $queryFuncionarios = "SELECT nome, dia, hora, presenca FROM frequencia WHERE tipo_usuario = '$tipoUsuario'";
+    $queryFuncionarios = "SELECT nome, dia, hora, turno, presenca FROM frequencia WHERE tipo_usuario = '$tipoUsuario'";
     $resultFuncionarios = mysqli_query($conexao, $queryFuncionarios);
     ?>
 
@@ -67,6 +68,7 @@ while ($rowUsuario = mysqli_fetch_assoc($resultUsuarios)) {
                 <th>Nome</th>
                 <th>Dia</th>
                 <th>Hora</th>
+                <th>Turno</th>
                 <th>Presença</th>
             </tr>
         </thead>
@@ -78,6 +80,7 @@ while ($rowUsuario = mysqli_fetch_assoc($resultUsuarios)) {
                 echo "<td>" . $rowFuncionario['nome'] . "</td>";
                 echo "<td>" . $rowFuncionario['dia'] . "</td>";
                 echo "<td>" . $rowFuncionario['hora'] . "</td>";
+                echo "<td>" . $rowFuncionario['turno'] . "</td>";
                 echo "<td>" . $rowFuncionario['presenca'] . "</td>";
                 echo "</tr>";
             }

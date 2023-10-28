@@ -11,16 +11,47 @@ if (!isset($_SESSION['nome']) || !isset($_SESSION['tipo_usuario'])) {
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $dia = $_POST['dia'];
     $hora = $_POST['hora'];
+    $turno = $_POST['turno'];
 
-    // Defina o valor de presenca com base na lógica do seu aplicativo
-    // Suponhamos que você queira definir "Presença" se a hora atual for menor que 12:00 e "Ausente" caso contrário.
-    $presenca = (strtotime($hora) < strtotime("18:00:00")) ? 'Presente' : 'Ausente';
+    // Defina o valor de presença com base no turno escolhido
+    switch ($turno) {
+        case 'Manhã':
+            $limitePresencaInicio = '07:00:00';
+            $limitePresencaFim = '12:00:00';
+            break;
+        case 'Tarde':
+            $limitePresencaInicio = '13:00:00';
+            $limitePresencaFim = '17:00:00';
+            break;
+        case 'Noite':
+            $limitePresencaInicio = '18:00:00';
+            $limitePresencaFim = '21:00:00';
+            break;
+        case 'Integral':
+            $limitePresencaInicio = '07:00:00';
+            $limitePresencaFim = '00:00:00';
+            break;
+        default:
+            $limitePresencaInicio = '00:00:00';
+            $limitePresencaFim = '00:00:00';
+    }
+
+    // Verifique se a hora da presença está dentro dos limites
+    $horaPresenca = strtotime($hora);
+    $limiteInicio = strtotime($limitePresencaInicio);
+    $limiteFim = strtotime($limitePresencaFim);
+
+    if ($horaPresenca >= $limiteInicio && $horaPresenca <= $limiteFim) {
+        $presenca = 'Presente';
+    } else {
+        $presenca = 'Ausente';
+    }
 
     $nome = $_SESSION['nome'];
     $tipo_usuario = $_SESSION['tipo_usuario'];
 
     // Insira os dados de frequência no banco de dados
-    $query = "INSERT INTO frequencia (nome, tipo_usuario, dia, hora, presenca) VALUES ('$nome', '$tipo_usuario', '$dia', '$hora', '$presenca')";
+    $query = "INSERT INTO frequencia (nome, tipo_usuario, dia, hora, turno, presenca) VALUES ('$nome', '$tipo_usuario', '$dia', '$hora', '$turno','$presenca')";
 
     if (mysqli_query($conexao, $query)) {
         // Redirecione de volta para a página principal

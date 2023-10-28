@@ -26,6 +26,13 @@
             <option value="Funcionário de segurança">Funcionário de segurança</option>
             <option value="Estagiário">Estagiário</option>
         </select><br>
+        <!-- <label for="turno">Turno:</label>
+        <select name="turno" required>
+            <option value="Manhã">Manhã</option>
+            <option value="Tarde">Tarde</option>
+            <option value="Noite">Noite</option>
+            <option value="Integral">Integral</option>
+        </select><br> -->
         <button type="submit" value="Cadastrar">Cadastrar</button>
         <div class="cadastro">
             Já tem uma conta?

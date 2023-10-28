@@ -11,19 +11,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if (mysqli_num_rows($result) == 1) {
         // Inicie a sessão para armazenar informações do usuário
-        
-        // Obtenha os dados do usuário
         $row = mysqli_fetch_assoc($result);
-        
+
         // Armazene os dados do usuário na sessão
         $_SESSION['nome'] = $row['nome'];
+        $_SESSION['email'] = $row['email'];
+        $_SESSION['telefone'] = $row['telefone'];
+        $_SESSION['turno'] = $row['turno'];
         $_SESSION['tipo_usuario'] = $row['tipo_usuario'];
 
         // Redirecione para a página principal.php
         header("Location: principal.php");
         exit();
-    } else {
-        echo "Credenciais inválidas. Tente novamente.";
     }
 }
 ?>

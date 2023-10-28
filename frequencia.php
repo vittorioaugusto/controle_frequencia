@@ -13,11 +13,11 @@ $tipo_usuario = $_SESSION['tipo_usuario'];
 // Verifique se o usuário é um administrador
 if ($tipo_usuario === 'Administrador') {
     // Recupere os dados de frequência de todos os usuários
-    $query = "SELECT nome, tipo_usuario, dia, hora, presenca FROM frequencia";
+    $query = "SELECT nome, tipo_usuario, dia, hora, turno, presenca FROM frequencia";
 } else {
     // Recupere apenas os dados de frequência do usuário logado
     $nome = $_SESSION['nome'];
-    $query = "SELECT nome, tipo_usuario, dia, hora, presenca FROM frequencia WHERE nome = '$nome'";
+    $query = "SELECT nome, tipo_usuario, dia, hora, turno, presenca FROM frequencia WHERE nome = '$nome'";
 }
 
 // Verifique se o usuário é um administrador
@@ -51,7 +51,8 @@ $result = mysqli_query($conexao, $query);
             <div class="botao_nav">
                 <ul>
                     <a href="principal.php"> <button id="butao_selecionado">Início</button></a>
-                    <a href="frequencia.php"><button>Realizar Frequência</button></a><br>
+                    <a href="frequencia.php"><button>Realizar Frequência</button></a>
+                    <a href="perfil.php"><button>Perfil</button></a>
                     <a href="javascript:void(0);" onclick="confirmarSaida();"> <button class="butao">Sair</button></a>
                 </ul>
             </div>
@@ -65,6 +66,12 @@ $result = mysqli_query($conexao, $query);
         <input type="date" name="dia" required><br>
         <label for="hora">Hora:</label>
         <input type="time" name="hora" required><br>
+        <label for="turno">Turno:</label>
+        <select name="turno" required>
+            <option value="Manhã">Manhã</option>
+            <option value="Tarde">Tarde</option>
+            <option value="Noite">Noite</option>
+        </select>
         <br>
         <button type="submit" value="Registrar Frequência">Registrar Frequência</button>
     </form>

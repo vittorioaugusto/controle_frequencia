@@ -10,9 +10,9 @@ if (!isset($_SESSION['nome']) || !isset($_SESSION['tipo_usuario'])) {
 
 // Defina a consulta SQL com base no tipo de usuário
 if ($_SESSION['tipo_usuario'] === 'Administrador') {
-    $query = "SELECT nome, tipo_usuario, dia, hora, presenca FROM frequencia";
+    $query = "SELECT nome, tipo_usuario, dia, hora, turno, presenca FROM frequencia";
 } else {
-    $query = "SELECT nome, tipo_usuario, dia, hora, presenca FROM frequencia WHERE nome = '{$_SESSION['nome']}'";
+    $query = "SELECT nome, tipo_usuario, dia, hora, turno, presenca FROM frequencia WHERE nome = '{$_SESSION['nome']}'";
 }
 ?>
 
@@ -47,7 +47,8 @@ if ($_SESSION['tipo_usuario'] === 'Administrador') {
                     echo '<a href="frequencia_funcionarios.php"><button>Frequência dos funcionários</button></a>';
                 }
                 ?>
-                <a href="javascript:void(0);" onclick="confirmarSaida();"> <button class="butao">Sair</button></a>
+                <a href="perfil.php"><button>Perfil</button></a>
+                <a href="javascript:void(0);" onclick="confirmarSaida();"> <button>Sair</button></a>
             </ul>
         </div>
     </nav>
@@ -68,6 +69,7 @@ if ($_SESSION['tipo_usuario'] === 'Administrador') {
             <th>Funcionário</th>
             <th>Data</th>
             <th>Hora</th>
+            <th>Turno</th>
             <th>Presença</th>
         </tr>
     </thead>
@@ -83,6 +85,7 @@ if ($_SESSION['tipo_usuario'] === 'Administrador') {
             echo "<td>" . $row['tipo_usuario'] . "</td>";
             echo "<td>" . $row['dia'] . "</td>";
             echo "<td>" . $row['hora'] . "</td>";
+            echo "<td>" . $row['turno'] . "</td>";
             echo "<td>" . $row['presenca'] . "</td>";
             echo "</tr>";
         }
