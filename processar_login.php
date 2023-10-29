@@ -17,8 +17,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $_SESSION['nome'] = $row['nome'];
         $_SESSION['email'] = $row['email'];
         $_SESSION['telefone'] = $row['telefone'];
-        $_SESSION['turno'] = $row['turno'];
         $_SESSION['tipo_usuario'] = $row['tipo_usuario'];
+        $_SESSION['turno'] = $row['turno'];
 
         // Redirecione para a página principal.php
         header("Location: principal.php");

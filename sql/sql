@@ -8,8 +8,8 @@ CREATE TABLE usuarios (
     email VARCHAR(255) NOT NULL,
     senha VARCHAR(255) NOT NULL,
     telefone VARCHAR(20),
-    turno ENUM('Manhã', 'Tarde', 'Noite', 'Integral'),
-    tipo_usuario VARCHAR(50)
+    tipo_usuario VARCHAR(50),
+    turno ENUM('Manhã', 'Tarde', 'Noite', 'Integral')
 );
 
 CREATE TABLE tipo_usuario (
@@ -23,9 +23,13 @@ CREATE TABLE frequencia (
     tipo_usuario VARCHAR(255) NOT NULL,
     dia DATE,
     hora TIME,
+    date_time DATETIME,
     turno ENUM('Manhã', 'Tarde', 'Noite', 'Integral'),
     presenca ENUM('Presente', 'Ausente') NOT NULL
 );
 
-INSERT INTO usuarios (nome, email, senha, telefone, turno, tipo_usuario) VALUES ('Claudio', 'claudio@admin.com', '123', '83911112222', 'Integral', 'Administrador');
+INSERT INTO usuarios (nome, email, senha, telefone, tipo_usuario, turno) VALUES ('Claudio', 'claudio@admin.com', '123', '83911112222', 'Administrador', 'Integral');
 
+
+select * from usuarios;
+select * from frequencia;

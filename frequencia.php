@@ -62,19 +62,12 @@ $result = mysqli_query($conexao, $query);
     <p>Nome: <?php echo $_SESSION['nome']; ?></p>
     <p>Funcionário: <?php echo $_SESSION['tipo_usuario']; ?></p>
     <form action="processar_frequencia.php" method="POST">
-        <label for="dia">Data:</label>
-        <input type="date" name="dia" required><br>
-        <label for="hora">Hora:</label>
-        <input type="time" name="hora" required><br>
-        <label for="turno">Turno:</label>
-        <select name="turno" required>
-            <option value="Manhã">Manhã</option>
-            <option value="Tarde">Tarde</option>
-            <option value="Noite">Noite</option>
-        </select>
-        <br>
-        <button type="submit" value="Registrar Frequência">Registrar Frequência</button>
-    </form>
+    <label for="data_hora">Data e Hora:</label>
+    <input type="datetime-local" name="data_hora" required><br>
+    <br>
+    <button type="submit" value="Registrar Frequência">Registrar Frequência</button>
+</form>
+
 
     <script type="text/javascript" src="js/funcoes.js"></script>
 </body>

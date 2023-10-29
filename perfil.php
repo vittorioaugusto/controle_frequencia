@@ -13,7 +13,7 @@ include 'conexao.php';
 $nome = $_SESSION['nome'];
 $email = $_SESSION['email'];
 $telefone = $_SESSION['telefone'];
-// $turno = $_SESSION['turno'];
+$turno = $_SESSION['turno'];
 $tipo_usuario = $_SESSION['tipo_usuario'];
 
 ?>
@@ -59,8 +59,9 @@ $tipo_usuario = $_SESSION['tipo_usuario'];
     <p>Nome: <?php echo $nome; ?></p>
     <p>Email: <?php echo $email; ?></p>
     <p>Telefone: <?php echo $telefone; ?></p>
-    <!-- <p>Turno: <?php echo $turno; ?></p> -->
     <p>Tipo de Usuário: <?php echo $tipo_usuario; ?></p>
+    <p>Turno: <?php echo $turno; ?></p>
+    
 
 
     <script type="text/javascript" src="js/funcoes.js"></script>
