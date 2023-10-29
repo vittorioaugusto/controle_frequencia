@@ -23,7 +23,6 @@ CREATE TABLE frequencia (
     tipo_usuario VARCHAR(255) NOT NULL,
     dia DATE,
     hora TIME,
-    date_time DATETIME,
     turno ENUM('Manhã', 'Tarde', 'Noite', 'Integral'),
     presenca ENUM('Presente', 'Ausente') NOT NULL
 );
