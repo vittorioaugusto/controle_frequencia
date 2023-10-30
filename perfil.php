@@ -33,8 +33,7 @@ $tipo_usuario = $_SESSION['tipo_usuario'];
                 <h1 id="titulo">Sistema de Frequência</h1>
             </div>
             <div class="bem_vindo_nome">
-                <h2>Bem vindo (a): <?php echo $nome; ?></h2>
-                <p>Tipo de Usuário: <?php echo $tipo_usuario; ?></p>
+                <!-- <p>Tipo de Usuário: <?php echo $tipo_usuario; ?></p> -->
             </div>
             <div class="botao_nav">
                 <ul>

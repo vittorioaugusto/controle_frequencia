@@ -105,7 +105,6 @@ while ($row_frequencia = mysqli_fetch_assoc($result_frequencia_usuario)) {
                 <h1 id="titulo">Sistema de Frequência</h1>
             </div>
             <div class="bem_vindo_nome">
-                <h2>Bem vindo (a): <?php echo $_SESSION['nome']; ?></h2>
                 <p>Tipo de Usuário: <?php echo $_SESSION['tipo_usuario']; ?></p>
             </div>
             <div class="botao_nav">
@@ -129,15 +128,14 @@ while ($row_frequencia = mysqli_fetch_assoc($result_frequencia_usuario)) {
     </header>
 
     <h2>
-    <?php
-    if ($_SESSION['tipo_usuario'] === 'Administrador') {
-        echo "Calendário de Frequência de " . $usuarioSelecionado;
-    } else {
-        echo "Minha Frequência";
-    }
-    ?>
-</h2>
-
+        <?php
+        if ($_SESSION['tipo_usuario'] === 'Administrador' && isset($_GET['usuario'])) {
+            echo "Calendário de Frequência de " . $usuarioSelecionado;
+        } else {
+            echo "Calendário de Frequência";
+        }
+        ?>
+    </h2>
 
     <?php
     // Verifique se o usuário é um administrador
@@ -163,8 +161,6 @@ while ($row_frequencia = mysqli_fetch_assoc($result_frequencia_usuario)) {
     </form>';
     }
     ?>
-
-
 
     <h3>Estatísticas de Presença:</h3>
     <p>Presente: <?php echo $presenca_stats['Presente']; ?></p>

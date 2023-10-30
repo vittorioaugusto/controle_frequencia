@@ -25,7 +25,7 @@ $resultUsuarios = mysqli_query($conexao, $queryUsuarios);
 <html>
 
 <head>
-    <title>Funcionários</title>
+    <title>Frequência dos Funcionários</title>
 </head>
 
 <body>
@@ -37,7 +37,6 @@ $resultUsuarios = mysqli_query($conexao, $queryUsuarios);
             <h1 id="titulo">Sistema de Frequência</h1>
         </div>
         <div class="bem_vindo_nome">
-            <h2>Bem vindo (a): <?php echo $_SESSION['nome']; ?></h2>
             <p>Tipo de Usuário: <?php echo $_SESSION['tipo_usuario']; ?></p>
         </div>
         <div class="botao_nav">
