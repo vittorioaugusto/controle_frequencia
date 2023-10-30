@@ -52,6 +52,7 @@ $result = mysqli_query($conexao, $query);
                 <ul>
                     <a href="principal.php"> <button id="butao_selecionado">Início</button></a>
                     <a href="frequencia.php"><button>Realizar Frequência</button></a>
+                    <a href="calendario_frequencia.php"><button>Calendário Frequência</button></a>
                     <a href="perfil.php"><button>Perfil</button></a>
                     <a href="javascript:void(0);" onclick="confirmarSaida();"> <button class="butao">Sair</button></a>
                 </ul>

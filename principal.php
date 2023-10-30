@@ -44,9 +44,10 @@ if ($_SESSION['tipo_usuario'] === 'Administrador') {
                     echo '<a href="frequencia.php"><button>Realizar Frequência</button></a>';
                 } else {
                     echo '<a href="funcionarios.php"><button>Funcionários</button></a>';
-                    echo '<a href="frequencia_funcionarios.php"><button>Frequência dos funcionários</button></a>';
+                    echo '<a href="frequencia_funcionarios.php"><button>Frequência dos Funcionários</button></a>';
                 }
                 ?>
+                <a href="calendario_frequencia.php"><button>Calendário de Frequência</button></a>
                 <a href="perfil.php"><button>Perfil</button></a>
                 <a href="javascript:void(0);" onclick="confirmarSaida();"> <button>Sair</button></a>
             </ul>

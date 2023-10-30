@@ -48,6 +48,7 @@ $tipo_usuario = $_SESSION['tipo_usuario'];
                         echo '<a href="frequencia_funcionarios.php"><button>Frequência dos funcionários</button></a>';
                     }
                     ?>
+                    <a href="calendario_frequencia.php"><button>Calendário de Frequência</button></a>
                     <a href="perfil.php"><button>Perfil</button></a>
                     <a href="javascript:void(0);" onclick="confirmarSaida();"> <button class="butao">Sair</button></a>
                 </ul>
