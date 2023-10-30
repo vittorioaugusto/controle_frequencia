@@ -8,11 +8,11 @@ if (!isset($_SESSION['nome']) || !isset($_SESSION['tipo_usuario'])) {
     exit();
 }
 
-// Defina a consulta SQL com base no tipo de usuário
+// Defina a consulta SQL com base no tipo de usuário e ordene por "dia"
 if ($_SESSION['tipo_usuario'] === 'Administrador') {
-    $query = "SELECT nome, tipo_usuario, dia, hora, turno, presenca FROM frequencia";
+    $query = "SELECT nome, tipo_usuario, dia, hora, turno, presenca FROM frequencia ORDER BY dia";
 } else {
-    $query = "SELECT nome, tipo_usuario, dia, hora, turno, presenca FROM frequencia WHERE nome = '{$_SESSION['nome']}'";
+    $query = "SELECT nome, tipo_usuario, dia, hora, turno, presenca FROM frequencia WHERE nome = '{$_SESSION['nome']}' ORDER BY dia";
 }
 ?>
 

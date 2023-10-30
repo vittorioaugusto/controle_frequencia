@@ -56,14 +56,14 @@ $resultUsuarios = mysqli_query($conexao, $queryUsuarios);
 while ($rowUsuario = mysqli_fetch_assoc($resultUsuarios)) {
     $tipoUsuario = $rowUsuario['tipo_usuario'];
 
-    // Consulta SQL para obter os funcionários de um tipo de usuário específico
-    $queryFuncionarios = "SELECT nome, dia, hora, turno, presenca FROM frequencia WHERE tipo_usuario = '$tipoUsuario'";
+    // Consulta SQL para obter os funcionários de um tipo de usuário específico e ordenar por "dia"
+    $queryFuncionarios = "SELECT nome, dia, hora, turno, presenca FROM frequencia WHERE tipo_usuario = '$tipoUsuario' ORDER BY dia";
     $resultFuncionarios = mysqli_query($conexao, $queryFuncionarios);
     ?>
 
     <table border="1">
         <thead>
-        <caption><h3><?php echo "Funcionário: $tipoUsuario"; ?></h3></caption>
+            <caption><h3><?php echo "Funcionário: $tipoUsuario"; ?></h3></caption>
             <tr>
                 <th>Nome</th>
                 <th>Dia</th>

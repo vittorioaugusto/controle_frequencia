@@ -18,12 +18,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $data = date('Y-m-d', strtotime($data_hora));
 
     // Verifique se o usuário já registrou uma entrada para o dia atual
-    $query_check = "SELECT COUNT(*) as num_entradas FROM frequencia WHERE nome = '$nome' AND dia = '$data'";
+    $query_check = "SELECT COUNT(*) as num_entradas, MAX(hora) as max_hora FROM frequencia WHERE nome = '$nome' AND dia = '$data'";
     $result_check = mysqli_query($conexao, $query_check);
 
     if ($result_check && mysqli_num_rows($result_check) > 0) {
         $row_check = mysqli_fetch_assoc($result_check);
         $num_entradas = $row_check['num_entradas'];
+        $max_hora = $row_check['max_hora'];
+
+        // Verifique se o usuário está tentando inserir horários fora de ordem
+        if ($num_entradas > 0 && strtotime($hora) < strtotime($max_hora)) {
+            echo "Erro: Você está tentando registrar horários fora de ordem. A última entrada foi em $max_hora.";
+            exit();
+        }
 
         if ($num_entradas < 2) {
             // O usuário pode registrar uma entrada
