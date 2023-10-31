@@ -16,6 +16,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Armazene os dados do usuário na sessão
         $_SESSION['nome'] = $row['nome'];
         $_SESSION['email'] = $row['email'];
+        $_SESSION['cpf'] = $row['cpf'];
         $_SESSION['telefone'] = $row['telefone'];
         $_SESSION['tipo_usuario'] = $row['tipo_usuario'];
         $_SESSION['turno'] = $row['turno'];

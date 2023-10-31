@@ -52,7 +52,7 @@ $resultUsuarios = mysqli_query($conexao, $queryUsuarios);
 
     <!-- Adicione um formulário de filtro para nome do usuário e data -->
     <form method="post" action="frequencia_funcionarios.php">
-        <h3>Filtrar Funcionários:</h3>
+        <h3>Filtrar Frequência dos Funcionários:</h3>
         <label for="usuario">Selecione o usuário:</label>
         <select name="usuario" id="usuario">
             <option value="">Todos os Usuários</option>

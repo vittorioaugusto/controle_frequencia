@@ -60,14 +60,14 @@ if ($_SESSION['tipo_usuario'] === 'Administrador') {
     <?php
     // Verifique se o usuário é um administrador
     if ($_SESSION['tipo_usuario'] === 'Administrador') {
-        echo '<caption>Frequência de todos os Funcionários</caption>';
+        echo '<caption>Frequência de Todos os Funcionários</caption>';
     } else {
         echo '<caption>Minha Frequência</caption>';
     }
     ?>
         <tr>
-            <th>Nome</th>
             <th>Funcionário</th>
+            <th>Nome</th>
             <th>Data</th>
             <th>Hora</th>
             <th>Turno</th>
@@ -82,8 +82,8 @@ if ($_SESSION['tipo_usuario'] === 'Administrador') {
         // Exiba os dados na tabela
         while ($row = mysqli_fetch_assoc($result)) {
             echo "<tr>";
-            echo "<td>" . $row['nome'] . "</td>";
             echo "<td>" . $row['tipo_usuario'] . "</td>";
+            echo "<td>" . $row['nome'] . "</td>";
             echo "<td>" . $row['dia'] . "</td>";
             echo "<td>" . $row['hora'] . "</td>";
             echo "<td>" . $row['turno'] . "</td>";

@@ -16,6 +16,8 @@
         <input type="text" name="email" required><br>
         <label for="senha">Senha:</label>
         <input type="password" name="senha" required><br>
+        <label for="cpf">CPF:</label>
+        <input type="number" name="cpf" required><br>
         <label for="telefone">Telefone:</label>
         <input type="text" name="telefone"><br>
         <label for="tipo_usuario">Tipo de Usuário:</label>
