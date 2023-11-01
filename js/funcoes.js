@@ -20,6 +20,34 @@ function validarFormulario() {
     return true;
 }
 
+// Função para verificar o campo de data e hora
+function verificarCampoDataHora() {
+    var dataHoraInput = document.querySelector('input[name="data_hora"]');
+    var avisoDiv = document.getElementById('aviso');
+
+    if (dataHoraInput.value) {
+        avisoDiv.innerText = 'Campo preenchido';
+    } else {
+        avisoDiv.innerText = '';
+    }
+}
+// Função para mostrar uma mensagem de confirmação
+function confirmarRegistro(event) {
+    var dataHoraInput = document.querySelector('input[name="data_hora"]');
+    
+    if (dataHoraInput.value) {
+        var confirmacao = confirm('Realmente deseja realizar a frequência?');
+        
+        if (!confirmacao) {
+            event.preventDefault(); // Impede o envio do formulário se o usuário clicar em "Cancelar"
+        }
+    }
+}
+// Adicione um ouvinte de evento para verificar o campo quando houver uma alteração
+document.querySelector('input[name="data_hora"]').addEventListener('input', verificarCampoDataHora);
+// Adicione um ouvinte de evento para mostrar a mensagem de confirmação
+document.querySelector('form').addEventListener('submit', confirmarRegistro);
+
 function confirmarSaida() {
     var confirmacao = confirm("Deseja realmente sair do sistema?");
     if (confirmacao) {

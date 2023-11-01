@@ -47,13 +47,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             }
 
             // Calcule o turno com base na hora
-            if (strtotime($hora) >= strtotime('07:00:00') && strtotime($hora) < strtotime('12:00:00')) {
+            if (strtotime($hora) >= strtotime('06:00:00') && strtotime($hora) < strtotime('12:59:00')) {
                 $turno = 'Manhã';
-            } elseif (strtotime($hora) >= strtotime('13:00:00') && strtotime($hora) < strtotime('17:00:00')) {
+            } elseif (strtotime($hora) >= strtotime('13:00:00') && strtotime($hora) < strtotime('17:59:00')) {
                 $turno = 'Tarde';
-            } elseif (strtotime($hora) >= strtotime('18:00:00') && strtotime($hora) <= strtotime('21:00:00')) {
+            } elseif (strtotime($hora) >= strtotime('18:00:00') && strtotime($hora) <= strtotime('23:59:00')) {
                 $turno = 'Noite';
-            } elseif (strtotime($hora) >= strtotime('07:00:00') && strtotime($hora) <= strtotime('21:00:00')) {
+            } elseif (strtotime($hora) >= strtotime('06:00:00') && strtotime($hora) <= strtotime('23:59:00')) {
                 $turno = 'Integral';
             } else {
                 $turno = 'Outro';

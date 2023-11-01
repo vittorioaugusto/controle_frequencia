@@ -9,16 +9,7 @@ if (!isset($_SESSION['nome']) || !isset($_SESSION['tipo_usuario'])) {
 }
 
 $tipo_usuario = $_SESSION['tipo_usuario'];
-
-// Verifique se o usuário é um administrador
-if ($tipo_usuario === 'Administrador') {
-    // Recupere os dados de frequência de todos os usuários
-    $query = "SELECT nome, tipo_usuario, dia, hora, turno, presenca FROM frequencia";
-} else {
-    // Recupere apenas os dados de frequência do usuário logado
-    $nome = $_SESSION['nome'];
-    $query = "SELECT nome, tipo_usuario, dia, hora, turno, presenca FROM frequencia WHERE nome = '$nome'";
-}
+$nome = $_SESSION['nome'];
 
 // Verifique se o usuário é um administrador
 if ($tipo_usuario === 'Administrador') {
@@ -26,9 +17,26 @@ if ($tipo_usuario === 'Administrador') {
     exit();
 }
 
+// Consulta para recuperar a última frequência do usuário no mesmo dia
+$query = "SELECT nome, tipo_usuario, dia, hora, turno, presenca 
+          FROM frequencia 
+          WHERE nome = '$nome' AND dia = CURDATE()
+          ORDER BY hora DESC 
+          LIMIT 1";
+
 $result = mysqli_query($conexao, $query);
 
+// Verifique se a consulta retornou resultados
+if ($row = mysqli_fetch_assoc($result)) {
+    $ultimaFrequenciaData = $row['dia'];
+    $ultimaFrequenciaHora = $row['hora'];
+    // Agora você pode exibir os dados da última frequência realizada pelo usuário
+} else {
+    // Não há registros de frequência para o usuário no mesmo dia
+}
+
 ?>
+
 
 
 <!DOCTYPE html>
@@ -46,6 +54,7 @@ $result = mysqli_query($conexao, $query);
                 <h1 id="titulo">Sistema de Frequência</h1>
             </div>
             <div class="bem_vindo_nome">
+                <p>Nome: <?php echo $_SESSION['nome']; ?></p>
                 <p>Tipo de Usuário: <?php echo $_SESSION['tipo_usuario']; ?></p>
             </div>
             <div class="botao_nav">
@@ -59,16 +68,22 @@ $result = mysqli_query($conexao, $query);
             </div>
         </nav>
     </header>
-    <h2>Registro de Frequência</h2>
-    <p>Nome: <?php echo $_SESSION['nome']; ?></p>
-    <p>Funcionário: <?php echo $_SESSION['tipo_usuario']; ?></p>
-    <form action="processar_frequencia.php" method="POST">
-    <label for="data_hora">Data e Hora:</label>
-    <input type="datetime-local" name="data_hora" required><br>
-    <br>
-    <button type="submit" value="Registrar Frequência">Registrar Frequência</button>
-</form>
 
+    <h2>Registre sua Frequência</h2>
+
+    <form action="processar_frequencia.php" method="POST">
+        <label for="data_hora">Data e Hora:</label>
+        <input type="datetime-local" name="data_hora" required><br>
+        <div id="aviso"></div>
+        <br><br>
+        <button type="submit" value="Registrar Frequência">Registrar Frequência</button>
+    </form>
+
+    <?php if (isset($ultimaFrequenciaData) && isset($ultimaFrequenciaHora)) : ?>
+        <h4>Última Frequência Realizada</h4>
+        <p>Data: <?php echo $ultimaFrequenciaData; ?></p>
+        <p>Hora: <?php echo $ultimaFrequenciaHora; ?></p>
+    <?php endif; ?>
 
     <script type="text/javascript" src="js/funcoes.js"></script>
 </body>

@@ -98,10 +98,14 @@ $resultUsuarios = mysqli_query($conexao, $queryUsuarios);
                 <th>Hora</th>
                 <th>Turno</th>
                 <th>Presença</th>
+                <th>Tipo</th> <!-- Nova coluna -->
             </tr>
         </thead>
         <tbody>
             <?php
+            // Inicialize a variável $presencasPorDia
+            $presencasPorDia = array();
+
             // Verifique se os critérios de filtro foram enviados
             if (isset($_POST['usuario']) || isset($_POST['data'])) {
                 $nomeUsuarioSelecionado = $_POST['usuario'];
@@ -130,12 +134,32 @@ $resultUsuarios = mysqli_query($conexao, $queryUsuarios);
                     echo "<td>" . $rowFuncionario['hora'] . "</td>";
                     echo "<td>" . $rowFuncionario['turno'] . "</td>";
                     echo "<td>" . $rowFuncionario['presenca'] . "</td>";
+                    echo "<td>";
+
+                    // Determinar se a presença é uma entrada ou saída com base no número de presenças
+                    if ($rowFuncionario['presenca'] == 'Presente') {
+                        if (!isset($presencasPorDia[$rowFuncionario['nome']][$rowFuncionario['dia']])) {
+                            $presencasPorDia[$rowFuncionario['nome']][$rowFuncionario['dia']] = 0;
+                        }
+
+                        if ($presencasPorDia[$rowFuncionario['nome']][$rowFuncionario['dia']] % 2 == 0) {
+                            echo "Entrada";
+                        } else {
+                            echo "Saída";
+                        }
+                        $presencasPorDia[$rowFuncionario['nome']][$rowFuncionario['dia']]++;
+                    } else {
+                        echo "N/A"; // Caso a presença não seja "Presente"
+                    }
+
+                    echo "</td>";
                     echo "</tr>";
                 }
             }
             ?>
         </tbody>
     </table>
+
 
     <script type="text/javascript" src="js/funcoes.js"></script>
 </body>
