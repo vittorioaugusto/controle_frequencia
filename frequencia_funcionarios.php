@@ -50,7 +50,6 @@ $resultUsuarios = mysqli_query($conexao, $queryUsuarios);
         </nav>
     </header>
 
-    <!-- Adicione um formulário de filtro para nome do usuário e data -->
     <form method="post" action="frequencia_funcionarios.php">
         <h3>Filtrar Frequência dos Funcionários:</h3>
         <label for="usuario">Selecione o usuário:</label>
@@ -98,7 +97,7 @@ $resultUsuarios = mysqli_query($conexao, $queryUsuarios);
                 <th>Hora</th>
                 <th>Turno</th>
                 <th>Presença</th>
-                <th>Tipo</th> <!-- Nova coluna -->
+                <th>Tipo</th>
             </tr>
         </thead>
         <tbody>
@@ -149,7 +148,7 @@ $resultUsuarios = mysqli_query($conexao, $queryUsuarios);
                         }
                         $presencasPorDia[$rowFuncionario['nome']][$rowFuncionario['dia']]++;
                     } else {
-                        echo "N/A"; // Caso a presença não seja "Presente"
+                        echo "Faltou"; // Caso a presença não seja "Presente"
                     }
 
                     echo "</td>";

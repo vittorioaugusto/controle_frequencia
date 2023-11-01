@@ -56,64 +56,64 @@ if ($_SESSION['tipo_usuario'] === 'Administrador') {
     </header>
 
     <table border="1">
-    <thead>
-        <?php
-        if ($_SESSION['tipo_usuario'] === 'Administrador') {
-            echo '<caption>Frequência de Todos os Funcionários</caption>';
-        } else {
-            echo '<caption>Minha Frequência</caption>';
-        }
-        ?>
-        <tr>
-            <th>Funcionário</th>
-            <th>Nome</th>
-            <th>Data</th>
-            <th>Hora</th>
-            <th>Turno</th>
-            <th>Presença</th>
-            <th>Tipo</th>
-        </tr>
-    </thead>
-    <tbody>
-        <?php
-        $result = mysqli_query($conexao, $query);
-
-        while ($row = mysqli_fetch_assoc($result)) {
-            $nomeFuncionario = $row['nome'];
-            $dataPresenca = $row['dia'];
-
-            // Verificar e rastrear o número de presenças para o mesmo funcionário e data
-            if (!isset($presencasPorDia[$nomeFuncionario][$dataPresenca])) {
-                $presencasPorDia[$nomeFuncionario][$dataPresenca] = 0;
-            }
-
-            echo "<tr>";
-            echo "<td>" . $row['tipo_usuario'] . "</td>";
-            echo "<td>" . $row['nome'] . "</td>";
-            echo "<td>" . $row['dia'] . "</td>";
-            echo "<td>" . $row['hora'] . "</td>";
-            echo "<td>" . $row['turno'] . "</td>"; // Adicione a coluna de Turno
-            echo "<td>" . $row['presenca'] . "</td>";
-            echo "<td>";
-
-            // Determinar se a presença é uma entrada ou saída com base no número de presenças
-            if ($row['presenca'] == 'Presente') {
-                if ($presencasPorDia[$nomeFuncionario][$dataPresenca] % 2 == 0) {
-                    echo "Entrada";
-                } else {
-                    echo "Saída";
-                }
-                $presencasPorDia[$nomeFuncionario][$dataPresenca]++;
+        <thead>
+            <?php
+            if ($_SESSION['tipo_usuario'] === 'Administrador') {
+                echo '<caption>Frequência de Todos os Funcionários</caption>';
             } else {
-                echo "N/A"; // Caso a presença não seja "Presente"
+                echo '<caption>Minha Frequência</caption>';
             }
+            ?>
+            <tr>
+                <th>Funcionário</th>
+                <th>Nome</th>
+                <th>Data</th>
+                <th>Hora</th>
+                <th>Turno</th>
+                <th>Presença</th>
+                <th>Tipo</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php
+            $result = mysqli_query($conexao, $query);
 
-            echo "</td>";
-            echo "</tr>";
-        }
-        ?>
-    </tbody>
-</table>
+            while ($row = mysqli_fetch_assoc($result)) {
+                $nomeFuncionario = $row['nome'];
+                $dataPresenca = $row['dia'];
+
+                // Verificar e rastrear o número de presenças para o mesmo funcionário e data
+                if (!isset($presencasPorDia[$nomeFuncionario][$dataPresenca])) {
+                    $presencasPorDia[$nomeFuncionario][$dataPresenca] = 0;
+                }
+
+                echo "<tr>";
+                echo "<td>" . $row['tipo_usuario'] . "</td>";
+                echo "<td>" . $row['nome'] . "</td>";
+                echo "<td>" . $row['dia'] . "</td>";
+                echo "<td>" . $row['hora'] . "</td>";
+                echo "<td>" . $row['turno'] . "</td>"; // Adicione a coluna de Turno
+                echo "<td>" . $row['presenca'] . "</td>";
+                echo "<td>";
+
+                // Determinar se a presença é uma entrada ou saída com base no número de presenças
+                if ($row['presenca'] == 'Presente') {
+                    if ($presencasPorDia[$nomeFuncionario][$dataPresenca] % 2 == 0) {
+                        echo "Entrada";
+                    } else {
+                        echo "Saída";
+                    }
+                    $presencasPorDia[$nomeFuncionario][$dataPresenca]++;
+                } else {
+                    echo "Faltou"; // Caso a presença não seja "Presente"
+                }
+
+                echo "</td>";
+                echo "</tr>";
+            }
+            ?>
+        </tbody>
+    </table>
 
 
 
