@@ -7,6 +7,7 @@ function mostrarOcultarSenha() {
     }
 }
 
+
 function validarFormulario() {
     var usuario = document.getElementById("usuario").value;
     var cpf = document.getElementById("cpf").value;
@@ -19,6 +20,7 @@ function validarFormulario() {
 
     return true;
 }
+
 
 // Função para verificar o campo de data e hora
 function verificarCampoDataHora() {
@@ -47,6 +49,26 @@ function confirmarRegistro(event) {
 document.querySelector('input[name="data_hora"]').addEventListener('input', verificarCampoDataHora);
 // Adicione um ouvinte de evento para mostrar a mensagem de confirmação
 document.querySelector('form').addEventListener('submit', confirmarRegistro);
+
+
+function alterarStatus(usuarioId, novoStatus) {
+    var confirmMessage = novoStatus === 1 ? "Ativar" : "Desativar";
+    if (confirm("Tem certeza de que deseja " + confirmMessage + " o usuário?")) {
+        $.ajax({
+            type: "POST",
+            url: "alterar_status.php",
+            data: { id: usuarioId, status: novoStatus },
+            success: function (data) {
+                // Atualize a página para refletir as mudanças
+                location.reload();
+            },
+            error: function () {
+                alert("Erro ao alterar o status do usuário.");
+            }
+        });
+    }
+}
+
 
 function confirmarSaida() {
     var confirmacao = confirm("Deseja realmente sair do sistema?");

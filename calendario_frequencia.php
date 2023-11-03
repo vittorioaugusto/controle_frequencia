@@ -239,7 +239,7 @@ $nome_mes = isset($meses_em_portugues[intval($mesSelecionado)]) ? $meses_em_port
 
 
             // Exibir as estatísticas para o usuário selecionado
-            echo '<h3>Estatísticas de Presença de ' . $usuarioSelecionado . ':</h3>';
+            echo '<h3>Estatísticas de Presença de ' . $usuarioSelecionado . '</h3>';
             echo "<p>Presente: $quantidadePresente</p>";
             echo "<p>Ausente: $quantidadeAusente</p>";
         }
@@ -366,7 +366,7 @@ $nome_mes = isset($meses_em_portugues[intval($mesSelecionado)]) ? $meses_em_port
         }
 
         // Exibir as estatísticas apenas para os não administradores
-        echo '<h3>Estatísticas de Presença:</h3>';
+        echo '<h3>Estatísticas de Presença</h3>';
         echo "<p>Presente: $quantidadePresente</p>";
         echo "<p>Ausente: $quantidadeAusente</p>";
 

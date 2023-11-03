@@ -10,7 +10,8 @@ CREATE TABLE usuarios (
     cpf VARCHAR(14) NOT NULL,
     telefone VARCHAR(20),
     tipo_usuario VARCHAR(50),
-    turno ENUM('Manhã', 'Tarde', 'Noite', 'Integral')
+    turno ENUM('Manhã', 'Tarde', 'Noite', 'Integral'),
+    status TINYINT(1) NOT NULL DEFAULT 1
 );
 
 CREATE TABLE tipo_usuario (
@@ -28,7 +29,7 @@ CREATE TABLE frequencia (
     presenca ENUM('Presente', 'Ausente') NOT NULL
 );
 
-INSERT INTO usuarios (nome, email, senha, cpf, telefone, tipo_usuario, turno) VALUES ('Claudio', 'claudio@admin.com', '123', '12345678901', '83911112222', 'Administrador', 'Integral');
+INSERT INTO usuarios (nome, email, senha, cpf, telefone, tipo_usuario, turno, status) VALUES ('Claudio', 'claudio@admin.com', '123', '12345678901', '83911112222', 'Administrador', 'Integral', 1);
 
 
 select * from usuarios;

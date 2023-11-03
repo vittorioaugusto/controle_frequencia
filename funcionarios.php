@@ -2,22 +2,31 @@
 session_start(); // Inicie a sessão para acessar as informações do usuário
 include 'conexao.php';
 
-// Verifique se o usuário está logado
-if (!isset($_SESSION['nome']) || !isset($_SESSION['tipo_usuario'])) {
-    header("Location: login.php"); // Redirecione para a página de login se não estiver logado
-    exit();
-}
-
 // Verifique se o usuário é um administrador
 if ($_SESSION['tipo_usuario'] !== 'Administrador') {
     header("Location: principal.php"); // Redirecione para a página principal se não for um administrador
     exit();
 }
 
-// Consulta SQL para obter todos os tipos de usuário, exceto administrador
-$queryUsuarios = "SELECT DISTINCT tipo_usuario FROM usuarios WHERE tipo_usuario != 'Administrador'";
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if (isset($_POST['id']) && isset($_POST['status'])) {
+        $usuarioId = $_POST['id'];
+        $novoStatus = $_POST['status'];
 
-// Execute a consulta SQL
+        // Atualize o status do usuário no banco de dados
+        $queryUpdateStatus = "UPDATE usuarios SET status = $novoStatus WHERE id = $usuarioId";
+        if (mysqli_query($conexao, $queryUpdateStatus)) {
+            // Atualização bem-sucedida
+            header("Location: funcionarios.php");
+            exit();
+        } else {
+            // Erro ao atualizar o status
+            echo "Erro ao atualizar o status do usuário.";
+        }
+    }
+}
+
+$queryUsuarios = "SELECT * FROM usuarios WHERE tipo_usuario != 'Administrador'";
 $resultUsuarios = mysqli_query($conexao, $queryUsuarios);
 ?>
 
@@ -95,7 +104,8 @@ $resultUsuarios = mysqli_query($conexao, $queryUsuarios);
             <tr>
                 <th>Funcionário</th>
                 <th>Nome</th>
-                <th>Número de Telefone</th>
+                <th>Telefone</th>
+                <th>Status</th>
             </tr>
         </thead>
         <tbody>
@@ -105,28 +115,39 @@ $resultUsuarios = mysqli_query($conexao, $queryUsuarios);
                 $cpf = $_POST['cpf'];
 
                 // Construa a parte condicional da consulta SQL com base nos critérios
-                $condicao = '';
+                $condicao = "WHERE tipo_usuario != 'Administrador'"; // Adicione essa condição para excluir administradores
+
                 if (!empty($usuario) && !empty($cpf)) {
-                    $condicao = "WHERE nome = '$usuario' AND cpf = '$cpf'";
+                    $usuario = mysqli_real_escape_string($conexao, $usuario);
+                    $cpf = mysqli_real_escape_string($conexao, $cpf);
+                    $condicao .= " AND nome = '$usuario' AND cpf = '$cpf'";
                 } elseif (!empty($usuario)) {
-                    $condicao = "WHERE nome = '$usuario'";
+                    $usuario = mysqli_real_escape_string($conexao, $usuario);
+                    $condicao .= " AND nome = '$usuario'";
                 } elseif (!empty($cpf)) {
-                    $condicao = "WHERE cpf = '$cpf'";
+                    $cpf = mysqli_real_escape_string($conexao, $cpf);
+                    $condicao .= " AND cpf = '$cpf'";
                 }
 
                 // Consulta SQL para obter os funcionários com base nos critérios de filtro
-                $queryFuncionarios = "SELECT tipo_usuario, nome, telefone FROM usuarios $condicao";
+                $queryFuncionarios = "SELECT id, tipo_usuario, nome, telefone, status FROM usuarios $condicao";
                 $resultFuncionarios = mysqli_query($conexao, $queryFuncionarios);
 
                 while ($rowFuncionario = mysqli_fetch_assoc($resultFuncionarios)) {
-                    // Verifique se o tipo de usuário não é "Administrador" antes de exibi-lo
-                    if ($rowFuncionario['tipo_usuario'] !== 'Administrador') {
-                        echo "<tr>";
-                        echo "<td>" . $rowFuncionario['tipo_usuario'] . "</td>";
-                        echo "<td>" . $rowFuncionario['nome'] . "</td>";
-                        echo "<td>" . $rowFuncionario['telefone'] . "</td>";
-                        echo "</tr>";
+                    echo "<tr>";
+                    echo "<td>" . $rowFuncionario['tipo_usuario'] . "</td>";
+                    echo "<td>" . $rowFuncionario['nome'] . "</td>";
+                    echo "<td>" . $rowFuncionario['telefone'] . "</td>";
+                    echo "<td>";
+
+                    if ($rowFuncionario['status'] == 1) {
+                        echo "<button onclick=\"alterarStatus(" . $rowFuncionario['id'] . ", 0)\">Desativar</button>";
+                    } else {
+                        echo "<button onclick=\"alterarStatus(" . $rowFuncionario['id'] . ", 1)\">Ativar</button>";
                     }
+
+                    echo "</td>";
+                    echo "</tr>";
                 }
             }
             ?>
@@ -134,6 +155,7 @@ $resultUsuarios = mysqli_query($conexao, $queryUsuarios);
     </table>
 
 
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script type="text/javascript" src="js/funcoes.js"></script>
 </body>
 
