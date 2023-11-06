@@ -48,20 +48,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
 
         // Calcule o turno com base na hora
-        if (strtotime($horaAtual) >= strtotime('06:00:00') && strtotime($horaAtual) < strtotime('12:59:00')) {
+        if (strtotime($horaAtual) >= strtotime('06:00:00') && strtotime($horaAtual) < strtotime('12:59:59')) {
             $turno = 'Manhã';
-        } elseif (strtotime($horaAtual) >= strtotime('13:00:00') && strtotime($horaAtual) < strtotime('17:59:00')) {
+        } elseif (strtotime($horaAtual) >= strtotime('13:00:00') && strtotime($horaAtual) < strtotime('17:59:59')) {
             $turno = 'Tarde';
-        } elseif (strtotime($horaAtual) >= strtotime('18:00:00') && strtotime($horaAtual) <= strtotime('23:59:00')) {
+        } elseif (strtotime($horaAtual) >= strtotime('18:00:00') && strtotime($horaAtual) <= strtotime('23:59:59')) {
             $turno = 'Noite';
         } elseif (strtotime($horaAtual) >= strtotime('00:00:00') && strtotime($horaAtual) < strtotime('06:00:00')) {
-            $turno = 'Noite';
+            $turno = 'Integral';
         } else {
             $turno = 'Outro';
         }
 
         // Defina o valor de presença com base no turno do usuário
-        $presenca = ($turno === $turno_usuario) ? 'Presente' : 'Ausente';
+        $presenca = ($turno === $turno_usuario || $turno_usuario === 'Integral') ? 'Presente' : 'Ausente';
 
         // Exiba o turno
         echo "Seu turno é: $turno_usuario<br>";
