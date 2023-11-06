@@ -106,8 +106,10 @@ $resultUsuarios = mysqli_query($conexao, $queryUsuarios);
                 <th>Funcionário</th>
                 <th>Nome</th>
                 <th>Telefone</th>
+                <th>Turno</th>
                 <th>Status</th>
             </tr>
+
         </thead>
         <tbody>
             <?php
@@ -131,7 +133,7 @@ $resultUsuarios = mysqli_query($conexao, $queryUsuarios);
                 }
 
                 // Consulta SQL para obter os funcionários com base nos critérios de filtro
-                $queryFuncionarios = "SELECT id, tipo_usuario, nome, telefone, status FROM usuarios $condicao";
+                $queryFuncionarios = "SELECT id, tipo_usuario, nome, telefone, turno, status FROM usuarios $condicao";
                 $resultFuncionarios = mysqli_query($conexao, $queryFuncionarios);
 
                 while ($rowFuncionario = mysqli_fetch_assoc($resultFuncionarios)) {
@@ -139,6 +141,7 @@ $resultUsuarios = mysqli_query($conexao, $queryUsuarios);
                     echo "<td>" . $rowFuncionario['tipo_usuario'] . "</td>";
                     echo "<td>" . $rowFuncionario['nome'] . "</td>";
                     echo "<td>" . $rowFuncionario['telefone'] . "</td>";
+                    echo "<td>" . $rowFuncionario['turno'] . "</td>"; // Exibir o turno
                     echo "<td>";
 
                     if ($rowFuncionario['status'] == 1) {
