@@ -16,9 +16,6 @@
         <span>Mostrar Senha:<input type="checkbox" onclick="mostrarOcultarSenha()"></span><br>
         <a id="esqueci_senha" href="esqueci_senha.php">Esqueceu a senha?</a><br>
         <button type="submit" value="Entrar">Entrar</button>
-        <div class="login_cadastro">
-            Não possui uma conta? <a href="cadastro.php">Cadastre-se</a>
-        </div>
     </form>
 
     <script type="text/javascript" src="js/funcoes.js"></script>

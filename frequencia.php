@@ -38,7 +38,6 @@ if ($row = mysqli_fetch_assoc($result)) {
 ?>
 
 
-
 <!DOCTYPE html>
 <html>
 
@@ -72,18 +71,16 @@ if ($row = mysqli_fetch_assoc($result)) {
     <h2>Registre sua Frequência</h2>
 
     <form action="processar_frequencia.php" method="POST">
-        <label for="data_hora">Data e Hora:</label>
-        <input type="datetime-local" name="data_hora" required><br>
-        <div id="aviso"></div>
-        <br><br>
-        <button type="submit" value="Registrar Frequência">Registrar Frequência</button>
+        <button type="submit" value="Registrar Frequência" id="registrarFrequenciaBtn">Registrar Frequência</button>
     </form>
+
 
     <?php if (isset($ultimaFrequenciaData) && isset($ultimaFrequenciaHora)) : ?>
         <h4>Última Frequência Realizada</h4>
         <p>Data: <?php echo $ultimaFrequenciaData; ?></p>
         <p>Hora: <?php echo $ultimaFrequenciaHora; ?></p>
     <?php endif; ?>
+
 
     <script type="text/javascript" src="js/funcoes.js"></script>
 </body>

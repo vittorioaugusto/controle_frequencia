@@ -1,6 +1,6 @@
 <?php
 
-$host = 'localhost:3307';
+$host = 'localhost';
 $usuario = 'root';
 $senha = '';
 $database = "controle_frequencia";

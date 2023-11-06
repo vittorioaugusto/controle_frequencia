@@ -51,6 +51,7 @@ $resultUsuarios = mysqli_query($conexao, $queryUsuarios);
             <div class="botao_nav">
                 <ul>
                     <a href="principal.php"> <button id="butao_selecionado">Início</button></a>
+                    <a href="cadastro.php"><button>Cadastrar Funcionário</button></a>
                     <a href="funcionarios.php"><button>Funcionários</button></a>
                     <a href="frequencia_funcionarios.php"><button>Frequência dos Funcionários</button></a>
                     <a href="calendario_frequencia.php"><button>Calendário de Frequência</button></a>

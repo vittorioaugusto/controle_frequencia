@@ -43,6 +43,7 @@ if ($_SESSION['tipo_usuario'] === 'Administrador') {
                     if ($_SESSION['tipo_usuario'] !== 'Administrador') {
                         echo '<a href="frequencia.php"><button>Realizar Frequência</button></a>';
                     } else {
+                        echo '<a href="cadastro.php"><button>Cadastrar Funcionário</button></a>';
                         echo '<a href="funcionarios.php"><button>Funcionários</button></a>';
                         echo '<a href="frequencia_funcionarios.php"><button>Frequência dos Funcionários</button></a>';
                     }
