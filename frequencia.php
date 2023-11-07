@@ -2,6 +2,9 @@
 session_start();
 include 'conexao.php';
 
+// Defina o fuso horário para o de São Paulo (ou o fuso horário apropriado)
+date_default_timezone_set('America/Sao_Paulo');
+
 // Verifique se o usuário está logado
 if (!isset($_SESSION['nome']) || !isset($_SESSION['tipo_usuario'])) {
     header("Location: login.php");

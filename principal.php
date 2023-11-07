@@ -93,7 +93,7 @@ if ($_SESSION['tipo_usuario'] === 'Administrador') {
                 echo "<td>" . $row['nome'] . "</td>";
                 echo "<td>" . $row['dia'] . "</td>";
                 echo "<td>" . $row['hora'] . "</td>";
-                echo "<td>" . $row['turno'] . "</td>"; // Adicione a coluna de Turno
+                echo "<td>" . $row['turno'] . "</td>"; // Exibe a coluna de Turno
                 echo "<td>" . $row['presenca'] . "</td>";
                 echo "<td>";
 
@@ -115,7 +115,6 @@ if ($_SESSION['tipo_usuario'] === 'Administrador') {
             ?>
         </tbody>
     </table>
-
 
 
     <script type="text/javascript" src="js/funcoes.js"></script>
