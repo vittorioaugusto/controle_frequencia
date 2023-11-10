@@ -42,6 +42,7 @@ if ($_SESSION['tipo_usuario'] === 'Administrador') {
                     // Verifique se o usuário não é um administrador
                     if ($_SESSION['tipo_usuario'] !== 'Administrador') {
                         echo '<a href="frequencia.php"><button>Realizar Frequência</button></a>';
+                        echo '<a href="horas_acumuladas.php"><button>Horas Acumuladas</button></a>';
                     } else {
                         echo '<a href="cadastro.php"><button>Cadastrar Funcionário</button></a>';
                         echo '<a href="funcionarios.php"><button>Funcionários</button></a>';
