@@ -35,31 +35,55 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
     }
 
-    if ($num_entradas < 2) {
-        $query_turno = "SELECT turno FROM usuarios WHERE nome = '$nome'";
-        $result_turno = mysqli_query($conexao, $query_turno);
+    $query_turno = "SELECT turno FROM usuarios WHERE nome = '$nome'";
+    $result_turno = mysqli_query($conexao, $query_turno);
 
-        if ($result_turno && mysqli_num_rows($result_turno) > 0) {
-            $row = mysqli_fetch_assoc($result_turno);
-            $turno_usuario = $row['turno'];
-        } else {
-            echo "Erro ao recuperar o turno do usuário.";
+    if ($result_turno && mysqli_num_rows($result_turno) > 0) {
+        $row = mysqli_fetch_assoc($result_turno);
+        $turno_usuario = $row['turno'];
+    } else {
+        echo "Erro ao recuperar o turno do usuário.";
+        exit();
+    }
+
+    // Calcule o turno com base na hora
+    if (strtotime($horaAtual) >= strtotime('06:00:00') && strtotime($horaAtual) < strtotime('12:59:59')) {
+        $turno = 'Manhã';
+    } elseif (strtotime($horaAtual) >= strtotime('13:00:00') && strtotime($horaAtual) < strtotime('17:59:59')) {
+        $turno = 'Tarde';
+    } elseif (strtotime($horaAtual) >= strtotime('18:00:00') && strtotime($horaAtual) <= strtotime('23:59:59')) {
+        $turno = 'Noite';
+    } elseif (strtotime($horaAtual) >= strtotime('00:00:00') && strtotime($horaAtual) < strtotime('06:00:00')) {
+        $turno = 'Integral';
+    } else {
+        $turno = 'Outro';
+    }
+
+    // Verifique se o usuário chegou antes do horário de trabalho e acumule o tempo
+    if (strtotime($horaAtual) < strtotime('08:00:00')) {
+        // Calcular a diferença em segundos entre a hora atual e o início do expediente (06:00:00)
+        $diferenca_segundos = strtotime('08:00:00') - strtotime($horaAtual);
+
+        // Converta a diferença para o formato HH:MM:SS
+        $diferenca_formatada = gmdate('H:i:s', $diferenca_segundos);
+
+        // Exiba a mensagem e adicione a entrada antecipada no banco de dados
+        echo "Você chegou antes do horário de trabalho! Ganhou: $diferenca_formatada\n";
+
+        // Defina o valor de presença com base no turno do usuário
+        $presenca = ($turno === $turno_usuario || $turno_usuario === 'Integral') ? 'Presente' : 'Ausente';
+
+        // Insira os dados de frequência no banco de dados
+        $query = "INSERT INTO frequencia (nome, tipo_usuario, dia, hora, turno, presenca) VALUES ('$nome', '$tipo_usuario', CURDATE(), '$horaAtual', '$turno', '$presenca')";
+
+        if (mysqli_query($conexao, $query)) {
+            // Redirecione de volta para a página principal
+            header("Location: principal.php");
             exit();
-        }
-
-        // Calcule o turno com base na hora
-        if (strtotime($horaAtual) >= strtotime('06:00:00') && strtotime($horaAtual) < strtotime('12:59:59')) {
-            $turno = 'Manhã';
-        } elseif (strtotime($horaAtual) >= strtotime('13:00:00') && strtotime($horaAtual) < strtotime('17:59:59')) {
-            $turno = 'Tarde';
-        } elseif (strtotime($horaAtual) >= strtotime('18:00:00') && strtotime($horaAtual) <= strtotime('23:59:59')) {
-            $turno = 'Noite';
-        } elseif (strtotime($horaAtual) >= strtotime('00:00:00') && strtotime($horaAtual) < strtotime('06:00:00')) {
-            $turno = 'Integral';
         } else {
-            $turno = 'Outro';
+            echo "Erro ao registrar a frequência: " . mysqli_error($conexao);
         }
-
+    } elseif ($num_entradas < 2) {
         // Defina o valor de presença com base no turno do usuário
         $presenca = ($turno === $turno_usuario || $turno_usuario === 'Integral') ? 'Presente' : 'Ausente';
 
