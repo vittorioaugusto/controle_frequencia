@@ -59,45 +59,34 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $turno = 'Outro';
     }
 
-// Verifique se o usuário chegou antes do horário de trabalho e acumule o tempo
-if (strtotime($horaAtual) < strtotime('07:00:00')) {
-    // Calcular a diferença em segundos entre a hora atual e o início do expediente (07:00:00)
-    $diferenca_segundos = strtotime('07:00:00') - strtotime($horaAtual);
+    // Verifique se o usuário chegou antes do horário de trabalho e acumule o tempo
+    if (strtotime($horaAtual) < strtotime('07:00:00')) {
+        // Calcular a diferença em segundos entre a hora atual e o início do expediente (08:00:00)
+        $diferenca_segundos = strtotime('07:00:00') - strtotime($horaAtual);
 
-    // Converter a diferença para o formato HH:MM:SS
-    $diferenca_formatada = gmdate('H:i:s', $diferenca_segundos);
+        // Converter a diferença para o formato HH:MM:SS
+        $diferenca_formatada = gmdate('H:i:s', $diferenca_segundos);
 
-    // Adicione o tempo específico para o turno da tarde ou noite
-    if (strtotime($horaAtual) < strtotime('14:00:00')) {
-        $diferenca_segundos += strtotime('14:00:00') - strtotime('07:00:00');
-    } elseif (strtotime($horaAtual) < strtotime('19:00:00')) {
-        $diferenca_segundos += strtotime('19:00:00') - strtotime('07:00:00');
-    }
+        // Exiba a mensagem e adicione a entrada antecipada no banco de dados
+        echo "Você chegou antes do horário de trabalho! Ganhou: $diferenca_formatada\n";
 
-    // Converter a diferença acumulada para o formato HH:MM:SS
-    $diferenca_formatada = gmdate('H:i:s', $diferenca_segundos);
+        // Defina o valor de presença com base no turno do usuário
+        $presenca = ($turno === $turno_usuario || $turno_usuario === 'Integral') ? 'Presente' : 'Ausente';
 
-    // Exiba a mensagem e adicione a entrada antecipada no banco de dados
-    echo "Você chegou antes do horário de trabalho! Ganhou: $diferenca_formatada\n";
+        // Insira os dados de frequência no banco de dados
+        $query = "INSERT INTO frequencia (nome, tipo_usuario, dia, hora, turno, presenca) VALUES ('$nome', '$tipo_usuario', CURDATE(), '$horaAtual', '$turno', '$presenca')";
 
-    // Defina o valor de presença com base no turno do usuário
-    $presenca = ($turno === $turno_usuario || $turno_usuario === 'Integral') ? 'Presente' : 'Ausente';
+        if (mysqli_query($conexao, $query)) {
+            // Adicione as horas acumuladas à tabela registros_horas
+            $query_horas_acumuladas = "INSERT INTO registros_horas (nome, horas_trabalhadas, data_registro) VALUES ('$nome', '$diferenca_formatada', CURDATE())";
+            mysqli_query($conexao, $query_horas_acumuladas);
 
-    // Insira os dados de frequência no banco de dados
-    $query = "INSERT INTO frequencia (nome, tipo_usuario, dia, hora, turno, presenca) VALUES ('$nome', '$tipo_usuario', CURDATE(), '$horaAtual', '$turno', '$presenca')";
-
-    if (mysqli_query($conexao, $query)) {
-        // Adicione as horas acumuladas à tabela registros_horas
-        $query_horas_acumuladas = "INSERT INTO registros_horas (nome, horas_trabalhadas, data_registro) VALUES ('$nome', '$diferenca_formatada', CURDATE())";
-        mysqli_query($conexao, $query_horas_acumuladas);
-
-        // Redirecione de volta para a página principal
-        header("Location: principal.php");
-        exit();
-    } else {
-        echo "Erro ao registrar a frequência: " . mysqli_error($conexao);
-    }
-
+            // Redirecione de volta para a página principal
+            header("Location: principal.php");
+            exit();
+        } else {
+            echo "Erro ao registrar a frequência: " . mysqli_error($conexao);
+        }
     } elseif ($num_entradas < 2) {
         // Defina o valor de presença com base no turno do usuário
         $presenca = ($turno === $turno_usuario || $turno_usuario === 'Integral') ? 'Presente' : 'Ausente';
