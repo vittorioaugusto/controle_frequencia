@@ -65,6 +65,16 @@ if ($result_horas_acumuladas && mysqli_num_rows($result_horas_acumuladas) > 0) {
         <p>Total de Horas Acumuladas: <?php echo $total_horas_acumuladas_formatado; ?></p>
     </div>
 
+    <?php
+    // Exibir mensagem quando o usuário chegou antes do horário de trabalho e acumulou horas
+    if (isset($_SESSION['mensagem_horas_acumuladas'])) {
+        echo '<div>';
+        echo '<p>' . $_SESSION['mensagem_horas_acumuladas'] . '</p>';
+        echo '</div>';
+        unset($_SESSION['mensagem_horas_acumuladas']); // Limpar a mensagem para evitar exibição repetida
+    }
+    ?>
+
     <script type="text/javascript" src="js/funcoes.js"></script>
 </body>
 
