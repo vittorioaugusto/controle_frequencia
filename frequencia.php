@@ -56,8 +56,8 @@ if ($row = mysqli_fetch_assoc($result)) {
                 <h1 id="titulo">Sistema de Frequência</h1>
             </div>
             <div class="bem_vindo_nome">
-                <p>Nome: <?php echo $_SESSION['nome']; ?></p>
                 <p>Tipo de Usuário: <?php echo $_SESSION['tipo_usuario']; ?></p>
+                <p>Turno: <?php echo $_SESSION['turno']; ?></p>
             </div>
             <div class="botao_nav">
                 <ul>

@@ -53,22 +53,34 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $turno = 'Tarde';
     } elseif (strtotime($horaAtual) >= strtotime('18:00:00') && strtotime($horaAtual) <= strtotime('23:59:59')) {
         $turno = 'Noite';
-    } elseif (strtotime($horaAtual) >= strtotime('00:00:00') && strtotime($horaAtual) < strtotime('06:00:00')) {
+    } elseif (strtotime($horaAtual) >= strtotime('06:00:00') && strtotime($horaAtual) < strtotime('05:59:59')) {
         $turno = 'Integral';
     } else {
         $turno = 'Outro';
     }
 
-    // Verifique se o usuário chegou antes do horário de trabalho e acumule o tempo
-    if (strtotime($horaAtual) < strtotime('07:00:00')) {
-        // Calcular a diferença em segundos entre a hora atual e o início do expediente (08:00:00)
-        $diferenca_segundos = strtotime('07:00:00') - strtotime($horaAtual);
+    // Calcular a diferença em segundos entre a hora atual e o início do expediente Manhã (07:00:00)
+    $diferenca_segundos_manha = strtotime('07:00:00') - strtotime($horaAtual);
 
+    // Calcular a diferença em segundos entre a hora atual e o início do expediente Tarde (14:00:00)
+    $diferenca_segundos_tarde = strtotime('14:00:00') - strtotime($horaAtual);
+
+    // Calcular a diferença em segundos entre a hora atual e o início do expediente Noite (19:00:00)
+    $diferenca_segundos_noite = strtotime('19:00:00') - strtotime($horaAtual);
+
+    // Verifique se o usuário chegou antes do horário de trabalho e acumule o tempo
+    if (strtotime($horaAtual) < strtotime('07:00:00') && !(($turno == 'Tarde' && strtotime($horaAtual) < strtotime('14:00:00')) || ($turno == 'Noite' && strtotime($horaAtual) < strtotime('19:00:00')) || ($turno == 'Integral' && strtotime($horaAtual) < strtotime('07:00:00')))) {
         // Converter a diferença para o formato HH:MM:SS
-        $diferenca_formatada = gmdate('H:i:s', $diferenca_segundos);
+        $diferenca_formatada_manha = gmdate('H:i:s', $diferenca_segundos_manha);
+        $diferenca_formatada_tarde = gmdate('H:i:s', $diferenca_segundos_tarde);
+        $diferenca_formatada_noite = gmdate('H:i:s', $diferenca_segundos_noite);
 
         // Exiba a mensagem e adicione a entrada antecipada no banco de dados
-        echo "Você chegou antes do horário de trabalho! Ganhou: $diferenca_formatada\n";
+        echo "Você chegou antes do horário de trabalho! Ganhou para o turno da Manhã: $diferenca_formatada_manha\n";
+        // Exiba a mensagem e adicione a entrada antecipada no banco de dados
+        echo "Você chegou antes do horário de trabalho! Ganhou para o turno da Manhã: $diferenca_formatada_tarde\n";
+        // Exiba a mensagem e adicione a entrada antecipada no banco de dados
+        echo "Você chegou antes do horário de trabalho! Ganhou para o turno da Tarde: $diferenca_formatada_noite\n";
 
         // Defina o valor de presença com base no turno do usuário
         $presenca = ($turno === $turno_usuario || $turno_usuario === 'Integral') ? 'Presente' : 'Ausente';
@@ -77,9 +89,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $query = "INSERT INTO frequencia (nome, tipo_usuario, dia, hora, turno, presenca) VALUES ('$nome', '$tipo_usuario', CURDATE(), '$horaAtual', '$turno', '$presenca')";
 
         if (mysqli_query($conexao, $query)) {
-            // Adicione as horas acumuladas à tabela registros_horas
-            $query_horas_acumuladas = "INSERT INTO registros_horas (nome, horas_trabalhadas, data_registro) VALUES ('$nome', '$diferenca_formatada', CURDATE())";
-            mysqli_query($conexao, $query_horas_acumuladas);
+            // Adicione as horas acumuladas à tabela registros_horas para o turno da Manhã
+            $query_horas_acumuladas_manha = "INSERT INTO registros_horas (nome, horas_trabalhadas, data_registro) VALUES ('$nome', '$diferenca_formatada_manha', CURDATE())";
+            mysqli_query($conexao, $query_horas_acumuladas_manha);
+            // Adicione as horas acumuladas à tabela registros_horas para o turno da Tarde
+            $query_horas_acumuladas_tarde = "INSERT INTO registros_horas (nome, horas_trabalhadas, data_registro) VALUES ('$nome', '$diferenca_formatada_tarde', CURDATE())";
+            mysqli_query($conexao, $query_horas_acumuladas_tarde);
+            // Adicione as horas acumuladas à tabela registros_horas para o turno da Noite
+            $query_horas_acumuladas_noite = "INSERT INTO registros_horas (nome, horas_trabalhadas, data_registro) VALUES ('$nome', '$diferenca_formatada_noite', CURDATE())";
+            mysqli_query($conexao, $query_horas_acumuladas_noite);
 
             // Redirecione de volta para a página principal
             header("Location: principal.php");
@@ -108,4 +126,3 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         echo "Você já registrou duas entradas para o dia de hoje.";
     }
 }
-?>

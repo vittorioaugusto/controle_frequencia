@@ -34,6 +34,7 @@ if ($_SESSION['tipo_usuario'] === 'Administrador') {
             <div class="bem_vindo_nome">
                 <h2>Bem vindo (a): <?php echo $_SESSION['nome']; ?></h2>
                 <p>Tipo de Usuário: <?php echo $_SESSION['tipo_usuario']; ?></p>
+                <p>Turno: <?php echo $_SESSION['turno']; ?></p>
             </div>
             <div class="botao_nav">
                 <ul>
@@ -71,7 +72,6 @@ if ($_SESSION['tipo_usuario'] === 'Administrador') {
                 <th>Nome</th>
                 <th>Data</th>
                 <th>Hora</th>
-                <th>Turno</th>
                 <th>Presença</th>
                 <th>Tipo</th>
             </tr>
@@ -94,7 +94,6 @@ if ($_SESSION['tipo_usuario'] === 'Administrador') {
                 echo "<td>" . $row['nome'] . "</td>";
                 echo "<td>" . $row['dia'] . "</td>";
                 echo "<td>" . $row['hora'] . "</td>";
-                echo "<td>" . $row['turno'] . "</td>"; // Exibe a coluna de Turno
                 echo "<td>" . $row['presenca'] . "</td>";
                 echo "<td>";
 
