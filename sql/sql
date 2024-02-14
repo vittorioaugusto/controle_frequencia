@@ -29,6 +29,14 @@ CREATE TABLE frequencia (
     presenca ENUM('Presente', 'Ausente') NOT NULL
 );
 
+CREATE TABLE registros_horas (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(255) NOT NULL,
+    horas_trabalhadas TIME NOT NULL,
+    data_registro DATE NOT NULL
+);
+
+
 INSERT INTO usuarios (nome, email, senha, cpf, telefone, tipo_usuario, turno, status) VALUES ('Claudio', 'claudio@admin.com', '123', '12345678901', '83911112222', 'Administrador', 'Integral', 1);
 
 
