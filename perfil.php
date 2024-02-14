@@ -64,22 +64,6 @@ $tipo_usuario = $_SESSION['tipo_usuario'];
     <p>Tipo de Usuário: <?php echo $tipo_usuario; ?></p>
     <p>Turno: <?php echo $turno; ?></p>
 
-    <h3>Foto de Perfil</h3>
-    <?php
-    // Exiba a foto de perfil se existir
-    if (isset($_SESSION['foto_perfil'])) {
-        echo '<img src="' . $_SESSION['foto_perfil'] . '" alt="Foto de Perfil">';
-    }
-    ?>
-
-    <!-- Formulário para upload de foto de perfil -->
-    <form action="upload_foto_perfil.php" method="post" enctype="multipart/form-data">
-        <label for="foto_perfil">Escolha uma foto de perfil:</label>
-        <input type="file" name="foto_perfil" id="foto_perfil" accept="image/*">
-        <button type="submit" name="submit">Enviar</button>
-    </form>
-
-
     <script type="text/javascript" src="js/funcoes.js"></script>
 </body>
 
