@@ -1,10 +1,10 @@
 <?php
-session_start(); // Inicie a sessão para acessar as informações do usuário
+session_start();
 include 'conexao.php';
 
 // Verifique se o usuário está logado
 if (!isset($_SESSION['nome']) || !isset($_SESSION['tipo_usuario'])) {
-    header("Location: login.php"); // Redirecione para a página de login se não estiver logado
+    header("Location: index.php");
     exit();
 }
 
