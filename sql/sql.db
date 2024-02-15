@@ -38,7 +38,3 @@ CREATE TABLE registros_horas (
 
 INSERT INTO usuarios (nome, email, senha, cpf, telefone, tipo_usuario, turno, status)
 VALUES ('Claudio', 'claudio@admin.com', '123', '12345678901', '83911112222', 'Administrador', 'Integral', 1);
-
-
-select * from usuarios;
-select * from frequencia;

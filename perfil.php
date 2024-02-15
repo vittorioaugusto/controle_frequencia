@@ -22,7 +22,10 @@ $tipo_usuario = $_SESSION['tipo_usuario'];
 <html>
 
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Perfil</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
@@ -58,11 +61,31 @@ $tipo_usuario = $_SESSION['tipo_usuario'];
     </header>
 
     <h2>Meu Perfil</h2>
+
+    <?php
+    // Defina as variáveis $diretorio_destino e $nome_arquivo
+    $diretorio_destino = 'imagens_perfil/';
+    $nome_arquivo = $_SESSION['nome'] . '_perfil.jpg';
+
+    if (file_exists($diretorio_destino . $nome_arquivo)) {
+        echo '<img class="imagem_perfil" src="' . $diretorio_destino . $nome_arquivo . '" alt="Imagem de Perfil">';
+    } else {
+        echo '<p>Imagem de perfil não encontrada.</p>';
+    }
+    ?>
+
     <p>Nome: <?php echo $nome; ?></p>
     <p>Email: <?php echo $email; ?></p>
     <p>Telefone: <?php echo $telefone; ?></p>
     <p>Tipo de Usuário: <?php echo $tipo_usuario; ?></p>
     <p>Turno: <?php echo $turno; ?></p>
+
+    <!-- Adicione este código dentro do formulário existente -->
+    <form action="salvar_imagem.php" method="post" enctype="multipart/form-data">
+        <label for="imagem">Escolha uma imagem para o perfil:</label>
+        <input type="file" name="imagem" id="imagem" accept="image/*">
+        <input type="submit" value="Upload Imagem" name="submit">
+    </form>
 
     <script type="text/javascript" src="js/funcoes.js"></script>
 </body>
