@@ -2,8 +2,8 @@
 
 
 
-
 ### Autor do Readme:
 
-[![Vittorio Augusto](image/perfil.jpg)](https://github.com/vittorioaugusto) | [Vittorio Augusto](https://github.com/vittorioaugusto)
+[![vittorioaugusto](vittorioaugusto.jpg)](https://github.com/vittorioaugusto) | [Vittorio Augusto](https://github.com/vittorioaugusto)
 | --- | --- |
+
