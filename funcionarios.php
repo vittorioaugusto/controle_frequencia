@@ -1,10 +1,10 @@
 <?php
-session_start(); // Inicie a sessão para acessar as informações do usuário
+session_start();
 include 'conexao.php';
 
-// Verifique se o usuário é um administrador
+
 if ($_SESSION['tipo_usuario'] !== 'Administrador') {
-    header("Location: principal.php"); // Redirecione para a página principal se não for um administrador
+    header("Location: principal.php");
     exit();
 }
 
@@ -16,11 +16,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Atualize o status do usuário no banco de dados
         $queryUpdateStatus = "UPDATE usuarios SET status = $novoStatus WHERE id = $usuarioId";
         if (mysqli_query($conexao, $queryUpdateStatus)) {
-            // Atualização bem-sucedida
             header("Location: funcionarios.php");
             exit();
         } else {
-            // Erro ao atualizar o status
             echo "Erro ao atualizar o status do usuário.";
         }
     }
@@ -63,38 +61,42 @@ $resultUsuarios = mysqli_query($conexao, $queryUsuarios);
     </header>
 
     <form method="post" action="funcionarios.php" onsubmit="return validarFormulario();">
-        <h3>Filtrar Funcionários:</h3>
-        <label for="usuario">Selecione o usuário:</label>
-        <select name="usuario" id="usuario">
-            <option value="">Todos os Usuários</option>
-            <?php
-            // Consulta SQL para obter os nomes dos usuários que não são administradores
-            $queryNomesUsuarios = "SELECT DISTINCT f.nome FROM usuarios f WHERE f.tipo_usuario != 'Administrador'";
-            $resultNomesUsuarios = mysqli_query($conexao, $queryNomesUsuarios);
+        <h3>Filtrar Funcionários</h3>
 
-            while ($rowNomeUsuario = mysqli_fetch_assoc($resultNomesUsuarios)) {
-                $nomeUsuario = $rowNomeUsuario['nome'];
-                echo "<option value='$nomeUsuario'>$nomeUsuario</option>";
-            }
-            ?>
-        </select>
+        <label for="filtrarTodos"></label>
+        <input type="submit" name="filtrarTodos" value="Mostrar Todos"><br>
 
         <label for="cpf">CPF:</label>
         <input type="number" name="cpf" id="cpf">
-        <input type="submit" value="Filtrar">
+        <input type="submit" name="filtrarPorCPF" value="Filtrar">
+
     </form>
 
     <table border="1">
         <thead>
             <caption>
-                <h3>Funcionário
+                <h3>
                     <?php
-                    if (isset($_POST['usuario'])) {
-                        $usuarioSelecionado = $_POST['usuario'];
-                        if ($usuarioSelecionado === "") {
-                            echo "Todos os Usuários";
-                        } else {
-                            echo $usuarioSelecionado;
+                    if (isset($_POST['usuario']) || isset($_POST['cpf'])) {
+                        if (isset($_POST['usuario'])) {
+                            $usuarioSelecionado = $_POST['usuario'];
+                            if ($usuarioSelecionado === "") {
+                                echo "Todos os Usuários";
+                            } else {
+                                echo $usuarioSelecionado;
+                            }
+                        } elseif (isset($_POST['cpf'])) {
+                            $cpf = $_POST['cpf'];
+                            $queryNomeUsuario = "SELECT nome FROM usuarios WHERE cpf = '$cpf'";
+                            $resultNomeUsuario = mysqli_query($conexao, $queryNomeUsuario);
+
+                            if ($resultNomeUsuario && mysqli_num_rows($resultNomeUsuario) > 0) {
+                                $rowNomeUsuario = mysqli_fetch_assoc($resultNomeUsuario);
+                                $nomeUsuario = $rowNomeUsuario['nome'];
+                                echo "Usuário: $nomeUsuario";
+                            } else {
+                                echo "Todos os Usuários";
+                            }
                         }
                     } else {
                         echo "Todos os Usuários";
@@ -102,8 +104,10 @@ $resultUsuarios = mysqli_query($conexao, $queryUsuarios);
                     ?>
                 </h3>
             </caption>
+
             <tr>
-                <th>Funcionário</th>
+                <th>Imagem de Perfil</th>
+                <th>Função</th>
                 <th>Nome</th>
                 <th>Telefone</th>
                 <th>Turno</th>
@@ -113,9 +117,9 @@ $resultUsuarios = mysqli_query($conexao, $queryUsuarios);
         </thead>
         <tbody>
             <?php
-            if (isset($_POST['usuario']) || isset($_POST['cpf'])) {
-                $usuario = $_POST['usuario'];
-                $cpf = $_POST['cpf'];
+            if ((isset($_POST['usuario']) || isset($_POST['cpf'])) || isset($_POST['filtrarTodos']) && isset($_POST['filtrarPorCPF'])) {
+                $usuario = isset($_POST['usuario']) ? $_POST['usuario'] : '';
+                $cpf = isset($_POST['cpf']) ? $_POST['cpf'] : '';
 
                 // Construa a parte condicional da consulta SQL com base nos critérios
                 $condicao = "WHERE tipo_usuario != 'Administrador'"; // Adicione essa condição para excluir administradores
@@ -138,10 +142,18 @@ $resultUsuarios = mysqli_query($conexao, $queryUsuarios);
 
                 while ($rowFuncionario = mysqli_fetch_assoc($resultFuncionarios)) {
                     echo "<tr>";
+                    // Obtenha o nome do arquivo da imagem de perfil
+                    $nomeArquivoPerfil = $rowFuncionario['nome'] . '_perfil.jpg';
+
+                    // Construa o caminho completo para a imagem de perfil
+                    $caminhoImagemPerfil = 'imagens_perfil/' . $nomeArquivoPerfil;
+
+                    // Adicione a tag <img> com o caminho da imagem de perfil
+                    echo "<td><img src='$caminhoImagemPerfil' alt='Imagem de Perfil' style='width: 100px; height: 100px;'></td>";
                     echo "<td>" . $rowFuncionario['tipo_usuario'] . "</td>";
                     echo "<td>" . $rowFuncionario['nome'] . "</td>";
                     echo "<td>" . $rowFuncionario['telefone'] . "</td>";
-                    echo "<td>" . $rowFuncionario['turno'] . "</td>"; // Exibir o turno
+                    echo "<td>" . $rowFuncionario['turno'] . "</td>";
                     echo "<td>";
 
                     if ($rowFuncionario['status'] == 1) {

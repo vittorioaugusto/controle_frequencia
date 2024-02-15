@@ -68,7 +68,7 @@ if ($_SESSION['tipo_usuario'] === 'Administrador') {
             }
             ?>
             <tr>
-                <th>Funcionário</th>
+                <th>Função</th>
                 <th>Nome</th>
                 <th>Data</th>
                 <th>Hora</th>

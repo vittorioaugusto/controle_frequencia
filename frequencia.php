@@ -5,7 +5,6 @@ include 'conexao.php';
 // Defina o fuso horário para o de São Paulo (ou o fuso horário apropriado)
 date_default_timezone_set('America/Sao_Paulo');
 
-// Verifique se o usuário está logado
 if (!isset($_SESSION['nome']) || !isset($_SESSION['tipo_usuario'])) {
     header("Location: index.php");
     exit();
@@ -14,9 +13,8 @@ if (!isset($_SESSION['nome']) || !isset($_SESSION['tipo_usuario'])) {
 $tipo_usuario = $_SESSION['tipo_usuario'];
 $nome = $_SESSION['nome'];
 
-// Verifique se o usuário é um administrador
 if ($tipo_usuario === 'Administrador') {
-    header("Location: principal.php"); // Redirecione o administrador para a página principal
+    header("Location: principal.php");
     exit();
 }
 
@@ -72,12 +70,33 @@ if ($row = mysqli_fetch_assoc($result)) {
         </nav>
     </header>
 
-    <h2>Registre sua Frequência</h2>
+    <?php
 
-    <form action="processar_frequencia.php" method="POST">
-        <button type="submit" value="Registrar Frequência" id="registrarFrequenciaBtn">Registrar Frequência</button>
-    </form>
+    // Verifique se o usuário já realizou uma frequência de entrada e uma de saída no mesmo dia
+    $queryContagem = "SELECT COUNT(*) AS numFrequencias
+                  FROM frequencia 
+                  WHERE nome = '$nome' AND dia = CURDATE()";
 
+    $resultContagem = mysqli_query($conexao, $queryContagem);
+
+    if ($rowContagem = mysqli_fetch_assoc($resultContagem)) {
+        $numFrequencias = $rowContagem['numFrequencias'];
+
+        // Defina o limite de frequência (1 entrada e 1 saída)
+        $limiteFrequencia = 2;
+
+        if ($numFrequencias >= $limiteFrequencia) {
+            echo "<p style='color: red;'>Você atingiu o limite de frequências para hoje.</p>";
+        } else {
+            // Permitir que o usuário registre uma nova frequência
+            echo "<h2>Registre sua Frequência</h2>";
+            echo "<form action='processar_frequencia.php' method='POST'>";
+            echo "<button type='submit' value='Registrar Frequência' id='registrarFrequenciaBtn'>Registrar Frequência</button>";
+            echo "</form>";
+        }
+    }
+
+    ?>
 
     <?php if (isset($ultimaFrequenciaData) && isset($ultimaFrequenciaHora)) : ?>
         <h4>Última Frequência Realizada</h4>

@@ -92,7 +92,7 @@ $resultUsuarios = mysqli_query($conexao, $queryUsuarios);
                 </h3>
             </caption>
             <tr>
-                <th>Funcionário</th>
+                <th>Função</th>
                 <th>Nome</th>
                 <th>Dia</th>
                 <th>Hora</th>
