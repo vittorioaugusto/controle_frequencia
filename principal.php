@@ -16,107 +16,154 @@ if ($_SESSION['tipo_usuario'] === 'Administrador') {
 }
 ?>
 
+
 <!DOCTYPE html>
-<html>
+<html lang="pt-br">
 
 <head>
-    <title>Página Principal</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Bootstrap CSS link -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
+    <!-- Biblioteca icones -->
+    <script src="https://kit.fontawesome.com/f2c34800e3.js" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="style.css">
+    <title>Início</title>
 </head>
 
-<body>
+<body class="vh-100">
 
-    <header>
-        <nav>
-            <div class="logo">
-                <div class="coin"></div>
-                <h1 id="titulo">Sistema de Frequência</h1>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container-fluid">
+
+            <h1 class="navbar-brand no-hover-color">Frequência Tech<i class="fa fa-check-circle-o ms-1" aria-hidden="true"></i></h1>
+
+            <button class="navbar-toggler shadow-none border-0" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="sidebar offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+                <div class="offcanvas-header text-white border-bottom">
+                    <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Frequência Tech</h5>
+                    <button type="button" class="btn-close btn-close-white shadow-none" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                </div>
+
+                <div class="offcanvas-body d-flex flex-column flex-lg-row p-3 p-lg-0">
+                    <ul class="navbar-nav justify-content-center align-items-center fs-5 flex-grow-1 pe-3">
+                        <li class="nav-item mx-1">
+                            <a class="nav-link active" href="principal.php" aria-current="page" href="principal.php">Home</a>
+                        </li>
+                        <?php
+                        if ($_SESSION['tipo_usuario'] !== 'Administrador') {
+                            echo ' <li class="nav-item mx-1">
+                            <a class="nav-link" href="frequencia.php">Realizar Frequência</a>
+                        </li>';
+                            echo '<li class="nav-item mx-1">
+                            <a class="nav-link" href="horas_acumuladas.php">Horas Acumuladas</a>
+                        </li>';
+                        } else {
+                            echo '<li class="nav-item mx-1">
+                            <a class="nav-link" href="cadastro.php">Cadastrar Funcionário</a>
+                        </li>';
+                            echo ' <li class="nav-item mx-1">
+                            <a class="nav-link" href="funcionarios.php">Funcionários</a>
+                        </li>';
+                            echo '<li class="nav-item mx-1">
+                            <a class="nav-link" href="frequencia_funcionarios.php">Frequência dos Funcionários</a>
+                        </li>';
+                        }
+                        ?>
+                        <li class="nav-item mx-1">
+                            <a class="nav-link" href="calendario_frequencia.php">Calendário de Frequência</a>
+                        </li>
+                        <li class="nav-item mx-1">
+                            <a class="nav-link" href="perfil.php">Perfil</a>
+                        </li>
+                    </ul>
+                    <div class="d-flex flex-column flex-lg-row justify-content-center align-items-center gap-3">
+                        <a href="javascript:void(0);" onclick="confirmarSaida();" class="text-white text-decoration-none px-3 py-1 rounded-4" style="background-color: #f94ca4">Sair</a>
+                    </div>
+                </div>
             </div>
-            <div class="bem_vindo_nome">
+        </div>
+    </nav>
+
+    <main>
+        <section class="w-100 d-flex flex-column 
+        justify-content-center align-items-center text-dark fs-5">
+            <div class="inicio_text p-3">
                 <h2>Bem vindo (a): <?php echo $_SESSION['nome']; ?></h2>
                 <p>Tipo de Usuário: <?php echo $_SESSION['tipo_usuario']; ?></p>
                 <p>Turno: <?php echo $_SESSION['turno']; ?></p>
             </div>
-            <div class="botao_nav">
-                <ul>
-                    <a href="principal.php"> <button id="butao_selecionado">Início</button></a>
-                    <?php
-                    // Verifique se o usuário não é um administrador
-                    if ($_SESSION['tipo_usuario'] !== 'Administrador') {
-                        echo '<a href="frequencia.php"><button>Realizar Frequência</button></a>';
-                        echo '<a href="horas_acumuladas.php"><button>Horas Acumuladas</button></a>';
-                    } else {
-                        echo '<a href="cadastro.php"><button>Cadastrar Funcionário</button></a>';
-                        echo '<a href="funcionarios.php"><button>Funcionários</button></a>';
-                        echo '<a href="frequencia_funcionarios.php"><button>Frequência dos Funcionários</button></a>';
-                    }
-                    ?>
-                    <a href="calendario_frequencia.php"><button>Calendário de Frequência</button></a>
-                    <a href="perfil.php"><button>Perfil</button></a>
-                    <a href="javascript:void(0);" onclick="confirmarSaida();"> <button>Sair</button></a>
-                </ul>
-            </div>
-        </nav>
-    </header>
 
-    <table border="1">
-        <thead>
-            <?php
-            if ($_SESSION['tipo_usuario'] === 'Administrador') {
-                echo '<caption>Frequência de Todos os Funcionários</caption>';
-            } else {
-                echo '<caption>Minha Frequência</caption>';
-            }
-            ?>
-            <tr>
-                <th>Função</th>
-                <th>Nome</th>
-                <th>Data</th>
-                <th>Hora</th>
-                <th>Presença</th>
-                <th>Tipo</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php
-            $result = mysqli_query($conexao, $query);
+            <table class="table w-50">
+                <div class="card-body">
+                    <thead>
+                        <tr>
+                            <?php
+                            if ($_SESSION['tipo_usuario'] === 'Administrador') {
+                                echo '<h3>Frequência de Todos os Funcionários</h3>';
+                            } else {
+                                echo '<h3>Minha Frequência</h3>';
+                            }
+                            ?>
+                            <th scope="col">Função</th>
+                            <th scope="col">Nome</th>
+                            <th scope="col">Data</th>
+                            <th scope="col">Hora</th>
+                            <th scope="col">Presença</th>
+                            <th scope="col">Tipo</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                        $result = mysqli_query($conexao, $query);
 
-            while ($row = mysqli_fetch_assoc($result)) {
-                $nomeFuncionario = $row['nome'];
-                $dataPresenca = $row['dia'];
+                        while ($row = mysqli_fetch_assoc($result)) {
+                            $nomeFuncionario = $row['nome'];
+                            $dataPresenca = $row['dia'];
 
-                // Verificar e rastrear o número de presenças para o mesmo funcionário e data
-                if (!isset($presencasPorDia[$nomeFuncionario][$dataPresenca])) {
-                    $presencasPorDia[$nomeFuncionario][$dataPresenca] = 0;
-                }
+                            // Verificar e rastrear o número de presenças para o mesmo funcionário e data
+                            if (!isset($presencasPorDia[$nomeFuncionario][$dataPresenca])) {
+                                $presencasPorDia[$nomeFuncionario][$dataPresenca] = 0;
+                            }
 
-                echo "<tr>";
-                echo "<td>" . $row['tipo_usuario'] . "</td>";
-                echo "<td>" . $row['nome'] . "</td>";
-                echo "<td>" . $row['dia'] . "</td>";
-                echo "<td>" . $row['hora'] . "</td>";
-                echo "<td>" . $row['presenca'] . "</td>";
-                echo "<td>";
+                            echo "<tr>";
+                            echo "<td>" . $row['tipo_usuario'] . "</td>";
+                            echo "<td>" . $row['nome'] . "</td>";
+                            echo "<td>" . $row['dia'] . "</td>";
+                            echo "<td>" . $row['hora'] . "</td>";
+                            echo "<td>" . $row['presenca'] . "</td>";
+                            echo "<td>";
 
-                // Determinar se a presença é uma entrada ou saída com base no número de presenças
-                if ($row['presenca'] == 'Presente') {
-                    if ($presencasPorDia[$nomeFuncionario][$dataPresenca] % 2 == 0) {
-                        echo "Entrada";
-                    } else {
-                        echo "Saída";
-                    }
-                    $presencasPorDia[$nomeFuncionario][$dataPresenca]++;
-                } else {
-                    echo "Faltou"; // Caso a presença não seja "Presente"
-                }
+                            // Determinar se a presença é uma entrada ou saída com base no número de presenças
+                            if ($row['presenca'] == 'Presente') {
+                                if ($presencasPorDia[$nomeFuncionario][$dataPresenca] % 2 == 0) {
+                                    echo "Entrada";
+                                } else {
+                                    echo "Saída";
+                                }
+                                $presencasPorDia[$nomeFuncionario][$dataPresenca]++;
+                            } else {
+                                echo "Faltou"; // Caso a presença não seja "Presente"
+                            }
 
-                echo "</td>";
-                echo "</tr>";
-            }
-            ?>
-        </tbody>
-    </table>
+                            echo "</td>";
+                            echo "</tr>";
+                        }
+                        ?>
+                    </tbody>
+                </div>
+            </table>
+        </section>
+    </main>
 
-
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
     <script type="text/javascript" src="js/funcoes.js"></script>
 </body>
 

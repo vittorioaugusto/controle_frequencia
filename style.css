@@ -1,26 +1,26 @@
-* {
-    box-sizing: border-box;
+body {
+    background-color: #f8f9fa;
 }
 
-body {
-    display: flex;
-    height: 100vh;
-    flex-direction: column;
-    justify-content: space-between;
-    background-color: #f8f9fa;
-    margin: 0;
-    padding: 0;
+@media(max-width: 991px){
+    .sidebar{
+        background-color: rgba(255, 255, 255, 0.15);
+        backdrop-filter: blur(10px);
+    }
 }
 
 .container {
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 100vh;
 }
 
 .container h2 {
     text-transform: uppercase;
+}
+
+.inicio_text{
+    color: #000;
 }
 
 .btn-custom-color {
