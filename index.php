@@ -20,7 +20,7 @@
 
     <nav class="navbar navbar-expand-lg">
         <div class="container-fluid">
-            <h1 class="navbar-brand fs-4 no-hover-color">Frequência Tech<i class="fa fa-check-circle-o ms-1" aria-hidden="true"></i></h1>
+            <h1 class="navbar-brand no-hover-color">Frequência Tech<i class="fa fa-check-circle-o ms-1" aria-hidden="true"></i></h1>
         </div>
     </nav>
 

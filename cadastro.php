@@ -1,10 +1,9 @@
 <?php
-session_start(); // Inicie a sessão para acessar as informações do usuário
+session_start();
 include 'conexao.php';
 
-// Verifique se o usuário está logado
 if (!isset($_SESSION['nome']) || !isset($_SESSION['tipo_usuario'])) {
-    header("Location: index.php"); // Redirecione para a página de login se não estiver logado
+    header("Location: index.php");
     exit();
 }
 
@@ -17,74 +16,132 @@ if ($_SESSION['tipo_usuario'] === 'Administrador') {
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Bootstrap CSS link -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
+    <!-- Biblioteca icones -->
+    <script src="https://kit.fontawesome.com/f2c34800e3.js" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="style.css">
     <title>Cadastrar Funcionário</title>
 </head>
 
 <body>
     <header>
-        <nav>
-            <div class="logo">
-                <div class="coin"></div>
-                <h1 id="titulo">Sistema de Frequência</h1>
-            </div>
-            <div class="bem_vindo_nome">
-                <p>Tipo de Usuário: <?php echo $_SESSION['tipo_usuario']; ?></p>
-            </div>
-            <div class="botao_nav">
-                <ul>
-                    <a href="principal.php"> <button id="butao_selecionado">Início</button></a>
-                    <?php
-                    // Verifique se o usuário não é um administrador
-                    if ($_SESSION['tipo_usuario'] !== 'Administrador') {
-                        echo '<a href="frequencia.php"><button>Realizar Frequência</button></a>';
-                    } else {
-                        echo '<a href="cadastro.php"><button>Cadastrar Funcionário</button></a>';
-                        echo '<a href="funcionarios.php"><button>Funcionários</button></a>';
-                        echo '<a href="frequencia_funcionarios.php"><button>Frequência dos Funcionários</button></a>';
-                    }
-                    ?>
-                    <a href="calendario_frequencia.php"><button>Calendário de Frequência</button></a>
-                    <a href="perfil.php"><button>Perfil</button></a>
-                    <a href="javascript:void(0);" onclick="confirmarSaida();"> <button>Sair</button></a>
-                </ul>
+        <nav class="navbar navbar-expand-lg navbar-dark">
+            <div class="container-fluid">
+
+                <h1 class="navbar-brand no-hover-color">Frequência Tech<i class="fa fa-check-circle-o ms-1" aria-hidden="true"></i></h1>
+
+                <button class="navbar-toggler shadow-none border-0" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="sidebar offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+                    <div class="offcanvas-header text-white border-bottom">
+                        <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Frequência Tech</h5>
+                        <button type="button" class="btn-close btn-close-white shadow-none" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                    </div>
+
+                    <div class="offcanvas-body d-flex flex-column flex-lg-row p-3 p-lg-0">
+                        <ul class="navbar-nav justify-content-center align-items-center fs-5 flex-grow-1 pe-3">
+                            <li class="nav-item mx-1">
+                                <a class="nav-link " href="principal.php" aria-current="page" href="principal.php">Home</a>
+                            </li>
+                            <?php
+                            if ($_SESSION['tipo_usuario'] !== 'Administrador') {
+                                echo ' <li class="nav-item mx-1">
+                            <a class="nav-link" href="frequencia.php">Realizar Frequência</a>
+                        </li>';
+                                echo '<li class="nav-item mx-1">
+                            <a class="nav-link" href="horas_acumuladas.php">Horas Acumuladas</a>
+                        </li>';
+                            } else {
+                                echo '<li class="nav-item mx-1">
+                            <a class="nav-link active" href="cadastro.php">Cadastrar Funcionário</a>
+                        </li>';
+                                echo ' <li class="nav-item mx-1">
+                            <a class="nav-link" href="funcionarios.php">Funcionários</a>
+                        </li>';
+                                echo '<li class="nav-item mx-1">
+                            <a class="nav-link" href="frequencia_funcionarios.php">Frequência dos Funcionários</a>
+                        </li>';
+                            }
+                            ?>
+                            <li class="nav-item mx-1">
+                                <a class="nav-link" href="calendario_frequencia.php">Calendário de Frequência</a>
+                            </li>
+                            <li class="nav-item mx-1">
+                                <a class="nav-link" href="perfil.php">Perfil</a>
+                            </li>
+                        </ul>
+                        <div class="d-flex flex-column flex-lg-row justify-content-center align-items-center gap-3">
+                            <a href="javascript:void(0);" onclick="confirmarSaida();" class="text-white text-decoration-none px-3 py-1 rounded-4" style="background-color: #f10000">Sair</a>
+                        </div>
+                    </div>
+                </div>
             </div>
         </nav>
-    </header>
-    <h2>Cadastrar Funcionário</h2>
-    <form action="processar_cadastro.php" method="POST">
-        <label for="nome">Nome:</label>
-        <input type="text" name="nome" required><br>
-        <label for="email">Email:</label>
-        <input type="text" name="email" required><br>
-        <label for="senha">Senha:</label>
-        <input type="password" name="senha" required><br>
-        <label for="cpf">CPF:</label>
-        <input type="number" name="cpf" required><br>
-        <label for="telefone">Telefone:</label>
-        <input type="text" name="telefone"><br>
-        <label for="tipo_usuario">Tipo de Usuário:</label>
-        <select name="tipo_usuario" required>
-            <option value="Professor">Professor</option>
-            <option value="Funcionário de suporte ao aluno">Funcionário de suporte ao aluno</option>
-            <option value="Funcionário de manutenção">Funcionário de manutenção</option>
-            <option value="Funcionário de segurança">Funcionário de segurança</option>
-            <option value="Estagiário">Estagiário</option>
-        </select><br>
-        <label for="turno">Turno:</label>
-        <select name="turno" required>
-            <option value="Manhã">Manhã</option>
-            <option value="Tarde">Tarde</option>
-            <option value="Noite">Noite</option>
-            <option value="Integral">Integral</option>
-        </select><br>
-        <button type="submit" value="Cadastrar">Cadastrar</button>
-    </form>
 
+    </header>
+
+    <div class="container">
+        <div class="card p-2 mt-4">
+            <div class="card-body">
+                <form action="processar_cadastro.php" method="POST">
+                    <h2 class="card-title mb-4 text-center">Cadastrar Funcionário</h2>
+                    <div class="mb-3">
+                        <label for="nome" class="form-label">Nome:</label>
+                        <input type="text" name="nome" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email:</label>
+                        <input type="email" name="email" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="senha" class="form-label">Senha:</label>
+                        <input type="text" name="senha" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="cpf" class="form-label">CPF:</label>
+                        <input type="number" name="cpf" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="telefone" class="form-label">Telefone:</label>
+                        <input type="text" name="telefone" class="form-control" required>
+                    </div>
+                    <label for="tipo_usuario" class="form-label">Tipo de Usuário:</label>
+                    <select name="tipo_usuario" required>
+                        <option value="Professor">Professor</option>
+                        <option value="Funcionário de suporte ao aluno">Funcionário de suporte ao aluno</option>
+                        <option value="Funcionário de manutenção">Funcionário de manutenção</option>
+                        <option value="Funcionário de segurança">Funcionário de segurança</option>
+                        <option value="Estagiário">Estagiário</option>
+                    </select>
+                    <label for="turno" class="form-label">Turno:</label>
+                    <select name="turno" required>
+                        <option value="Manhã">Manhã</option>
+                        <option value="Tarde">Tarde</option>
+                        <option value="Noite">Noite</option>
+                        <option value="Integral">Integral</option>
+                    </select><br>
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-custom-color px-5 py-2 mt-3" value="Cadastrar">Cadastrar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
     <script type="text/javascript" src="js/funcoes.js"></script>
 </body>
 

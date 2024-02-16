@@ -85,7 +85,7 @@ if ($_SESSION['tipo_usuario'] === 'Administrador') {
                         </li>
                     </ul>
                     <div class="d-flex flex-column flex-lg-row justify-content-center align-items-center gap-3">
-                        <a href="javascript:void(0);" onclick="confirmarSaida();" class="text-white text-decoration-none px-3 py-1 rounded-4" style="background-color: #f94ca4">Sair</a>
+                        <a href="javascript:void(0);" onclick="confirmarSaida();" class="text-white text-decoration-none px-3 py-1 rounded-4" style="background-color: #f10000">Sair</a>
                     </div>
                 </div>
             </div>
@@ -95,16 +95,19 @@ if ($_SESSION['tipo_usuario'] === 'Administrador') {
     <main>
         <section class="w-100 d-flex flex-column 
         justify-content-center align-items-center text-dark fs-5">
+
             <div class="inicio_text p-3">
                 <h2>Bem vindo (a): <?php echo $_SESSION['nome']; ?></h2>
-                <p>Tipo de Usuário: <?php echo $_SESSION['tipo_usuario']; ?></p>
-                <p>Turno: <?php echo $_SESSION['turno']; ?></p>
+                <div class="d-flex flex-column p-lg-0 justify-content-center align-items-center">
+                    <p>Tipo de Usuário: <?php echo $_SESSION['tipo_usuario']; ?></p>
+                    <p>Turno: <?php echo $_SESSION['turno']; ?></p>
+                </div>
             </div>
 
-            <table class="table w-50">
+            <table class="table w-50 border">
                 <div class="card-body">
                     <thead>
-                        <tr>
+                        <tr class="table-info">
                             <?php
                             if ($_SESSION['tipo_usuario'] === 'Administrador') {
                                 echo '<h3>Frequência de Todos os Funcionários</h3>';
@@ -144,13 +147,13 @@ if ($_SESSION['tipo_usuario'] === 'Administrador') {
                             // Determinar se a presença é uma entrada ou saída com base no número de presenças
                             if ($row['presenca'] == 'Presente') {
                                 if ($presencasPorDia[$nomeFuncionario][$dataPresenca] % 2 == 0) {
-                                    echo "Entrada";
+                                    echo "<span class='bg-success'>Entrada</span>";
                                 } else {
-                                    echo "Saída";
+                                    echo "<span class='bg-saida'>Saída</span>";
                                 }
                                 $presencasPorDia[$nomeFuncionario][$dataPresenca]++;
                             } else {
-                                echo "Faltou"; // Caso a presença não seja "Presente"
+                                echo "<span class='bg-faltou'>Faltou</span>";
                             }
 
                             echo "</td>";
