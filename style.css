@@ -1,3 +1,65 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    height: 100vh;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: #f8f9fa;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+.container h2 {
+    text-transform: uppercase;
+}
+
+.btn-custom-color {
+    background-color: #6E2CF3;
+    color: #fff;
+}
+
+.btn-custom-color:hover {
+    background-color: #5500ff;
+    color: #fff;
+}
+
+.navbar {
+    background-color: #6E2CF3;
+}
+
+.navbar h1 {
+    color: #fff;
+}
+
+.no-hover-color:hover{
+    color: #fff;
+    text-decoration: none;
+}
+
+#esqueci_senha {
+    display: block;
+    margin-top: 10px;
+    text-decoration: none;
+    color: #007bff;
+}
+
+#esqueci_senha:hover {
+    text-decoration: underline;
+}
+
+
+
+
 .imagem_perfil {
     width: 100px;
     height: 100px;
