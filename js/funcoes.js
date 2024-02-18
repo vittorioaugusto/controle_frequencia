@@ -9,12 +9,11 @@ function mostrarOcultarSenha() {
 
 
 function validarFormulario() {
-    var usuario = document.getElementById("usuario").value;
     var cpf = document.getElementById("cpf").value;
 
-    // Verifique se o usuário selecionou um usuário, mas não preencheu o CPF
-    if (usuario && usuario !== "" && (!cpf || cpf === "")) {
-        alert("Por favor, preencha o campo CPF ao selecionar um usuário.");
+    // Verifique se o botão "Filtrar Por CPF" foi clicado e o campo do CPF está vazio
+    if (event.submitter.name === "filtrarPorCPF" && (!cpf || cpf === "")) {
+        alert("Por favor, preencha o campo CPF.");
         return false;
     }
 
