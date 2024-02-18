@@ -149,16 +149,24 @@ $resultUsuarios = mysqli_query($conexao, $queryUsuarios);
                             $presencasPorDia[$rowFuncionario['nome']][$rowFuncionario['dia']] = 0;
                         }
 
-                        if ($presencasPorDia[$rowFuncionario['nome']][$rowFuncionario['dia']] % 2 == 0) {
-                            echo "Entrada";
+                        // Contar apenas se a frequência for realizada duas vezes no mesmo dia
+                        if ($presencasPorDia[$rowFuncionario['nome']][$rowFuncionario['dia']] == 1) {
                             // Incrementar o contador de presença
                             if (!isset($presencasContador[$rowFuncionario['nome']])) {
                                 $presencasContador[$rowFuncionario['nome']] = 0;
                             }
                             $presencasContador[$rowFuncionario['nome']]++;
-                        } else {
-                            echo "Saída";
                         }
+
+                        $tipo = '';
+                        if ($presencasPorDia[$rowFuncionario['nome']][$rowFuncionario['dia']] % 2 == 0) {
+                            $tipo = "Entrada";
+                        } else {
+                            $tipo = "Saída";
+                        }
+
+                        echo $tipo;
+
                         $presencasPorDia[$rowFuncionario['nome']][$rowFuncionario['dia']]++;
                     } else {
                         echo "Faltou"; // Caso a presença não seja "Presente"
@@ -173,6 +181,7 @@ $resultUsuarios = mysqli_query($conexao, $queryUsuarios);
                     echo "</tr>";
                 }
             }
+
             // Loop sobre ambos os contadores
             foreach (array('presencasContador', 'ausenciasContador') as $contador) {
                 foreach ($$contador as $usuario => $quantidade) {
