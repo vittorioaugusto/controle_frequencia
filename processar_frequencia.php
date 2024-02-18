@@ -162,4 +162,3 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         echo "Você já registrou duas entradas para o dia de hoje.";
     }
 }
-?>
