@@ -34,7 +34,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             exit();
         }
     }
-
+    
     $query_turno = "SELECT turno FROM usuarios WHERE nome = '$nome'";
     $result_turno = mysqli_query($conexao, $query_turno);
 
