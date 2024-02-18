@@ -35,22 +35,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
     }
 
-    // Verifique se o usuário realizou a frequência no dia anterior
-    $query_check_anterior = "SELECT COUNT(*) as num_entradas_anterior FROM frequencia WHERE nome = '$nome' AND dia = DATE_SUB(CURDATE(), INTERVAL 1 DAY)";
-    $result_check_anterior = mysqli_query($conexao, $query_check_anterior);
-
-    if ($result_check_anterior && mysqli_num_rows($result_check_anterior) > 0) {
-        $row_check_anterior = mysqli_fetch_assoc($result_check_anterior);
-        $num_entradas_anterior = $row_check_anterior['num_entradas_anterior'];
-
-        // Se o usuário não registrou a frequência no dia anterior e não registrou duas entradas no dia atual, insira registros de ausência
-        if ($num_entradas_anterior == 0 && $num_entradas < 2) {
-            // Insira registros de ausência para o dia anterior
-            $query_ausencia = "INSERT INTO frequencia (nome, tipo_usuario, dia, hora, turno, presenca) VALUES ('$nome', '$tipo_usuario', DATE_SUB(CURDATE(), INTERVAL 1 DAY), '00:00:00', 'Ausente', 'Ausente')";
-            mysqli_query($conexao, $query_ausencia);
-        }
-    }
-
     $query_turno = "SELECT turno FROM usuarios WHERE nome = '$nome'";
     $result_turno = mysqli_query($conexao, $query_turno);
 
@@ -178,3 +162,4 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         echo "Você já registrou duas entradas para o dia de hoje.";
     }
 }
+?>
