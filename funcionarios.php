@@ -96,7 +96,7 @@ $resultUsuarios = mysqli_query($conexao, $queryUsuarios);
                             </li>
                         </ul>
                         <div class="d-flex flex-column flex-lg-row justify-content-center align-items-center gap-3">
-                            <a href="javascript:void(0);" onclick="confirmarSaida();" class="text-white text-decoration-none px-3 py-1 rounded-4" style="background-color: #f10000">Sair</a>
+                            <a href="javascript:void(0);" onclick="confirmarSaida();" class="text-white text-decoration-none px-3 py-1 rounded-4 sair-btn">Sair</a>
                         </div>
                     </div>
                 </div>
@@ -231,6 +231,7 @@ $resultUsuarios = mysqli_query($conexao, $queryUsuarios);
         </section>
     </main>
 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script type="text/javascript" src="js/funcoes.js"></script>

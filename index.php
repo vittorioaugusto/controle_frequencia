@@ -31,14 +31,14 @@
                 <form action="processar_login.php" method="POST">
                     <h2 class="card-title mb-4 text-center">Login</h2>
                     <div class="mb-3 input-group">
-                        <span class="input-group-text" title="Email">
+                        <span class="input-group-text">
                             <i class="fas fa-envelope fa-1x"></i>
                         </span>
                         <label for="email" class="form-label visually-hidden">Email:</label>
                         <input type="text" name="email" class="form-control" placeholder="Digite seu email" required>
                     </div>
                     <div class="mb-3 input-group">
-                        <span class="input-group-text" title="Senha">
+                        <span class="input-group-text">
                             <i class="fas fa-lock fa-1x"></i>
                         </span>
                         <label for="senha" class="form-label visually-hidden">Senha:</label>

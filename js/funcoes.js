@@ -7,19 +7,23 @@ function mostrarOcultarSenha() {
     }
 }
 
-
 function validarFormulario() {
     var cpf = document.getElementById("cpf").value;
 
     // Verifique se o botão "Filtrar Por CPF" foi clicado e o campo do CPF está vazio
     if (event.submitter.name === "filtrarPorCPF" && (!cpf || cpf === "")) {
-        alert("Por favor, preencha o campo CPF.");
+        Swal.fire({
+            title: "Atenção",
+            text: "Por favor, preencha o campo CPF.",
+            icon: "warning",
+            confirmButtonColor: "#3085d6",
+            confirmButtonText: "OK"
+        });
         return false;
     }
 
     return true;
 }
-
 
 // Função para verificar o campo de data e hora
 function verificarCampoDataHora() {
@@ -32,6 +36,7 @@ function verificarCampoDataHora() {
         avisoDiv.innerText = '';
     }
 }
+
 // Função para mostrar uma mensagem de confirmação
 function confirmarRegistro(event) {
     var dataHoraInput = document.querySelector('input[name="data_hora"]');
@@ -44,11 +49,11 @@ function confirmarRegistro(event) {
         }
     }
 }
+
 // Adicione um ouvinte de evento para verificar o campo quando houver uma alteração
 document.querySelector('input[name="data_hora"]').addEventListener('input', verificarCampoDataHora);
 // Adicione um ouvinte de evento para mostrar a mensagem de confirmação
 document.querySelector('form').addEventListener('submit', confirmarRegistro);
-
 
 function obterNomeUsuario(usuarioId, novoStatus, callback) {
     $.ajax({
@@ -99,10 +104,19 @@ function alterarStatus(usuarioId, novoStatus) {
     });
 }
 
-
 function confirmarSaida() {
-    var confirmacao = confirm("Deseja realmente sair do sistema?");
-    if (confirmacao) {
-        window.location.href = "sair.php";
-    }
+    Swal.fire({
+        title: "Confirmação",
+        text: "Deseja realmente sair do sistema?",
+        icon: "question",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Sim",
+        cancelButtonText: "Cancelar"
+    }).then((result) => {
+        if (result.isConfirmed) {
+            window.location.href = "sair.php";
+        }
+    });
 }
