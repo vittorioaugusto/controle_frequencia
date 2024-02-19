@@ -50,22 +50,53 @@ document.querySelector('input[name="data_hora"]').addEventListener('input', veri
 document.querySelector('form').addEventListener('submit', confirmarRegistro);
 
 
-function alterarStatus(usuarioId, novoStatus) {
+function obterNomeUsuario(usuarioId, novoStatus, callback) {
+    $.ajax({
+        type: "POST",
+        url: "obter_nome_usuario.php",
+        data: { id: usuarioId },
+        success: function (response) {
+            callback(response, usuarioId, novoStatus);
+        },
+        error: function () {
+            alert("Erro ao obter o nome do usuário.");
+        }
+    });
+}
+
+function exibirPrompt(usuarioNome, usuarioId, novoStatus) {
     var confirmMessage = novoStatus === 1 ? "Ativar" : "Desativar";
-    if (confirm("Tem certeza de que deseja " + confirmMessage + " o usuário?")) {
-        $.ajax({
-            type: "POST",
-            url: "alterar_status.php",
-            data: { id: usuarioId, status: novoStatus },
-            success: function (data) {
-                // Atualize a página para refletir as mudanças
-                location.reload();
-            },
-            error: function () {
-                alert("Erro ao alterar o status do usuário.");
-            }
-        });
-    }
+
+    Swal.fire({
+        title: "Confirmação",
+        text: "Tem certeza de que deseja " + confirmMessage + usuarioNome + "?",
+        icon: "question",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Sim",
+        cancelButtonText: "Cancelar"
+    }).then((result) => {
+        if (result.isConfirmed) {
+            $.ajax({
+                type: "POST",
+                url: "alterar_status.php",
+                data: { id: usuarioId, status: novoStatus },
+                success: function () {
+                    location.reload();
+                },
+                error: function () {
+                    alert("Erro ao alterar o status do usuário.");
+                }
+            });
+        }
+    });
+}
+
+function alterarStatus(usuarioId, novoStatus) {
+    obterNomeUsuario(usuarioId, novoStatus, function (usuarioNome, usuarioId, novoStatus) {
+        exibirPrompt(usuarioNome, usuarioId, novoStatus);
+    });
 }
 
 
