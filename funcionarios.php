@@ -47,7 +47,6 @@ $resultUsuarios = mysqli_query($conexao, $queryUsuarios);
 </head>
 
 <body>
-
     <header>
         <nav class="navbar navbar-expand-lg navbar-dark">
             <div class="container-fluid">
@@ -106,7 +105,7 @@ $resultUsuarios = mysqli_query($conexao, $queryUsuarios);
     </header>
 
     <div class="container">
-        <div class="p-1">
+        <div class="p-1 mt-3">
             <div class="card-body">
                 <form method="post" action="funcionarios.php" onsubmit="return validarFormulario();" class="row g-3">
                     <h3 class="card-title mb-1 text-center">Filtrar Funcionários</h3>
@@ -134,7 +133,7 @@ $resultUsuarios = mysqli_query($conexao, $queryUsuarios);
         <section class="w-100 d-flex flex-column 
         justify-content-center align-items-center text-dark fs-5">
 
-            <table class="table w-50 border">
+            <table class="table w-75 table-bordered">
                 <div class="card-body">
                     <thead>
                         <h3>
