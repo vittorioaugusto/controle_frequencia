@@ -105,6 +105,13 @@ $resultUsuarios = mysqli_query($conexao, $queryUsuarios);
             <?php
             // Inicialize a variável $presencasPorDia
             $presencasPorDia = array();
+            // Inicialize as variáveis para contar a presença e a ausência
+            $presencasContador = array();
+            $ausenciasContador = array();
+
+            // Verificar se um usuário específico está selecionado para evitar a exibição quando todos os usuários estão filtrados
+            $usuarioSelecionado = isset($_POST['usuario']) ? $_POST['usuario'] : '';
+            $exibirContador = !empty($usuarioSelecionado);
 
             // Verifique se os critérios de filtro foram enviados
             if (isset($_POST['usuario']) || isset($_POST['data'])) {
@@ -144,16 +151,36 @@ $resultUsuarios = mysqli_query($conexao, $queryUsuarios);
 
                         if ($presencasPorDia[$rowFuncionario['nome']][$rowFuncionario['dia']] % 2 == 0) {
                             echo "Entrada";
+                            // Incrementar o contador de presença
+                            if (!isset($presencasContador[$rowFuncionario['nome']])) {
+                                $presencasContador[$rowFuncionario['nome']] = 0;
+                            }
+                            $presencasContador[$rowFuncionario['nome']]++;
                         } else {
                             echo "Saída";
                         }
                         $presencasPorDia[$rowFuncionario['nome']][$rowFuncionario['dia']]++;
                     } else {
                         echo "Faltou"; // Caso a presença não seja "Presente"
+                        // Incrementar o contador de ausência
+                        if (!isset($ausenciasContador[$rowFuncionario['nome']])) {
+                            $ausenciasContador[$rowFuncionario['nome']] = 0;
+                        }
+                        $ausenciasContador[$rowFuncionario['nome']]++;
                     }
 
                     echo "</td>";
                     echo "</tr>";
+                }
+            }
+            // Loop sobre ambos os contadores
+            foreach (array('presencasContador', 'ausenciasContador') as $contador) {
+                foreach ($$contador as $usuario => $quantidade) {
+                    // Verificar se deve exibir o contador
+                    if ($exibirContador) {
+                        $status = ($contador == 'presencasContador') ? 'presente' : 'ausente';
+                        echo "<p>$usuario esteve $status $quantidade vezes.</p>";
+                    }
                 }
             }
             ?>
