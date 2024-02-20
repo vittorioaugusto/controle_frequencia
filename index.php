@@ -22,6 +22,9 @@
     <nav class="navbar navbar-expand-lg">
         <div class="container-fluid">
             <h1 class="navbar-brand no-hover-color">Frequência Tech<i class="fa fa-check-circle-o ms-1" aria-hidden="true"></i></h1>
+            <div class="d-flex flex-column flex-lg-row justify-content-center align-items-center">
+                <a href="cadastro_administrador.php" class="btn cadastro-btn px-3 py-2">Cadastrar Administrador</a>
+            </div>
         </div>
     </nav>
 

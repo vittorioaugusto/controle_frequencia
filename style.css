@@ -3,6 +3,31 @@ body {
     background-color: #f8f9fa;
 }
 
+@media(max-width: 991px) {
+    .sidebar {
+        background-color: rgba(255, 255, 255, 0.15);
+        backdrop-filter: blur(10px);
+    }
+}
+
+.navbar {
+    background-color: #6E2CF3;
+}
+
+.navbar h1 {
+    color: #fff;
+}
+
+.cadastro-btn {
+    background-color: #0039ac;
+    color: #fff;
+}
+
+.cadastro-btn:hover {
+    background-color: #001f66;
+    color: #fff;
+}
+
 .nav-item:hover {
     background-color: #8a50ff;
     border-radius: 50px;
@@ -21,16 +46,7 @@ body {
 }
 
 .sair-btn:hover {
-    background-color: #ff3333; 
-}
-
-
-
-@media(max-width: 991px) {
-    .sidebar {
-        background-color: rgba(255, 255, 255, 0.15);
-        backdrop-filter: blur(10px);
-    }
+    background-color: #ff3333;
 }
 
 .container {
@@ -49,15 +65,7 @@ body {
 }
 
 .btn-custom-color:hover {
-    background-color: #5500ff;
-    color: #fff;
-}
-
-.navbar {
-    background-color: #6E2CF3;
-}
-
-.navbar h1 {
+    background-color: #4000c0;
     color: #fff;
 }
 
@@ -77,23 +85,21 @@ body {
     text-decoration: underline;
 }
 
+.custom-label {
+    font-weight: 700;
+}
+
 .bg-entrada {
     background-color: #28a745;
-    /* Verde para entradas */
 }
 
 .bg-saida {
     background-color: #dc3545;
-    /* Vermelho para saídas */
 }
 
 .bg-faltou {
     background-color: #ffc107;
-    /* Amarelo para faltas */
 }
-
-
-
 
 .imagem_perfil {
     width: 100px;
