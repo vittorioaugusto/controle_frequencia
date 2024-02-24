@@ -24,7 +24,7 @@ if ($_SESSION['tipo_usuario'] === 'Administrador') {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- Bootstrap CSS link -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 
     <!-- Biblioteca icones -->
     <script src="https://kit.fontawesome.com/f2c34800e3.js" crossorigin="anonymous"></script>
@@ -94,7 +94,7 @@ if ($_SESSION['tipo_usuario'] === 'Administrador') {
     </header>
 
     <div class="container">
-        <div class="card p-2 mt-3">
+        <div class="card p-2 mt-2">
             <div class="card-body">
                 <form action="processar_cadastro.php" method="POST">
                     <h4 class="card-title mb-2 p-2 text-center">Cadastrar Funcionário</h4>
@@ -131,9 +131,8 @@ if ($_SESSION['tipo_usuario'] === 'Administrador') {
                             <i class="fas fa-phone fa-1x"></i>
                         </span>
                         <label for="telefone" class="form-label visually-hidden">Telefone:</label>
-                        <input type="tel" name="telefone" class="form-control" pattern="\([0-9]{2}\) [0-9]{4,5}-[0-9]{4}" placeholder="Digite o telefone" required>
+                        <input type="tel" name="telefone" class="form-control" pattern="\([0-9]{2}\) [0-9]{4,5}-[0-9]{4}" placeholder="(00) 0000-0000" required>
                     </div>
-                    <div id="telefoneExemplo" class="form-text">Exemplo: (00) 0000-0000</div>
                     <label for="tipo_usuario" class="form-label custom-label">Função:</label>
                     <select name="tipo_usuario" class="form-select" required>
                         <option value="Professor">Professor</option>
