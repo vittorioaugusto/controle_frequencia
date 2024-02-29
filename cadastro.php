@@ -59,7 +59,7 @@ if ($_SESSION['tipo_usuario'] === 'Administrador') {
                         <?php
                         if ($_SESSION['tipo_usuario'] !== 'Administrador') {
                             echo ' <li class="nav-item mx-1">
-                            <a class="nav-link" href="frequencia.php">Realizar Frequência</a>
+                            <a class="nav-link" href="realizar_frequencia.php">Realizar Frequência</a>
                         </li>';
                             echo '<li class="nav-item mx-1">
                             <a class="nav-link" href="horas_acumuladas.php">Horas Acumuladas</a>

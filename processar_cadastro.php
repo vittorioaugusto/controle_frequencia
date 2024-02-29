@@ -44,10 +44,10 @@
                 <div class="offcanvas-body d-flex flex-column flex-lg-row p-3 p-lg-0">
                     <ul class="navbar-nav justify-content-center align-items-center fs-5 flex-grow-1 pe-3">
                         <li class="nav-item mx-1">
-                            <a class="nav-link" href="principal.php" aria-current="page" href="principal.php">Home</a>
+                            <a class="nav-link" href="principal.php">Home</a>
                         </li>
                         <li class="nav-item mx-1">
-                            <a class="nav-link active" href="frequencia.php">Cadastrar Funcionário</a>
+                            <a class="nav-link active" style="background-color: #8a50ff" aria-current="page" href="frequencia.php">Cadastrar Funcionário</a>
                         </li>
                         <li class="nav-item mx-1">
                             <a class="nav-link" href="frequencia.php">Funcionários</a>

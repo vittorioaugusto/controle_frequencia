@@ -1,6 +1,7 @@
 # Simulador de Controle de Frequência
 
-Bem-vindo ao Simulado de Controle de Frequência
+Bem-vindo ao Simulador Frequência Master
+
 
 ## Conteúdo
 
@@ -11,7 +12,7 @@ Bem-vindo ao Simulado de Controle de Frequência
 
 ## Visão Geral
 
-O simulador de controle de frequência é um projeto feito por mim, com o intuito de simular a frequência de funcionários dentro de uma empresa, o administrador 
+O simulador Frequência Master é um projeto feito por mim, com o intuito de simular a frequência de funcionários dentro de uma empresa, o administrador pode cadastrar funcionários, desativar e ativar o funcionário, ver quantos funcionários estão cadastrados, ver a frequência de cada funcionário, ver um calendário de frequência de cada funcionário e ver seu perfil. Já o Funcionário pode, realizar sua frequência, conferir qual foi o dia que realizou a frequência, ver um calendário com todas as suas frequências já realizadas
 
 
 
@@ -21,12 +22,18 @@ Para usar a página:
 
 1. Acesse [http://localhost/controle_frequencia/index.php](http://localhost/controle_frequencia/index.php) em seu navegador.
 
-
-
+![index](img/index.png)
 
 2. Faça o Cadastro com Administrador para acessar o sistema.
-3. Clique no botão "Entrar" para enviar o formulário.
+
+![Cadastro Administrador](img/CadastroAdministrador.png)
+
+3. Faça o login com o email e a senha, depois clique em "Entrar".
+
+![login](img/login.png)
+
 4. Após o envio, uma mensagem de agradecimento será exibida na página.
+
 
 ## Tecnologias Utilizadas
 
@@ -37,8 +44,7 @@ Esta página foi desenvolvida utilizando as seguintes tecnologias:
 - **JavaScript**
 - **PHP**
 - **MySql**
-
-
+- **Bootstrap 5**
 
 
 ## Autor:

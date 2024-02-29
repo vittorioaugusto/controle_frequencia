@@ -103,7 +103,6 @@ $resultUsuarios = mysqli_query($conexao, $queryUsuarios);
         </div>
     </nav>
 
-
     <div class="container">
         <div class="p-1 mt-3">
             <div class="card-body">

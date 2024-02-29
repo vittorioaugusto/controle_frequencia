@@ -17,7 +17,7 @@
     <title>Login</title>
 </head>
 
-<body class="vh-100">
+<body class="d-flex flex-column vh-100">
 
     <nav class="navbar navbar-expand-lg">
         <div class="container-fluid">
@@ -28,7 +28,7 @@
         </div>
     </nav>
 
-    <div class="container">
+    <div class="container d-flex justify-content-center align-items-center">
         <div class="card p-4 mt-5">
             <div class="card-body">
                 <form action="processar_login.php" method="POST">
@@ -59,6 +59,12 @@
             </div>
         </div>
     </div>
+
+    <footer class="mt-auto">
+        <div class="text-center mt-5">
+            <p>Copyright© 2024 | vittorioaugusto - Todos os direitos reservados.</p>
+        </div>
+    </footer>
 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>

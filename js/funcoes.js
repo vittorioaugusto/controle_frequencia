@@ -25,6 +25,23 @@ function validarFormularioCpf() {
     return true;
 }
 
+function validarFormularioData() {
+    var date = document.getElementById("date").value;
+
+    if (event.submitter.name === "filtrarPorData" && (!date || date === "")) {
+        Swal.fire({
+            title: "Atenção",
+            text: "Por favor, selecione uma data antes de filtrar.",
+            icon: "warning",
+            confirmButtonColor: "#3085d6",
+            confirmButtonText: "OK"
+        });
+        return false;
+    }
+
+    return true;
+}
+
 // Função para verificar o campo de data e hora
 function verificarCampoDataHora() {
     var dataHoraInput = document.querySelector('input[name="data_hora"]');
