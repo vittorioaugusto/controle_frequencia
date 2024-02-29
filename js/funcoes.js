@@ -7,7 +7,7 @@ function mostrarOcultarSenha() {
     }
 }
 
-function validarFormulario() {
+function validarFormularioCpf() {
     var cpf = document.getElementById("cpf").value;
 
     // Verifique se o botão "Filtrar Por CPF" foi clicado e o campo do CPF está vazio
@@ -109,6 +109,7 @@ function confirmarSaida() {
         title: "Confirmação",
         text: "Deseja realmente sair do sistema?",
         icon: "question",
+        iconColor: "#6E2CF3",
         showCancelButton: true,
         confirmButtonColor: "#3085d6",
         cancelButtonColor: "#d33",

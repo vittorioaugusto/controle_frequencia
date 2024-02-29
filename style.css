@@ -30,7 +30,11 @@ body {
 
 .nav-item:hover {
     background-color: #8a50ff;
-    border-radius: 50px;
+    border-radius: 10px;
+}
+
+.nav-link{
+    border-radius: 10px;
 }
 
 .nav-link:hover {

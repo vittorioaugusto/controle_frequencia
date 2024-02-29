@@ -34,64 +34,63 @@ if ($_SESSION['tipo_usuario'] === 'Administrador') {
     <title>Cadastrar Funcionário</title>
 </head>
 
-<body>
-    <header>
-        <nav class="navbar navbar-expand-lg navbar-dark">
-            <div class="container-fluid">
+<body class="vh-100">
 
-                <h1 class="navbar-brand no-hover-color">Frequência Tech<i class="fa fa-check-circle-o ms-1" aria-hidden="true"></i></h1>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container-fluid">
 
-                <button class="navbar-toggler shadow-none border-0" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
+            <h1 class="navbar-brand no-hover-color">Frequência Master<i class="fa fa-check-circle-o ms-1" aria-hidden="true"></i></h1>
 
-                <div class="sidebar offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
-                    <div class="offcanvas-header text-white border-bottom">
-                        <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Frequência Tech</h5>
-                        <button type="button" class="btn-close btn-close-white shadow-none" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-                    </div>
+            <button class="navbar-toggler shadow-none border-0" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
-                    <div class="offcanvas-body d-flex flex-column flex-lg-row p-3 p-lg-0">
-                        <ul class="navbar-nav justify-content-center align-items-center fs-5 flex-grow-1 pe-3">
-                            <li class="nav-item mx-1">
-                                <a class="nav-link" href="principal.php" aria-current="page" href="principal.php">Home</a>
-                            </li>
-                            <?php
-                            if ($_SESSION['tipo_usuario'] !== 'Administrador') {
-                                echo ' <li class="nav-item mx-1">
+            <div class="sidebar offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+                <div class="offcanvas-header text-white border-bottom">
+                    <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Frequência Master<i class="fa fa-check-circle-o ms-1" aria-hidden="true"></i></h5>
+                    <button type="button" class="btn-close btn-close-white shadow-none" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                </div>
+
+                <div class="offcanvas-body d-flex flex-column flex-lg-row p-3 p-lg-0">
+                    <ul class="navbar-nav justify-content-center align-items-center fs-5 flex-grow-1 pe-3">
+                        <li class="nav-item mx-1">
+                            <a class="nav-link" href="principal.php">Home</a>
+                        </li>
+                        <?php
+                        if ($_SESSION['tipo_usuario'] !== 'Administrador') {
+                            echo ' <li class="nav-item mx-1">
                             <a class="nav-link" href="frequencia.php">Realizar Frequência</a>
                         </li>';
-                                echo '<li class="nav-item mx-1">
+                            echo '<li class="nav-item mx-1">
                             <a class="nav-link" href="horas_acumuladas.php">Horas Acumuladas</a>
                         </li>';
-                            } else {
-                                echo '<li class="nav-item mx-1">
-                            <a class="nav-link active" href="cadastro.php">Cadastrar Funcionário</a>
+                        } else {
+                            echo '<li class="nav-item mx-1">
+                            <a class="nav-link active" style="background-color: #8a50ff" aria-current="page" href="cadastro.php">Cadastrar Funcionário</a>
                         </li>';
-                                echo ' <li class="nav-item mx-1">
+                            echo ' <li class="nav-item mx-1">
                             <a class="nav-link" href="funcionarios.php">Funcionários</a>
                         </li>';
-                                echo '<li class="nav-item mx-1">
+                            echo '<li class="nav-item mx-1">
                             <a class="nav-link" href="frequencia_funcionarios.php">Frequência dos Funcionários</a>
                         </li>';
-                            }
-                            ?>
-                            <li class="nav-item mx-1">
-                                <a class="nav-link" href="calendario_frequencia.php">Calendário de Frequência</a>
-                            </li>
-                            <li class="nav-item mx-1">
-                                <a class="nav-link" href="perfil.php">Perfil</a>
-                            </li>
-                        </ul>
-                        <div class="d-flex flex-column flex-lg-row justify-content-center align-items-center gap-3">
-                            <a href="javascript:void(0);" onclick="confirmarSaida();" class="text-white text-decoration-none px-3 py-1 rounded-4 sair-btn">Sair</a>
-                        </div>
+                        }
+                        ?>
+                        <li class="nav-item mx-1">
+                            <a class="nav-link" href="calendario_frequencia.php">Calendário de Frequência</a>
+                        </li>
+                        <li class="nav-item mx-1">
+                            <a class="nav-link" href="perfil.php">Perfil</a>
+                        </li>
+                    </ul>
+                    <div class="d-flex flex-column flex-lg-row justify-content-center align-items-center gap-3">
+                        <a href="javascript:void(0);" onclick="confirmarSaida();" class="text-white text-decoration-none px-3 py-1 rounded-4 sair-btn" title="Sair"> <i class="fa fa-sign-out" aria-hidden="true"></i> </a>
                     </div>
                 </div>
             </div>
-        </nav>
+        </div>
+    </nav>
 
-    </header>
 
     <div class="container">
         <div class="card p-2 mt-2">
@@ -157,7 +156,7 @@ if ($_SESSION['tipo_usuario'] === 'Administrador') {
     </div>
 
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <script type="text/javascript" src="js/funcoes.js"></script>
 </body>

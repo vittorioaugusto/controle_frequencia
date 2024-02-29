@@ -21,7 +21,7 @@
 
     <nav class="navbar navbar-expand-lg">
         <div class="container-fluid">
-            <h1 class="navbar-brand no-hover-color">Frequência Tech<i class="fa fa-check-circle-o ms-1" aria-hidden="true"></i></h1>
+            <h1 class="navbar-brand no-hover-color">Frequência Master<i class="fa fa-check-circle-o ms-1" aria-hidden="true"></i></h1>
         </div>
     </nav>
 
@@ -63,7 +63,7 @@
                             <i class="fas fa-phone fa-1x"></i>
                         </span>
                         <label for="telefone" class="form-label visually-hidden">Telefone:</label>
-                        <input type="tel" name="telefone" class="form-control" pattern="\([0-9]{2}\) [0-9]{4,5}-[0-9]{4}" placeholder="Digite o telefone" required>
+                        <input type="tel" name="telefone" class="form-control" pattern="\([0-9]{2}\) [0-9]{4,5}-[0-9]{4}" placeholder="(00) 0000-0000" required>
                     </div>
                     <label for="turno" class="form-label custom-label">Turno:</label>
                     <select name="turno" class="form-select" required>

@@ -46,68 +46,68 @@ $resultUsuarios = mysqli_query($conexao, $queryUsuarios);
     <title>Funcionários</title>
 </head>
 
-<body>
-    <header>
-        <nav class="navbar navbar-expand-lg navbar-dark">
-            <div class="container-fluid">
+<body class="vh-100">
 
-                <h1 class="navbar-brand no-hover-color">Frequência Tech<i class="fa fa-check-circle-o ms-1" aria-hidden="true"></i></h1>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container-fluid">
 
-                <button class="navbar-toggler shadow-none border-0" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
+            <h1 class="navbar-brand no-hover-color">Frequência Master<i class="fa fa-check-circle-o ms-1" aria-hidden="true"></i></h1>
 
-                <div class="sidebar offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
-                    <div class="offcanvas-header text-white border-bottom">
-                        <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Frequência Tech</h5>
-                        <button type="button" class="btn-close btn-close-white shadow-none" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-                    </div>
+            <button class="navbar-toggler shadow-none border-0" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
-                    <div class="offcanvas-body d-flex flex-column flex-lg-row p-3 p-lg-0">
-                        <ul class="navbar-nav justify-content-center align-items-center fs-5 flex-grow-1 pe-3">
-                            <li class="nav-item mx-1">
-                                <a class="nav-link" href="principal.php" aria-current="page" href="principal.php">Home</a>
-                            </li>
-                            <?php
-                            if ($_SESSION['tipo_usuario'] !== 'Administrador') {
-                                echo ' <li class="nav-item mx-1">
+            <div class="sidebar offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+                <div class="offcanvas-header text-white border-bottom">
+                    <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Frequência Tech</h5>
+                    <button type="button" class="btn-close btn-close-white shadow-none" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                </div>
+
+                <div class="offcanvas-body d-flex flex-column flex-lg-row p-3 p-lg-0">
+                    <ul class="navbar-nav justify-content-center align-items-center fs-5 flex-grow-1 pe-3">
+                        <li class="nav-item mx-1">
+                            <a class="nav-link" href="principal.php">Home</a>
+                        </li>
+                        <?php
+                        if ($_SESSION['tipo_usuario'] !== 'Administrador') {
+                            echo ' <li class="nav-item mx-1">
                             <a class="nav-link" href="frequencia.php">Realizar Frequência</a>
                         </li>';
-                                echo '<li class="nav-item mx-1">
+                            echo '<li class="nav-item mx-1">
                             <a class="nav-link" href="horas_acumuladas.php">Horas Acumuladas</a>
                         </li>';
-                            } else {
-                                echo '<li class="nav-item mx-1">
+                        } else {
+                            echo '<li class="nav-item mx-1">
                             <a class="nav-link" href="cadastro.php">Cadastrar Funcionário</a>
                         </li>';
-                                echo ' <li class="nav-item mx-1">
-                            <a class="nav-link active" href="funcionarios.php">Funcionários</a>
+                            echo ' <li class="nav-item mx-1">
+                            <a class="nav-link active" style="background-color: #8a50ff" aria-current="page" href="funcionarios.php">Funcionários</a>
                         </li>';
-                                echo '<li class="nav-item mx-1">
+                            echo '<li class="nav-item mx-1">
                             <a class="nav-link" href="frequencia_funcionarios.php">Frequência dos Funcionários</a>
                         </li>';
-                            }
-                            ?>
-                            <li class="nav-item mx-1">
-                                <a class="nav-link" href="calendario_frequencia.php">Calendário de Frequência</a>
-                            </li>
-                            <li class="nav-item mx-1">
-                                <a class="nav-link" href="perfil.php">Perfil</a>
-                            </li>
-                        </ul>
-                        <div class="d-flex flex-column flex-lg-row justify-content-center align-items-center gap-3">
-                            <a href="javascript:void(0);" onclick="confirmarSaida();" class="text-white text-decoration-none px-3 py-1 rounded-4 sair-btn">Sair</a>
-                        </div>
+                        }
+                        ?>
+                        <li class="nav-item mx-1">
+                            <a class="nav-link" href="calendario_frequencia.php">Calendário de Frequência</a>
+                        </li>
+                        <li class="nav-item mx-1">
+                            <a class="nav-link" href="perfil.php">Perfil</a>
+                        </li>
+                    </ul>
+                    <div class="d-flex flex-column flex-lg-row justify-content-center align-items-center gap-3">
+                        <a href="javascript:void(0);" onclick="confirmarSaida();" class="text-white text-decoration-none px-3 py-1 rounded-4 sair-btn" title="Sair"> <i class="fa fa-sign-out" aria-hidden="true"></i> </a>
                     </div>
                 </div>
             </div>
-        </nav>
-    </header>
+        </div>
+    </nav>
+
 
     <div class="container">
         <div class="p-1 mt-3">
             <div class="card-body">
-                <form method="post" action="funcionarios.php" onsubmit="return validarFormulario();" class="row g-3">
+                <form method="POST" action="funcionarios.php" onsubmit="return validarFormularioCpf();" class="row g-3">
                     <h3 class="card-title mb-1 text-center">Filtrar Funcionários</h3>
                     <div class="col-md-6">
                         <label for="filtrarTodos" class="form-label"></label>
