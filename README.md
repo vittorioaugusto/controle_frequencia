@@ -32,8 +32,6 @@ Para usar a página:
 
 ![login](img/login.png)
 
-4. Após o envio, uma mensagem de agradecimento será exibida na página.
-
 
 ## Tecnologias Utilizadas
 
