@@ -15,11 +15,6 @@ $queryFrequenciaUsuario = "SELECT f.nome, f.dia, f.hora, f.turno, f.presenca, u.
                            JOIN usuarios u ON f.nome = u.nome 
                            WHERE f.nome = '$usuarioLogado'";
 
-// Verificar se o formulário de filtro foi enviado
-if (isset($_POST['filtrarPorData'])) {
-    $filtroDia = $_POST['date'];
-    $queryFrequenciaUsuario .= " AND f.dia = '$filtroDia'";
-}
 
 $resultFrequenciaUsuario = mysqli_query($conexao, $queryFrequenciaUsuario);
 ?>
@@ -43,6 +38,7 @@ $resultFrequenciaUsuario = mysqli_query($conexao, $queryFrequenciaUsuario);
 </head>
 
 <body class="vh-100">
+
     <nav class="navbar navbar-expand-lg navbar-dark">
         <div class="container-fluid">
 
@@ -99,26 +95,30 @@ $resultFrequenciaUsuario = mysqli_query($conexao, $queryFrequenciaUsuario);
     </nav>
 
     <div class="container">
-        <div class="p-2 mt-3">
+        <div class="p-2 mt-3 d-flex justify-content-center">
             <div class="card-body">
-                <form method="POST" action="" class="row g-3" onsubmit="return validarFormularioData();">
+                <form method="POST" action="minha_frequencia.php" class="row" onsubmit="return validarData()">
                     <div class="col-md-5">
                         <label for="filtrarTodos" class="form-label"></label>
                         <div class="text-center">
-                            <button type="submit" name="filtrarTodos" value="Mostrar Todos" class="btn btn-custom-color px-4 py-2 mt-3">Filtrar Todas as datas</button>
+                            <button type="submit" name="filtrarTodos" value="Mostrar Todos" class="btn btn-custom-color px-3 py-2 mt-2">Filtrar Todas as datas</button>
                         </div>
                     </div>
                     <div class="col-md-7">
-                        <label for="filtrarTodos" class="form-label">Selecione a data</label>
-                        <div class="mb-1">
-                            <input type="date" name="date" id="date" class="form-control">
-                        </div>
-                        <div class="text-center">
-                            <button type="submit" name="filtrarPorData" class="btn btn-custom-color px-5 py-2 mt-4">Filtrar</button>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label for="filtrarTodos" class="form-label">Selecione a data</label>
+                                <div class="mb-3">
+                                    <input type="date" name="data" id="data" class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-md-6 text-center">
+                                <label class="invisible-label"></label>
+                                <button type="submit" name="filtrarPorData" class="btn btn-custom-color px-5 py-2 mt-2">Filtrar</button>
+                            </div>
                         </div>
                     </div>
                 </form>
-
             </div>
         </div>
     </div>
@@ -143,16 +143,95 @@ $resultFrequenciaUsuario = mysqli_query($conexao, $queryFrequenciaUsuario);
                     </thead>
                     <tbody>
                         <?php
-                        while ($rowFuncionario = mysqli_fetch_assoc($resultFrequenciaUsuario)) {
-                            echo "<tr>";
-                            echo "<td>" . $rowFuncionario['tipo_usuario'] . "</td>";
-                            echo "<td>" . $rowFuncionario['nome'] . "</td>";
-                            echo "<td>" . $rowFuncionario['dia'] . "</td>";
-                            echo "<td>" . $rowFuncionario['hora'] . "</td>";
-                            echo "<td>" . $rowFuncionario['turno'] . "</td>";
-                            echo "<td>" . $rowFuncionario['presenca'] . "</td>";
-                            echo "<td>" . (($rowFuncionario['presenca'] == 'Presente') ? 'Entrada' : 'Faltou') . "</td>";
-                            echo "</tr>";
+                        // Inicialize a variável $presencasPorDia
+                        $presencasPorDia = array();
+
+                        // Inicialize as variáveis para contar a presença e a ausência
+                        $presencasContador = array();
+                        $ausenciasContador = array();
+
+                        // Verificar se um usuário específico está selecionado para evitar a exibição quando todos os usuários estão filtrados
+                        $usuarioSelecionado = isset($_POST['usuario']) ? $_POST['usuario'] : '';
+                        $exibirContador = !empty($usuarioSelecionado);
+
+                        // Verifique se os critérios de filtro foram enviados
+                        if (isset($_POST['data'])) {
+
+                            $dataSelecionada = $_POST['data'];
+
+                            // Construa a parte condicional da consulta SQL com base nos critérios
+                            $condicao = '';
+
+                            if (!empty($nomeUsuarioSelecionado) && !empty($dataSelecionada)) {
+                                $condicao = "WHERE f.nome = '$nomeUsuarioSelecionado' AND f.dia = '$dataSelecionada'";
+                            } elseif (!empty($nomeUsuarioSelecionado)) {
+                                $condicao = "WHERE f.nome = '$nomeUsuarioSelecionado'";
+                            } elseif (!empty($dataSelecionada)) {
+                                $condicao = "WHERE f.dia = '$dataSelecionada'";
+                            }
+
+                            // Consulta SQL para obter os funcionários com base nos critérios de filtro
+                            $queryFuncionarios = "SELECT f.nome, f.dia, f.hora, f.turno, f.presenca, u.tipo_usuario FROM frequencia f JOIN usuarios u ON f.nome = u.nome $condicao";
+                            $resultFuncionarios = mysqli_query($conexao, $queryFuncionarios);
+
+                            while ($rowFuncionario = mysqli_fetch_assoc($resultFuncionarios)) {
+                                echo "<tr>";
+                                echo "<td>" . $rowFuncionario['tipo_usuario'] . "</td>";
+                                echo "<td>" . $rowFuncionario['nome'] . "</td>";
+                                echo "<td>" . $rowFuncionario['dia'] . "</td>";
+                                echo "<td>" . $rowFuncionario['hora'] . "</td>";
+                                echo "<td>" . $rowFuncionario['turno'] . "</td>";
+                                echo "<td>" . $rowFuncionario['presenca'] . "</td>";
+                                echo "<td>";
+
+                                // Determinar se a presença é uma entrada ou saída com base no número de presenças
+                                if ($rowFuncionario['presenca'] == 'Presente') {
+                                    if (!isset($presencasPorDia[$rowFuncionario['nome']][$rowFuncionario['dia']])) {
+                                        $presencasPorDia[$rowFuncionario['nome']][$rowFuncionario['dia']] = 0;
+                                    }
+
+                                    // Contar apenas se a frequência for realizada duas vezes no mesmo dia
+                                    if ($presencasPorDia[$rowFuncionario['nome']][$rowFuncionario['dia']] == 1) {
+                                        // Incrementar o contador de presença
+                                        if (!isset($presencasContador[$rowFuncionario['nome']])) {
+                                            $presencasContador[$rowFuncionario['nome']] = 0;
+                                        }
+                                        $presencasContador[$rowFuncionario['nome']]++;
+                                    }
+
+                                    $tipo = '';
+                                    if ($presencasPorDia[$rowFuncionario['nome']][$rowFuncionario['dia']] % 2 == 0) {
+                                        $tipo = "Entrada";
+                                    } else {
+                                        $tipo = "Saída";
+                                    }
+
+                                    echo $tipo;
+
+                                    $presencasPorDia[$rowFuncionario['nome']][$rowFuncionario['dia']]++;
+                                } else {
+                                    echo "Faltou"; // Caso a presença não seja "Presente"
+                                    // Incrementar o contador de ausência
+                                    if (!isset($ausenciasContador[$rowFuncionario['nome']])) {
+                                        $ausenciasContador[$rowFuncionario['nome']] = 0;
+                                    }
+                                    $ausenciasContador[$rowFuncionario['nome']]++;
+                                }
+
+                                echo "</td>";
+                                echo "</tr>";
+                            }
+                        }
+
+                        // Loop sobre ambos os contadores
+                        foreach (array('presencasContador', 'ausenciasContador') as $contador) {
+                            foreach ($$contador as $usuario => $quantidade) {
+                                // Verificar se deve exibir o contador
+                                if ($exibirContador) {
+                                    $status = ($contador == 'presencasContador') ? 'presente' : 'ausente';
+                                    echo "<p>$usuario esteve $status $quantidade vezes.</p>";
+                                }
+                            }
                         }
                         ?>
                     </tbody>

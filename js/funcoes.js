@@ -25,10 +25,10 @@ function validarFormularioCpf() {
     return true;
 }
 
-function validarFormularioData() {
-    var date = document.getElementById("date").value;
+function validarData() {
+    var data = document.getElementById("data").value;
 
-    if (event.submitter.name === "filtrarPorData" && (!date || date === "")) {
+    if (event.submitter.name === "filtrarPorData" && (!data || data === "")) {
         Swal.fire({
             title: "Atenção",
             text: "Por favor, selecione uma data antes de filtrar.",

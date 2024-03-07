@@ -94,7 +94,6 @@ $resultUsuarios = mysqli_query($conexao, $queryUsuarios);
         </div>
     </nav>
 
-
     <div class="container">
         <div class="p-1 mt-3">
             <div class="card-body">
@@ -129,7 +128,6 @@ $resultUsuarios = mysqli_query($conexao, $queryUsuarios);
             </div>
         </div>
     </div>
-
 
     <main>
         <section class="w-100 d-flex flex-column 
@@ -166,6 +164,7 @@ $resultUsuarios = mysqli_query($conexao, $queryUsuarios);
                         <?php
                         // Inicialize a variável $presencasPorDia
                         $presencasPorDia = array();
+                        
                         // Inicialize as variáveis para contar a presença e a ausência
                         $presencasContador = array();
                         $ausenciasContador = array();
