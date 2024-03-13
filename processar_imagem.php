@@ -21,7 +21,7 @@
 
     <script type="text/javascript" src="assets/js/script.js"></script>
     <link rel="stylesheet" href="assets/css/style.css">
-    <title>Processar Cadastro Funcionários</title>
+    <title>Processar Imagem de Perfil</title>
 </head>
 
 <body class="vh-100">
@@ -47,23 +47,20 @@
                             <a class="nav-link" href="principal.php">Home</a>
                         </li>
                         <li class="nav-item mx-1">
-                            <a class="nav-link active" style="background-color: #8a50ff" aria-current="page" href="frequencia.php">Cadastrar Funcionário</a>
+                            <a class="nav-link" href="realizar_frequencia.php">Realizar Frequência</a>
                         </li>
                         <li class="nav-item mx-1">
-                            <a class="nav-link" href="frequencia.php">Funcionários</a>
-                        </li>
-                        <li class="nav-item mx-1">
-                            <a class="nav-link" href="frequencia.php">Frequência dos Funcionários</a>
+                            <a class="nav-link" href="minha_frequencia.php">Minha Frequência</a>
                         </li>
                         <li class="nav-item mx-1">
                             <a class="nav-link" href="calendario_frequencia.php">Calendário de Frequência</a>
                         </li>
                         <li class="nav-item mx-1">
-                            <a class="nav-link" href="perfil.php">Perfil</a>
+                            <a class="nav-link active" style="background-color: #8a50ff" aria-current="page" href="perfil.php">Perfil</a>
                         </li>
                     </ul>
                     <div class="d-flex flex-column flex-lg-row justify-content-center align-items-center gap-3">
-                        <a href="javascript:void(0);" onclick="confirmarSaida();" class="text-white text-decoration-none px-3 py-1 rounded-4 sair-btn">Sair</a>
+                        <a href="javascript:void(0);" onclick="confirmarSaida();" class="text-white text-decoration-none px-3 py-1 rounded-4 sair-btn" title="Sair"><i class="fa fa-sign-out" aria-hidden="true"></i></a>
                     </div>
                 </div>
             </div>
@@ -72,51 +69,68 @@
 
     <?php
     session_start();
-    include 'SQL/conexao.php';
 
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        $nome = $_POST['nome'];
-        $email = $_POST['email'];
-        $senha = $_POST['senha'];
-        $cpf = $_POST['cpf'];
-        $telefone = $_POST['telefone'];
-        $tipo_usuario = $_POST['tipo_usuario'];
-        $turno = $_POST['turno'];
+    // Verifique se o usuário está logado
+    if (!isset($_SESSION['nome']) || !isset($_SESSION['tipo_usuario'])) {
+        header("Location: login.php");
+        exit();
+    }
 
-        // Verificar se o CPF tem exatamente 11 números
-        if (strlen($cpf) === 11) {
-            // Verificar se o cadastro já existe no banco de dados
-            $check_query = "SELECT * FROM usuarios WHERE cpf = '$cpf'";
-            $check_result = mysqli_query($conexao, $check_query);
+    // Diretório onde as imagens serão salvas (altere para o caminho real no seu servidor)
+    $diretorio_destino = 'assets/imagens_perfil/';
 
-            if (mysqli_num_rows($check_result) == 0) {
-                // O cadastro não existe, então podemos inserir os dados
-                $insert_query = "INSERT INTO usuarios (nome, email, senha, cpf, telefone, tipo_usuario, turno) VALUES ('$nome', '$email', '$senha', '$cpf', '$telefone', '$tipo_usuario', '$turno')";
+    // Nome do arquivo
+    $nome_arquivo = $_SESSION['nome'] . '_perfil.jpg';
 
-                if (mysqli_query($conexao, $insert_query)) {
-                    // Cadastro realizado com sucesso
-                    echo "
-            <script>
+    // Caminho completo do arquivo no servidor
+    $caminho_completo = $diretorio_destino . $nome_arquivo;
+
+    // Mensagem de alerta padrão
+    $alert_message = "Nenhum arquivo enviado.";
+
+    // Verifica se foi enviado um arquivo
+    if (isset($_FILES['imagem'])) {
+        // Garante que o diretório de destino exista
+        if (!file_exists($diretorio_destino)) {
+            mkdir($diretorio_destino, 0755, true);
+        }
+
+        // Move o arquivo para o diretório de destino
+        if (move_uploaded_file($_FILES['imagem']['tmp_name'], $caminho_completo)) {
+            $alert_message = "Upload da imagem realizado com sucesso.";
+        } else {
+            $alert_message = "Selecione uma imagem para realizar o upload.";
+            // Exibe o alerta usando JavaScript com SweetAlert2
+            echo "<script>
                 Swal.fire({
-                    icon: 'success',
-                    title: 'Cadastro realizado com sucesso!',
-                    showConfirmButton: false,
-                    timer: 2000
-                }).then(function() {
-                    window.location.href = 'funcionarios.php';
+                    title: 'Atenção',
+                    text: '$alert_message',
+                    icon: 'warning',
+                    confirmButtonColor: '#3085d6',
+                    confirmButtonText: 'OK'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = 'perfil.php';
+                    }
                 });
             </script>";
-                    exit();
-                } else {
-                    echo "Erro ao cadastrar: " . mysqli_error($conexao);
-                }
-            } else {
-                echo "Erro ao cadastrar: O CPF já está em uso.";
-            }
-        } else {
-            echo "Erro ao cadastrar: CPF deve ter exatamente 11 números.";
+            exit(); // Termina a execução do script após exibir o alerta
         }
     }
+
+    // Exibe o alerta de sucesso usando JavaScript com SweetAlert2 e um timer
+    echo "<script>
+        Swal.fire({
+            title: 'Sucesso',
+            text: '$alert_message',
+            icon: 'success',
+            showConfirmButton: false,
+            timer: 2000
+        }).then(() => {
+            window.location.href = 'perfil.php';
+        });
+    </script>";
+
     ?>
 
 </body>

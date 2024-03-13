@@ -4,7 +4,7 @@ include 'SQL/conexao.php';
 
 // Verifique se o usuário está logado
 if (!isset($_SESSION['nome']) || !isset($_SESSION['tipo_usuario'])) {
-    header("Location: index.php"); // Redirecione para a página de login se não estiver logado
+    header("Location: login.php"); // Redirecione para a página de login se não estiver logado
     exit();
 }
 
@@ -18,74 +18,121 @@ $tipo_usuario = $_SESSION['tipo_usuario'];
 ?>
 
 <!DOCTYPE html>
-<html>
+<html lang="pt-br">
 
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Perfil</title>
+
+    <!-- Bootstrap CSS link -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+    <!-- Biblioteca icones -->
+    <script src="https://kit.fontawesome.com/f2c34800e3.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+
     <link rel="stylesheet" href="assets/css/style.css">
+    <title>Perfil</title>
 </head>
 
-<body>
-    <header>
-        <nav>
-            <div class="logo">
-                <div class="coin"></div>
-                <h1 id="titulo">Sistema de Frequência</h1>
+<body class="vh-100">
+
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container-fluid">
+
+            <h1 class="navbar-brand no-hover-color">Frequência Master<i class="fa fa-check-circle-o ms-1" aria-hidden="true"></i></h1>
+
+            <button class="navbar-toggler shadow-none border-0" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="sidebar offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+                <div class="offcanvas-header text-white border-bottom">
+                    <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Frequência Tech</h5>
+                    <button type="button" class="btn-close btn-close-white shadow-none" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                </div>
+
+                <div class="offcanvas-body d-flex flex-column flex-lg-row p-3 p-lg-0">
+                    <ul class="navbar-nav justify-content-center align-items-center fs-5 flex-grow-1 pe-3">
+                        <li class="nav-item mx-1">
+                            <a class="nav-link" href="principal.php">Home</a>
+                        </li>
+                        <?php
+                        if ($_SESSION['tipo_usuario'] !== 'Administrador') {
+                            echo '<li class="nav-item mx-1">
+                            <a class="nav-link" href="realizar_frequencia.php">Realizar Frequência</a>
+                        </li>';
+                            echo '<li class="nav-item mx-1">
+                            <a class="nav-link" href="minha_frequencia.php">Minha Frequência</a>
+                        </li>';
+                        } else {
+                            echo '<li class="nav-item mx-1">
+                            <a class="nav-link" href="cadastro_funcionario.php">Cadastrar Funcionário</a>
+                        </li>';
+                            echo ' <li class="nav-item mx-1">
+                            <a class="nav-link" href="funcionarios.php">Funcionários</a>
+                        </li>';
+                            echo '<li class="nav-item mx-1">
+                            <a class="nav-link" href="frequencia_funcionarios.php">Frequência dos Funcionários</a>
+                        </li>';
+                        }
+                        ?>
+                        <li class="nav-item mx-1">
+                            <a class="nav-link" href="calendario_frequencia.php">Calendário de Frequência</a>
+                        </li>
+                        <li class="nav-item mx-1">
+                            <a class="nav-link active" style="background-color: #8a50ff" aria-current="page" href="perfil.php">Perfil</a>
+                        </li>
+                    </ul>
+                    <div class="d-flex flex-column flex-lg-row justify-content-center align-items-center gap-3">
+                        <a href="javascript:void(0);" onclick="confirmarSaida();" class="text-white text-decoration-none px-3 py-1 rounded-4 sair-btn" title="Sair"><i class="fa fa-sign-out" aria-hidden="true"></i></a>
+                    </div>
+                </div>
             </div>
-            <div class="bem_vindo_nome">
-                <!-- <p>Tipo de Usuário: <?php echo $tipo_usuario; ?></p> -->
+        </div>
+    </nav>
+
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-md-4">
+                <?php
+                // Defina as variáveis $diretorio_destino e $nome_arquivo
+                $diretorio_destino = 'assets/imagens_perfil/';
+                $nome_arquivo = $_SESSION['nome'] . '_perfil.jpg';
+
+                if (file_exists($diretorio_destino . $nome_arquivo)) {
+                    // Adiciona um parâmetro de consulta com timestamp à URL da imagem
+                    $imagem_url = $diretorio_destino . $nome_arquivo . '?timestamp=' . time();
+                    echo '<img class="img-fluid rounded-circle mb-3" src="' . $imagem_url . '" alt="Imagem de Perfil">';
+                } else {
+                    echo '<p>Imagem de perfil não encontrada.</p>';
+                }
+                ?>
+
             </div>
-            <div class="botao_nav">
-                <ul>
-                    <a href="principal.php"> <button>Início</button></a>
-                    <?php
-                    // Verifique se o usuário não é um administrador
-                    if ($_SESSION['tipo_usuario'] !== 'Administrador') {
-                        echo '<a href="frequencia.php"><button>Realizar Frequência</button></a>';
-                        echo '<a href="horas_acumuladas.php"><button>Horas Acumuladas</button></a>';
-                    } else {
-                        echo '<a href="cadastro.php"><button>Cadastrar Funcionário</button></a>';
-                        echo '<a href="funcionarios.php"><button>Funcionários</button></a>';
-                        echo '<a href="frequencia_funcionarios.php"><button>Frequência dos funcionários</button></a>';
-                    }
-                    ?>
-                    <a href="calendario_frequencia.php"><button>Calendário de Frequência</button></a>
-                    <a href="perfil.php"><button>Perfil</button></a>
-                    <a href="javascript:void(0);" onclick="confirmarSaida();"> <button class="butao">Sair</button></a>
-                </ul>
+            <div class="col-md-8">
+                <h2 class="mb-4">Meu Perfil</h2>
+                <p><strong>Nome:</strong> <?php echo $nome; ?></p>
+                <p><strong>Email:</strong> <?php echo $email; ?></p>
+                <p><strong>Telefone:</strong> <?php echo $telefone; ?></p>
+                <p><strong>Tipo de Usuário:</strong> <?php echo $tipo_usuario; ?></p>
+                <p><strong>Turno:</strong> <?php echo $turno; ?></p>
+
+                <form action="processar_imagem.php" method="POST" enctype="multipart/form-data">
+                    <div class="mb-3">
+                        <label for="imagem" class="form-label">Escolha uma imagem para o perfil:</label>
+                        <input type="file" class="form-control" name="imagem" id="imagem" accept="image/*">
+                    </div>
+                    <button type="submit" class="btn btn-primary" name="submit">Upload Imagem</button>
+                </form>
             </div>
-        </nav>
-    </header>
+        </div>
+    </div>
 
-    <h2>Meu Perfil</h2>
 
-    <?php
-    // Defina as variáveis $diretorio_destino e $nome_arquivo
-    $diretorio_destino = 'assets/imagens_perfil/';
-    $nome_arquivo = $_SESSION['nome'] . '_perfil.jpg';
-
-    if (file_exists($diretorio_destino . $nome_arquivo)) {
-        echo '<img class="imagem_perfil" src="' . $diretorio_destino . $nome_arquivo . '" alt="Imagem de Perfil">';
-    } else {
-        echo '<p>Imagem de perfil não encontrada.</p>';
-    }
-    ?>
-
-    <p>Nome: <?php echo $nome; ?></p>
-    <p>Email: <?php echo $email; ?></p>
-    <p>Telefone: <?php echo $telefone; ?></p>
-    <p>Tipo de Usuário: <?php echo $tipo_usuario; ?></p>
-    <p>Turno: <?php echo $turno; ?></p>
-
-    <!-- Adicione este código dentro do formulário existente -->
-    <form action="salvar_imagem.php" method="post" enctype="multipart/form-data">
-        <label for="imagem">Escolha uma imagem para o perfil:</label>
-        <input type="file" name="imagem" id="imagem" accept="image/*">
-        <input type="submit" value="Upload Imagem" name="submit">
-    </form>
-
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <script type="text/javascript" src="assets/js/script.js"></script>
 </body>
 

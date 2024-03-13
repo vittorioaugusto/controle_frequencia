@@ -148,11 +148,11 @@ if ($row = mysqli_fetch_assoc($result)) {
 
     <div class="container">
         <div class="card-body text-center">
-        <?php if (isset($ultimaFrequenciaData) && isset($ultimaFrequenciaHora)) : ?>
-            <h4>Última Frequência Realizada</h4>
-            <p>Data: <?php echo $ultimaFrequenciaData; ?></p>
-            <p>Hora: <?php echo $ultimaFrequenciaHora; ?></p>
-        <?php endif; ?>
+            <?php if (isset($ultimaFrequenciaData) && isset($ultimaFrequenciaHora)) : ?>
+                <h4>Última Frequência Realizada</h4>
+                <p>Data: <?php echo $ultimaFrequenciaData; ?></p>
+                <p>Hora: <?php echo $ultimaFrequenciaHora; ?></p>
+            <?php endif; ?>
         </div>
     </div>
 
