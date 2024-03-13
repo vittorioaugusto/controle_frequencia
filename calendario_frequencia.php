@@ -1,10 +1,10 @@
 <?php
 session_start();
-include 'conexao.php';
+include 'SQL/conexao.php';
 
 // Verifique se o usuário está logado
 if (!isset($_SESSION['nome']) || !isset($_SESSION['tipo_usuario'])) {
-    header("Location: index.php");
+    header("Location: login.php");
     exit();
 }
 
@@ -107,7 +107,6 @@ $anoSelecionado = isset($_POST['ano']) ? $_POST['ano'] : date("Y");
 $nome_mes = isset($meses_em_portugues[intval($mesSelecionado)]) ? $meses_em_portugues[intval($mesSelecionado)] : 'Mês Inválido';
 
 ?>
-
 
 
 <!DOCTYPE html>

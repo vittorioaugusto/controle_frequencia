@@ -1,7 +1,6 @@
 <?php
 session_start();
-
-include 'conexao.php';
+include 'SQL/conexao.php';
 
 // Verifique se o usuário está logado
 if (!isset($_SESSION['nome']) || !isset($_SESSION['tipo_usuario'])) {
@@ -25,7 +24,7 @@ $tipo_usuario = $_SESSION['tipo_usuario'];
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Perfil</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="assets/css/style.css">
 </head>
 
 <body>
@@ -64,7 +63,7 @@ $tipo_usuario = $_SESSION['tipo_usuario'];
 
     <?php
     // Defina as variáveis $diretorio_destino e $nome_arquivo
-    $diretorio_destino = 'imagens_perfil/';
+    $diretorio_destino = 'assets/imagens_perfil/';
     $nome_arquivo = $_SESSION['nome'] . '_perfil.jpg';
 
     if (file_exists($diretorio_destino . $nome_arquivo)) {
@@ -87,7 +86,7 @@ $tipo_usuario = $_SESSION['tipo_usuario'];
         <input type="submit" value="Upload Imagem" name="submit">
     </form>
 
-    <script type="text/javascript" src="js/funcoes.js"></script>
+    <script type="text/javascript" src="assets/js/script.js"></script>
 </body>
 
 </html>

@@ -1,6 +1,6 @@
 <?php
 session_start();
-include 'conexao.php';
+include 'SQL/conexao.php';
 
 // Verifique se o usuário está logado
 if (!isset($_SESSION['nome']) || !isset($_SESSION['tipo_usuario'])) {
@@ -33,7 +33,7 @@ $resultFrequenciaUsuario = mysqli_query($conexao, $queryFrequenciaUsuario);
     <!-- Biblioteca icones -->
     <script src="https://kit.fontawesome.com/f2c34800e3.js" crossorigin="anonymous"></script>
 
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="assets/css/style.css">
     <title>Minha Frequência</title>
 </head>
 
@@ -244,7 +244,7 @@ $resultFrequenciaUsuario = mysqli_query($conexao, $queryFrequenciaUsuario);
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script type="text/javascript" src="js/funcoes.js"></script>
+    <script type="text/javascript" src="assets/js/script.js"></script>
 </body>
 
 </html>

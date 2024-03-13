@@ -1,6 +1,6 @@
 <?php
 session_start();
-include 'conexao.php';
+include 'SQL/conexao.php';
 
 
 if ($_SESSION['tipo_usuario'] !== 'Administrador') {
@@ -42,7 +42,7 @@ $resultUsuarios = mysqli_query($conexao, $queryUsuarios);
     <!-- Biblioteca icones -->
     <script src="https://kit.fontawesome.com/f2c34800e3.js" crossorigin="anonymous"></script>
 
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="assets/css/style.css">
     <title>Funcionários</title>
 </head>
 
@@ -78,7 +78,7 @@ $resultUsuarios = mysqli_query($conexao, $queryUsuarios);
                         </li>';
                         } else {
                             echo '<li class="nav-item mx-1">
-                            <a class="nav-link" href="cadastro.php">Cadastrar Funcionário</a>
+                            <a class="nav-link" href="cadastro_funcionario.php">Cadastrar Funcionário</a>
                         </li>';
                             echo ' <li class="nav-item mx-1">
                             <a class="nav-link active" style="background-color: #8a50ff" aria-current="page" href="funcionarios.php">Funcionários</a>
@@ -203,7 +203,7 @@ $resultUsuarios = mysqli_query($conexao, $queryUsuarios);
                                 $nomeArquivoPerfil = $rowFuncionario['nome'] . '_perfil.jpg';
 
                                 // Construa o caminho completo para a imagem de perfil
-                                $caminhoImagemPerfil = 'imagens_perfil/' . $nomeArquivoPerfil;
+                                $caminhoImagemPerfil = 'assets/imagens_perfil/' . $nomeArquivoPerfil;
 
                                 // Adicione a tag <img> com o caminho da imagem de perfil
                                 echo "<td><img src='$caminhoImagemPerfil' alt='Imagem de Perfil' style='width: 100px; height: 100px;'></td>";
@@ -233,7 +233,7 @@ $resultUsuarios = mysqli_query($conexao, $queryUsuarios);
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script type="text/javascript" src="js/funcoes.js"></script>
+    <script type="text/javascript" src="assets/js/script.js"></script>
 </body>
 
 </html>
