@@ -142,14 +142,13 @@ if ($_SESSION['tipo_usuario'] === 'Administrador') {
                             echo "<td>" . $row['dia'] . "</td>";
                             echo "<td>" . $row['hora'] . "</td>";
                             echo "<td>" . $row['presenca'] . "</td>";
-                            echo "<td>";
-
+                           
                             // Determinar se a presença é uma entrada ou saída com base no número de presenças
                             if ($row['presenca'] == 'Presente') {
                                 if ($presencasPorDia[$nomeFuncionario][$dataPresenca] % 2 == 0) {
-                                    echo "<span class='bg-success'>Entrada</span>";
+                                    echo "<td style='background-color: #28a745; color: #000;'>Entrada</td>"; // Verde para entrada
                                 } else {
-                                    echo "<span class='bg-saida'>Saída</span>";
+                                    echo "<td style='background-color: #dc3545; color: #000;'>Saída</td>"; // Vermelho para saída
                                 }
                                 $presencasPorDia[$nomeFuncionario][$dataPresenca]++;
                             } else {
