@@ -182,7 +182,6 @@ $resultFrequenciaUsuario = mysqli_query($conexao, $queryFrequenciaUsuario);
                                 echo "<td>" . $rowFuncionario['hora'] . "</td>";
                                 echo "<td>" . $rowFuncionario['turno'] . "</td>";
                                 echo "<td>" . $rowFuncionario['presenca'] . "</td>";
-                                echo "<td>";
 
                                 // Determinar se a presença é uma entrada ou saída com base no número de presenças
                                 if ($rowFuncionario['presenca'] == 'Presente') {
@@ -202,15 +201,15 @@ $resultFrequenciaUsuario = mysqli_query($conexao, $queryFrequenciaUsuario);
                                     $tipo = '';
                                     if ($presencasPorDia[$rowFuncionario['nome']][$rowFuncionario['dia']] % 2 == 0) {
                                         $tipo = "Entrada";
+                                        echo "<td style='background-color: #28a745; color: #000;'>$tipo</td>"; // Verde para entrada
                                     } else {
                                         $tipo = "Saída";
+                                        echo "<td style='background-color: #dc3545; color: #000;'>$tipo</td>"; // Vermelho para saída
                                     }
-
-                                    echo $tipo;
 
                                     $presencasPorDia[$rowFuncionario['nome']][$rowFuncionario['dia']]++;
                                 } else {
-                                    echo "Faltou"; // Caso a presença não seja "Presente"
+                                    echo "<td>Faltou</td>"; // Caso a presença não seja "Presente"
                                     // Incrementar o contador de ausência
                                     if (!isset($ausenciasContador[$rowFuncionario['nome']])) {
                                         $ausenciasContador[$rowFuncionario['nome']] = 0;
