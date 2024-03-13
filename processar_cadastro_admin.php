@@ -19,8 +19,8 @@
     <!-- SweetAlert -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     
-    <script type="text/javascript" src="js/funcoes.js"></script>
-    <link rel="stylesheet" href="style.css">
+    <script type="text/javascript" src="assets/js/script.js"></script>
+    <link rel="stylesheet" href="assets/css/style.css">
     <title>Processar Cadastro Administrador</title>
 </head>
 

@@ -20,9 +20,9 @@ O simulador Frequência Master é um projeto feito por mim, com o intuito de sim
 
 Para usar a página:
 
-1. Acesse [http://localhost/controle_frequencia/index.php](http://localhost/controle_frequencia/index.php) em seu navegador.
+1. Acesse [http://localhost/controle_frequencia/index.php](http://localhost/controle_frequencia/login.php) em seu navegador.
 
-![index](img/index.png)
+![login](img/login.png)
 
 2. Faça o Cadastro com Administrador para acessar o sistema.
 
@@ -30,7 +30,8 @@ Para usar a página:
 
 3. Faça o login com o email e a senha, depois clique em "Entrar".
 
-![login](img/login.png)
+![login_dados](img/login_dados.png)
+
 
 
 ## Tecnologias Utilizadas

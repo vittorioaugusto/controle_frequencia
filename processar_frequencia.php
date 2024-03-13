@@ -1,6 +1,6 @@
 <?php
 session_start();
-include 'conexao.php';
+include 'SQL/conexao.php';
 
 // Defina o fuso horário para o de São Paulo (ou o fuso horário apropriado)
 date_default_timezone_set('America/Sao_Paulo');

@@ -3,12 +3,12 @@ session_start();
 
 // Verifique se o usuário está logado
 if (!isset($_SESSION['nome']) || !isset($_SESSION['tipo_usuario'])) {
-    header("Location: index.php");
+    header("Location: login.php");
     exit();
 }
 
 // Diretório onde as imagens serão salvas (altere para o caminho real no seu servidor)
-$diretorio_destino = 'imagens_perfil/';
+$diretorio_destino = 'assets/imagens_perfil/';
 
 // Nome do arquivo
 $nome_arquivo = $_SESSION['nome'] . '_perfil.jpg';

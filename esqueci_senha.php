@@ -13,7 +13,7 @@
     <script src="https://kit.fontawesome.com/f2c34800e3.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
 
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="assets/css/style.css">
     <title>Redefinir Senha</title>
 </head>
 
@@ -48,7 +48,7 @@
                         <button type="submit" class="btn btn-custom-color px-4 py-2">Atualizar senha</button>
                     </div>
                     <div class="text-center">
-                        <a href="index.php" class="btn btn-custom-color px-3 py-1 mt-2">Voltar</a>
+                        <a href="login.php" class="btn btn-custom-color px-3 py-1 mt-2">Voltar</a>
                     </div>
                 </form>
             </div>
@@ -56,7 +56,7 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-    <script type="text/javascript" src="js/funcoes.js"></script>
+    <script type="text/javascript" src="assets/js/script.js"></script>
 </body>
 
 </html>
