@@ -324,104 +324,128 @@ $nome_mes = isset($meses_em_portugues[intval($mesSelecionado)]) ? $meses_em_port
                     echo '</div>';
                 }
 
-                // Se o usuário não estiver logado como administrador, exibir o formulário de seleção do mês e ano
-                if (!isset($_SESSION['tipo_usuario']) || $_SESSION['tipo_usuario'] !== 'Administrador') {
-                    echo '<form action="calendario_frequencia.php" method="POST" class="mt-3">
-        <label for="mes">Selecione o mês:</label>
-        <select name="mes" id="mes" class="form-select">
-            <option value="01">Janeiro</option>
-            <option value="02">Fevereiro</option>
-            <option value="03">Março</option>
-            <option value="04">Abril</option>
-            <option value="05">Maio</option>
-            <option value="06">Junho</option>
-            <option value="07">Julho</option>
-            <option value="08">Agosto</option>
-            <option value="09">Setembro</option>
-            <option value="10">Outubro</option>
-            <option value="11">Novembro</option>
-            <option value="12">Dezembro</option>
-        </select>
-        <label for="ano" class="mt-2">Selecione o ano:</label>
-        <select name="ano" id="ano" class="form-select">';
-                    $anoAtual = date("Y");
-                    for ($ano = $anoAtual; $ano >= ($anoAtual - 5); $ano--) {
-                        echo "<option value='$ano'>$ano</option>";
-                    }
-                    echo '</select>
-        <input type="submit" value="Filtrar" class="btn btn-primary mt-2">
-    </form>';
-                }
+    ?>
 
-                // Verifique o tipo de usuário
-                if ($_SESSION['tipo_usuario'] !== 'Administrador') {
-                    // Inicialize as variáveis de estatísticas
-                    $quantidadePresente = 0;
-                    $quantidadeAusente = 0;
-
-                    // Calcule as estatísticas com base nos dados de frequência
-                    foreach ($frequencia_dias_horas as $frequencia) {
-                        if ($frequencia['presenca'] == 'Presente') {
-                            $quantidadePresente++;
-                        } elseif ($frequencia['presenca'] == 'Ausente') {
-                            $quantidadeAusente++;
+    <?php if (!isset($_SESSION['tipo_usuario']) || $_SESSION['tipo_usuario'] !== 'Administrador') : ?>
+        <div class="row">
+            <div class="col-md-6">
+                <!-- Formulário no canto superior esquerdo -->
+                <form action="calendario_frequencia.php" method="POST" class="mt-2">
+                    <label for="mes">Selecione o mês:</label>
+                    <select name="mes" id="mes" class="form-select">
+                        <option value="01">Janeiro</option>
+                        <option value="02">Fevereiro</option>
+                        <option value="03">Março</option>
+                        <option value="04">Abril</option>
+                        <option value="05">Maio</option>
+                        <option value="06">Junho</option>
+                        <option value="07">Julho</option>
+                        <option value="08">Agosto</option>
+                        <option value="09">Setembro</option>
+                        <option value="10">Outubro</option>
+                        <option value="11">Novembro</option>
+                        <option value="12">Dezembro</option>
+                    </select>
+                    <label for="ano" class="mt-2">Selecione o ano:</label>
+                    <select name="ano" id="ano" class="form-select">
+                        <?php
+                        $anoAtual = date("Y");
+                        for ($ano = $anoAtual; $ano >= ($anoAtual - 5); $ano--) {
+                            echo "<option value='$ano'>$ano</option>";
                         }
+                        ?>
+                    </select>
+                    <input type="submit" value="Filtrar" class="btn btn-primary mt-3">
+                </form>
+            </div>
+            <div class="col-md-6">
+                <!-- Estatísticas de presença ao lado -->
+                <h3 class="mt-4">Estatísticas de Presença</h3>
+                <?php
+                // Inicialize as variáveis de estatísticas
+                $quantidadePresente = 0;
+                $quantidadeAusente = 0;
+                // Calcule as estatísticas com base nos dados de frequência
+                foreach ($frequencia_dias_horas as $frequencia) {
+                    if ($frequencia['presenca'] == 'Presente') {
+                        $quantidadePresente++;
+                    } elseif ($frequencia['presenca'] == 'Ausente') {
+                        $quantidadeAusente++;
                     }
+                }
+                // Exibir as estatísticas apenas para os não administradores
+                echo "<p>Presente: $quantidadePresente</p>";
+                echo "<p>Ausente: $quantidadeAusente</p>";
+                ?>
+            </div>
+        </div>
+    <?php endif; ?>
 
-                    // Exibir as estatísticas apenas para os não administradores
-                    echo '<h3 class="mt-4">Estatísticas de Presença</h3>';
-                    echo "<p>Presente: $quantidadePresente</p>";
-                    echo "<p>Ausente: $quantidadeAusente</p>";
+    <?php
+    // Verifique o tipo de usuário
+    if ($_SESSION['tipo_usuario'] !== 'Administrador') {
+        // Inicialize as variáveis de estatísticas
+        $quantidadePresente = 0;
+        $quantidadeAusente = 0;
 
-                    if (!$anoSelecionado || !$mesSelecionado) {
-                        $mesSelecionado = date('m');
-                        $anoSelecionado = date('Y');
-                    }
+        // Calcule as estatísticas com base nos dados de frequência
+        foreach ($frequencia_dias_horas as $frequencia) {
+            if ($frequencia['presenca'] == 'Presente') {
+                $quantidadePresente++;
+            } elseif ($frequencia['presenca'] == 'Ausente') {
+                $quantidadeAusente++;
+            }
+        }
 
-                    $numeroDias = cal_days_in_month(CAL_GREGORIAN, $mesSelecionado, $anoSelecionado);
-                    echo "<h2>" . date('F', strtotime("$anoSelecionado-$mesSelecionado-01")) . " $anoSelecionado</h2>";
-                    echo "<table class='table table-bordered'>";
-                    echo "<tr><th>Dom</th><th>Seg</th><th>Ter</th><th>Qua</th><th>Qui</th><th>Sex</th><th>Sáb</th></tr>";
-                    $primeiroDia = date('w', strtotime("$anoSelecionado-$mesSelecionado-01"));
+        if (!$anoSelecionado || !$mesSelecionado) {
+            $mesSelecionado = date('m');
+            $anoSelecionado = date('Y');
+        }
 
+        $numeroDias = cal_days_in_month(CAL_GREGORIAN, $mesSelecionado, $anoSelecionado);
+        echo "<h2>" . date('F', strtotime("$anoSelecionado-$mesSelecionado-01")) . " $anoSelecionado</h2>";
+        echo "<table class='table table-bordered border-dark'>";
+        echo "<tr><th>Dom</th><th>Seg</th><th>Ter</th><th>Qua</th><th>Qui</th><th>Sex</th><th>Sáb</th></tr>";
+        $primeiroDia = date('w', strtotime("$anoSelecionado-$mesSelecionado-01"));
+
+        echo "<tr>";
+        for ($i = 0; $i < $primeiroDia; $i++) {
+            echo "<td></td>";
+        }
+
+        for ($dia = 1; $dia <= $numeroDias; $dia++) {
+            $dataVerificar = "$anoSelecionado-" . str_pad($mesSelecionado, 2, '0', STR_PAD_LEFT) . "-" . str_pad($dia, 2, '0', STR_PAD_LEFT);
+            $countPresente = 0;
+
+            foreach ($frequencia_dias_horas as $frequencia) {
+                if ($frequencia['dia'] == $dataVerificar && $frequencia['presenca'] == 'Presente') {
+                    $countPresente++;
+                }
+            }
+
+            if ($countPresente >= 2) {
+                echo "<td style='background-color: #28a745; color: #000;'>$dia</td>"; // Verde para presente
+            } elseif ($countPresente == 1) {
+                echo "<td style='background-color: #dc3545; color: #000;'>$dia</td>"; // Vermelho para ausente
+            } else {
+                echo "<td>$dia</td>"; // Padrão sem cor
+            }
+
+            if (($dia + $primeiroDia) % 7 == 0) {
+                echo "</tr>";
+                if ($dia < $numeroDias) {
                     echo "<tr>";
-                    for ($i = 0; $i < $primeiroDia; $i++) {
-                        echo "<td></td>";
-                    }
-
-                    for ($dia = 1; $dia <= $numeroDias; $dia++) {
-                        $dataVerificar = "$anoSelecionado-" . str_pad($mesSelecionado, 2, '0', STR_PAD_LEFT) . "-" . str_pad($dia, 2, '0', STR_PAD_LEFT);
-                        $countPresente = 0;
-
-                        foreach ($frequencia_dias_horas as $frequencia) {
-                            if ($frequencia['dia'] == $dataVerificar && $frequencia['presenca'] == 'Presente') {
-                                $countPresente++;
-                            }
-                        }
-
-                        if ($countPresente >= 2) {
-                            echo "<td style='background-color: #28a745; color: #000;'>$dia</td>"; // Verde para presente
-                        } elseif ($countPresente == 1) {
-                            echo "<td style='background-color: #dc3545; color: #000;'>$dia</td>"; // Vermelho para ausente
-                        } else {
-                            echo "<td>$dia</td>"; // Padrão sem cor
-                        }
-
-                        if (($dia + $primeiroDia) % 7 == 0) {
-                            echo "</tr>";
-                            if ($dia < $numeroDias) {
-                                echo "<tr>";
-                            }
-                        }
-                    }
-
-                    // Preencha os espaços em branco no final do mês
-                    for ($i = ($numeroDias + $primeiroDia) % 7; $i > 0; $i--) {
-                        echo "<td></td>";
-                    }
-
-                    echo "</table>";
                 }
+            }
+        }
+
+        // Preencha os espaços em branco no final do mês
+        for ($i = ($numeroDias + $primeiroDia) % 7; $i > 0; $i--) {
+            echo "<td></td>";
+        }
+
+        echo "</table>";
+    }
     ?>
 
 
