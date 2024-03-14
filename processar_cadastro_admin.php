@@ -61,7 +61,7 @@
                     showConfirmButton: false,
                     timer: 2000
                 }).then(function() {
-                    window.location.href = 'index.php';
+                    window.location.href = 'login.php';
                 });
             </script>";
                 exit();

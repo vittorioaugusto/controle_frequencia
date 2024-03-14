@@ -134,7 +134,7 @@ function confirmarSaida() {
         cancelButtonText: "Cancelar"
     }).then((result) => {
         if (result.isConfirmed) {
-            window.location.href = "sair.php";
+            window.location.href = "login.php";
         }
     });
 }
