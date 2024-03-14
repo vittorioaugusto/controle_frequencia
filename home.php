@@ -53,7 +53,7 @@
                     <div>
                         <h3 class="text-center">Calendário de Frequência</h3>
                         <ul class="mt-3">
-                            <li>O Calendário permite aos funcionários vizualizarem suas frequências durante o ano.</li>
+                            <li>O Calendário permite aos funcionários visualizarem suas frequências durante o ano.</li>
                             <li>O Administrador também possui acesso e vizualizam a frquência de todos os funcionários durante o ano.</li>
                         </ul>
                     </div>
