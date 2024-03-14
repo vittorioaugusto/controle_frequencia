@@ -15,7 +15,7 @@ if ($_SESSION['tipo_usuario'] !== 'Administrador') {
 }
 
 // Consulta SQL para obter todos os tipos de usuário, exceto administrador
-$queryUsuarios = "SELECT DISTINCT tipo_usuario FROM usuarios WHERE tipo_usuario != 'Administrador'";
+$queryUsuarios = "SELECT DISTINCT tipo_usuario FROM usuario WHERE tipo_usuario != 'Administrador'";
 $resultUsuarios = mysqli_query($conexao, $queryUsuarios);
 ?>
 

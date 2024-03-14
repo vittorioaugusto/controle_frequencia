@@ -12,7 +12,7 @@ if (!isset($_SESSION['nome']) || !isset($_SESSION['tipo_usuario'])) {
 $usuarioLogado = $_SESSION['nome'];
 $queryFrequenciaUsuario = "SELECT f.nome, f.dia, f.hora, f.turno, f.presenca, u.tipo_usuario 
                            FROM frequencia f 
-                           JOIN usuarios u ON f.nome = u.nome 
+                           JOIN usuario u ON f.nome = u.nome 
                            WHERE f.nome = '$usuarioLogado'";
 
 
