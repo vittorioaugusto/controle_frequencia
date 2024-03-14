@@ -6,7 +6,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $novoStatus = $_POST['status'];
 
     // Atualize o campo 'ativo' na tabela de usuários com o novo status
-    $query = "UPDATE usuarios SET status = $novoStatus WHERE id = $usuarioId";
+    $query = "UPDATE usuario SET status = $novoStatus WHERE id = $usuarioId";
     $result = mysqli_query($conexao, $query);
 
     if ($result) {

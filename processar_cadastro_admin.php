@@ -48,7 +48,7 @@
         // Verificar se o tipo de usuário é um administrador
         if ($tipo_usuario == "Administrador") {
             // Realizar o cadastro no banco de dados
-            $query = "INSERT INTO usuarios (nome, email, senha, cpf, telefone, tipo_usuario, turno) VALUES ('$nome', '$email', '$senha', '$cpf', '$telefone', '$tipo_usuario', '$turno')";
+            $query = "INSERT INTO usuario (nome, email, senha, cpf, telefone, tipo_usuario, turno) VALUES ('$nome', '$email', '$senha', '$cpf', '$telefone', '$tipo_usuario', '$turno')";
             $result = mysqli_query($conexao, $query);
 
             if ($result) {
@@ -61,7 +61,7 @@
                     showConfirmButton: false,
                     timer: 2000
                 }).then(function() {
-                    window.location.href = 'index.php';
+                    window.location.href = 'login.php';
                 });
             </script>";
                 exit();

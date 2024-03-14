@@ -4,7 +4,7 @@ include 'SQL/conexao.php';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $usuarioId = $_POST['id'];
 
-    $consultaNome = "SELECT nome FROM usuarios WHERE id = $usuarioId";
+    $consultaNome = "SELECT nome FROM usuario WHERE id = $usuarioId";
     $resultadoNome = mysqli_query($conexao, $consultaNome);
 
     if ($resultadoNome && $row = mysqli_fetch_assoc($resultadoNome)) {

@@ -14,7 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $novoStatus = $_POST['status'];
 
         // Atualize o status do usuário no banco de dados
-        $queryUpdateStatus = "UPDATE usuarios SET status = $novoStatus WHERE id = $usuarioId";
+        $queryUpdateStatus = "UPDATE usuario SET status = $novoStatus WHERE id = $usuarioId";
         if (mysqli_query($conexao, $queryUpdateStatus)) {
             header("Location: funcionarios.php");
             exit();
@@ -24,7 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
-$queryUsuarios = "SELECT * FROM usuarios WHERE tipo_usuario != 'Administrador'";
+$queryUsuarios = "SELECT * FROM usuario WHERE tipo_usuario != 'Administrador'";
 $resultUsuarios = mysqli_query($conexao, $queryUsuarios);
 ?>
 
@@ -147,7 +147,7 @@ $resultUsuarios = mysqli_query($conexao, $queryUsuarios);
                                     }
                                 } elseif (isset($_POST['cpf'])) {
                                     $cpf = $_POST['cpf'];
-                                    $queryNomeUsuario = "SELECT nome FROM usuarios WHERE cpf = '$cpf'";
+                                    $queryNomeUsuario = "SELECT nome FROM usuario WHERE cpf = '$cpf'";
                                     $resultNomeUsuario = mysqli_query($conexao, $queryNomeUsuario);
 
                                     if ($resultNomeUsuario && mysqli_num_rows($resultNomeUsuario) > 0) {
@@ -194,7 +194,7 @@ $resultUsuarios = mysqli_query($conexao, $queryUsuarios);
                             }
 
                             // Consulta SQL para obter os funcionários com base nos critérios de filtro
-                            $queryFuncionarios = "SELECT id, tipo_usuario, nome, telefone, turno, status FROM usuarios $condicao";
+                            $queryFuncionarios = "SELECT id, tipo_usuario, nome, telefone, turno, status FROM usuario $condicao";
                             $resultFuncionarios = mysqli_query($conexao, $queryFuncionarios);
 
                             while ($rowFuncionario = mysqli_fetch_assoc($resultFuncionarios)) {
