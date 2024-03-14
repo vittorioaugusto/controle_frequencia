@@ -21,9 +21,12 @@
 
     <nav class="navbar navbar-expand-lg">
         <div class="container-fluid">
-            <h1 class="navbar-brand no-hover-color">Frequência Master<i class="fa fa-check-circle-o ms-1" aria-hidden="true"></i></h1>
-            <div class="d-flex flex-column flex-lg-row justify-content-center align-items-center">
-                <a href="cadastro_administrador.php" class="btn cadastro-btn px-3 py-2">Cadastrar Administrador</a>
+            <a href="home.php" class="text-decoration-none">
+                <h1 class="navbar-brand no-hover-color">Frequência Master<i class="fa fa-check-circle-o ms-1" aria-hidden="true"></i></h1>
+            </a>
+            <div class="d-flex flex-column flex-lg-row justify-content-center align-items-center gap-2">
+                <a href="home.php" class="btn botao_nav-btn px-3 py-2">Home</a>
+                <a href="cadastro_administrador.php" class="btn botao_nav-btn px-3 py-2">Cadastrar Administrador</a>
             </div>
         </div>
     </nav>
@@ -59,13 +62,6 @@
             </div>
         </div>
     </div>
-
-    <footer class="mt-auto">
-        <div class="text-center mt-5">
-            <p>Copyright© 2024 | vittorioaugusto - Todos os direitos reservados.</p>
-        </div>
-    </footer>
-
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script type="text/javascript" src="assets/js/script.js"></script>

@@ -10,6 +10,23 @@ body {
     }
 }
 
+::-webkit-scrollbar {
+    width: 12px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #888;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+
 .navbar {
     background-color: #6E2CF3;
 }
@@ -18,12 +35,12 @@ body {
     color: #fff;
 }
 
-.cadastro-btn {
+.botao_nav-btn {
     background-color: #0039ac;
     color: #fff;
 }
 
-.cadastro-btn:hover {
+.botao_nav-btn:hover {
     background-color: #001f66;
     color: #fff;
 }
@@ -33,7 +50,7 @@ body {
     border-radius: 10px;
 }
 
-.nav-link{
+.nav-link {
     border-radius: 10px;
 }
 

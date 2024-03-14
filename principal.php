@@ -55,7 +55,7 @@ if ($_SESSION['tipo_usuario'] === 'Administrador') {
                 <div class="offcanvas-body d-flex flex-column flex-lg-row p-3 p-lg-0">
                     <ul class="navbar-nav justify-content-center align-items-center fs-5 flex-grow-1 pe-3">
                         <li class="nav-item mx-1">
-                            <a class="nav-link active" style="background-color: #8a50ff" aria-current="page" href="principal.php">Home</a>
+                            <a class="nav-link active" style="background-color: #8a50ff" aria-current="page" href="princiapl.php">Início</a>
                         </li>
                         <?php
                         if ($_SESSION['tipo_usuario'] !== 'Administrador') {
@@ -142,7 +142,7 @@ if ($_SESSION['tipo_usuario'] === 'Administrador') {
                             echo "<td>" . $row['dia'] . "</td>";
                             echo "<td>" . $row['hora'] . "</td>";
                             echo "<td>" . $row['presenca'] . "</td>";
-                           
+
                             // Determinar se a presença é uma entrada ou saída com base no número de presenças
                             if ($row['presenca'] == 'Presente') {
                                 if ($presencasPorDia[$nomeFuncionario][$dataPresenca] % 2 == 0) {

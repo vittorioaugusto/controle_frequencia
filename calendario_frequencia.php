@@ -148,7 +148,7 @@ $nome_mes = isset($meses_em_portugues[intval($mesSelecionado)]) ? $meses_em_port
                 <div class="offcanvas-body d-flex flex-column flex-lg-row p-3 p-lg-0">
                     <ul class="navbar-nav justify-content-center align-items-center fs-5 flex-grow-1 pe-3">
                         <li class="nav-item mx-1">
-                            <a class="nav-link" href="principal.php">Home</a>
+                            <a class="nav-link" href="principal.php">Início</a>
                         </li>
                         <?php
                         if ($_SESSION['tipo_usuario'] !== 'Administrador') {
