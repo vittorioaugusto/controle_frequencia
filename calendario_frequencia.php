@@ -148,7 +148,7 @@ $nome_mes = isset($meses_em_portugues[intval($mesSelecionado)]) ? $meses_em_port
                 <div class="offcanvas-body d-flex flex-column flex-lg-row p-3 p-lg-0">
                     <ul class="navbar-nav justify-content-center align-items-center fs-5 flex-grow-1 pe-3">
                         <li class="nav-item mx-1">
-                            <a class="nav-link" href="principal.php">Home</a>
+                            <a class="nav-link" href="principal.php">Início</a>
                         </li>
                         <?php
                         if ($_SESSION['tipo_usuario'] !== 'Administrador') {
@@ -200,12 +200,13 @@ $nome_mes = isset($meses_em_portugues[intval($mesSelecionado)]) ? $meses_em_port
 
                 <?php if ($_SESSION['tipo_usuario'] === 'Administrador') {
                     // Se for administrador, exiba o formulário de seleção do usuário e o restante do código para o administrador
-                    echo '<form action="calendario_frequencia.php" method="POST">
-        <label for="usuario">Selecione o usuário:</label>
-        <select name="usuario" id="usuario">';
+                    echo '<form action="calendario_frequencia.php" method="POST" class="row g-3">
+                            <div class="col-md-5 text-center">
+                                <label for="usuario" class="form-label">Selecione o usuário:</label>
+                                <select name="usuario" id="usuario" class="form-select">';
 
                     // Consulta SQL para obter a lista de nomes de usuário (exceto o administrador)
-                    $queryUsuarios = "SELECT nome FROM usuarios WHERE tipo_usuario != 'Administrador'";
+                    $queryUsuarios = "SELECT nome FROM usuario WHERE tipo_usuario != 'Administrador'";
                     $resultUsuarios = mysqli_query($conexao, $queryUsuarios);
 
                     while ($rowUsuario = mysqli_fetch_assoc($resultUsuarios)) {
@@ -213,8 +214,12 @@ $nome_mes = isset($meses_em_portugues[intval($mesSelecionado)]) ? $meses_em_port
                         echo "<option value='$usuarioNome'>$usuarioNome</option>";
                     }
 
-                    echo '</select><input type="submit" value="Filtrar">
-    </form>';
+                    echo '      </select>
+                            </div>
+                        <div class="col-md-4 text-center">
+                            <button type="submit" class="btn btn-custom-color px-4 py-2 mt-4">Filtrar</button>
+                        </div>
+                    </form>';
 
                     if (isset($_POST['usuario'])) {
                         $usuarioSelecionado = $_POST['usuario'];
@@ -242,7 +247,7 @@ $nome_mes = isset($meses_em_portugues[intval($mesSelecionado)]) ? $meses_em_port
                         }
 
                         // Exibir as estatísticas para o usuário selecionado
-                        echo '<h3>Estatísticas de Presença de ' . $usuarioSelecionado . '</h3>';
+                        echo '<h3 class="mt-3">Estatísticas de Presença de ' . $usuarioSelecionado . '</h3>';
                         echo "<p>Presente: $quantidadePresente</p>";
                         echo "<p>Ausente: $quantidadeAusente</p>";
                     }
@@ -253,12 +258,9 @@ $nome_mes = isset($meses_em_portugues[intval($mesSelecionado)]) ? $meses_em_port
         </div>
     </div>
 
-
     <main class="container-fluid">
 
-    <?php
-
-                    if (isset($_POST['usuario'])) {
+    <?php if (isset($_POST['usuario'])) {
                         $usuarioSelecionado = $_POST['usuario'];
 
                         // Exemplo de consulta SQL (substitua com a sua própria consulta):
@@ -320,8 +322,6 @@ $nome_mes = isset($meses_em_portugues[intval($mesSelecionado)]) ? $meses_em_port
 
                         echo "</table>";
                     }
-
-                    echo '</div>';
                 }
 
     ?>
@@ -329,7 +329,6 @@ $nome_mes = isset($meses_em_portugues[intval($mesSelecionado)]) ? $meses_em_port
     <?php if (!isset($_SESSION['tipo_usuario']) || $_SESSION['tipo_usuario'] !== 'Administrador') : ?>
         <div class="row">
             <div class="col-md-6">
-                <!-- Formulário no canto superior esquerdo -->
                 <form action="calendario_frequencia.php" method="POST" class="mt-2">
                     <label for="mes">Selecione o mês:</label>
                     <select name="mes" id="mes" class="form-select">
@@ -359,7 +358,6 @@ $nome_mes = isset($meses_em_portugues[intval($mesSelecionado)]) ? $meses_em_port
                 </form>
             </div>
             <div class="col-md-6">
-                <!-- Estatísticas de presença ao lado -->
                 <h3 class="mt-4">Estatísticas de Presença</h3>
                 <?php
                 // Inicialize as variáveis de estatísticas
@@ -380,6 +378,7 @@ $nome_mes = isset($meses_em_portugues[intval($mesSelecionado)]) ? $meses_em_port
             </div>
         </div>
     <?php endif; ?>
+
 
     <?php
     // Verifique o tipo de usuário
@@ -403,9 +402,9 @@ $nome_mes = isset($meses_em_portugues[intval($mesSelecionado)]) ? $meses_em_port
         }
 
         $numeroDias = cal_days_in_month(CAL_GREGORIAN, $mesSelecionado, $anoSelecionado);
-        echo "<h2>" . date('F', strtotime("$anoSelecionado-$mesSelecionado-01")) . " $anoSelecionado</h2>";
+        echo "<h3 class='mt-3'>" . date('F', strtotime("$anoSelecionado-$mesSelecionado-01")) . " $anoSelecionado</h3>";
         echo "<table class='table table-bordered border-dark'>";
-        echo "<tr><th>Dom</th><th>Seg</th><th>Ter</th><th>Qua</th><th>Qui</th><th>Sex</th><th>Sáb</th></tr>";
+        echo "<tr class='table-info border-dark'><th>Dom</th><th>Seg</th><th>Ter</th><th>Qua</th><th>Qui</th><th>Sex</th><th>Sáb</th></tr>";
         $primeiroDia = date('w', strtotime("$anoSelecionado-$mesSelecionado-01"));
 
         echo "<tr>";
@@ -446,6 +445,7 @@ $nome_mes = isset($meses_em_portugues[intval($mesSelecionado)]) ? $meses_em_port
 
         echo "</table>";
     }
+
     ?>
 
 
@@ -468,6 +468,7 @@ $nome_mes = isset($meses_em_portugues[intval($mesSelecionado)]) ? $meses_em_port
             ?>
         </tbody>
     </table>
+
     </main>
 
 

@@ -57,7 +57,7 @@ $resultUsuarios = mysqli_query($conexao, $queryUsuarios);
                 <div class="offcanvas-body d-flex flex-column flex-lg-row p-3 p-lg-0">
                     <ul class="navbar-nav justify-content-center align-items-center fs-5 flex-grow-1 pe-3">
                         <li class="nav-item mx-1">
-                            <a class="nav-link" href="principal.php" href="principal.php">Home</a>
+                            <a class="nav-link" href="principal.php">Início</a>
                         </li>
                         <?php
                         if ($_SESSION['tipo_usuario'] !== 'Administrador') {
@@ -122,7 +122,7 @@ $resultUsuarios = mysqli_query($conexao, $queryUsuarios);
                         <input type="date" name="data" id="data" class="form-control">
                     </div>
                     <div class="col-md-4 text-center">
-                        <button type="submit" class="btn btn-custom-color px-5 py-2 mt-4 ">Filtrar</button>
+                        <button type="submit" class="btn btn-custom-color px-5 py-2 mt-4">Filtrar</button>
                     </div>
                 </form>
             </div>
@@ -190,7 +190,7 @@ $resultUsuarios = mysqli_query($conexao, $queryUsuarios);
                             }
 
                             // Consulta SQL para obter os funcionários com base nos critérios de filtro
-                            $queryFuncionarios = "SELECT f.nome, f.dia, f.hora, f.turno, f.presenca, u.tipo_usuario FROM frequencia f JOIN usuarios u ON f.nome = u.nome $condicao";
+                            $queryFuncionarios = "SELECT f.nome, f.dia, f.hora, f.turno, f.presenca, u.tipo_usuario FROM frequencia f JOIN usuario u ON f.nome = u.nome $condicao";
                             $resultFuncionarios = mysqli_query($conexao, $queryFuncionarios);
 
                             while ($rowFuncionario = mysqli_fetch_assoc($resultFuncionarios)) {

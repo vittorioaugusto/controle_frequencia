@@ -44,7 +44,7 @@
                 <div class="offcanvas-body d-flex flex-column flex-lg-row p-3 p-lg-0">
                     <ul class="navbar-nav justify-content-center align-items-center fs-5 flex-grow-1 pe-3">
                         <li class="nav-item mx-1">
-                            <a class="nav-link" href="principal.php">Home</a>
+                            <a class="nav-link" href="principal.php">Início</a>
                         </li>
                         <li class="nav-item mx-1">
                             <a class="nav-link active" style="background-color: #8a50ff" aria-current="page" href="frequencia.php">Cadastrar Funcionário</a>
@@ -86,12 +86,12 @@
         // Verificar se o CPF tem exatamente 11 números
         if (strlen($cpf) === 11) {
             // Verificar se o cadastro já existe no banco de dados
-            $check_query = "SELECT * FROM usuarios WHERE cpf = '$cpf'";
+            $check_query = "SELECT * FROM usuario WHERE cpf = '$cpf'";
             $check_result = mysqli_query($conexao, $check_query);
 
             if (mysqli_num_rows($check_result) == 0) {
                 // O cadastro não existe, então podemos inserir os dados
-                $insert_query = "INSERT INTO usuarios (nome, email, senha, cpf, telefone, tipo_usuario, turno) VALUES ('$nome', '$email', '$senha', '$cpf', '$telefone', '$tipo_usuario', '$turno')";
+                $insert_query = "INSERT INTO usuario (nome, email, senha, cpf, telefone, tipo_usuario, turno) VALUES ('$nome', '$email', '$senha', '$cpf', '$telefone', '$tipo_usuario', '$turno')";
 
                 if (mysqli_query($conexao, $insert_query)) {
                     // Cadastro realizado com sucesso

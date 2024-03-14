@@ -21,15 +21,17 @@
 
     <nav class="navbar navbar-expand-lg">
         <div class="container-fluid">
-            <h1 class="navbar-brand no-hover-color">Frequência Master<i class="fa fa-check-circle-o ms-1" aria-hidden="true"></i></h1>
+            <a href="home.php" class="text-decoration-none">
+                <h1 class="navbar-brand no-hover-color">Frequência Master<i class="fa fa-check-circle-o ms-1" aria-hidden="true"></i></h1>
+            </a>
         </div>
     </nav>
 
     <div class="container">
-        <div class="card p-2 mt-3">
+        <div class="card p-3 mt-3">
             <div class="card-body">
                 <form action="processar_cadastro_admin.php" method="POST">
-                    <h4 class="card-title mb-2 p-2 text-center">Cadastrar Administrador</h4>
+                    <h4 class="card-title mb-2 p-2 text-center">Cadastro Administrador</h4>
                     <div class="mb-2 input-group">
                         <span class="input-group-text">
                             <i class="fas fa-user fa-1x"></i>

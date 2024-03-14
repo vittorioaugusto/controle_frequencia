@@ -7,7 +7,7 @@ date_default_timezone_set('America/Sao_Paulo');
 
 // Verifique se o usuário está logado
 if (!isset($_SESSION['nome']) || !isset($_SESSION['tipo_usuario'])) {
-    header("Location: index.php");
+    header("Location: login.php");
     exit();
 }
 
@@ -35,7 +35,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
     }
 
-    $query_turno = "SELECT turno FROM usuarios WHERE nome = '$nome'";
+    $query_turno = "SELECT turno FROM usuario WHERE nome = '$nome'";
     $result_turno = mysqli_query($conexao, $query_turno);
 
     if ($result_turno && mysqli_num_rows($result_turno) > 0) {
@@ -78,19 +78,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if (mysqli_query($conexao, $query)) {
         // Verifique se já existe um registro na tabela registros_horas para o dia de hoje
-        $query_verifica_registro = "SELECT COUNT(*) as num_registros FROM registros_horas WHERE nome = '$nome' AND data_registro = CURDATE()";
+        $query_verifica_registro = "SELECT COUNT(*) as num_registros FROM registro_hora WHERE nome = '$nome' AND data_registro = CURDATE()";
         $result_verifica_registro = mysqli_query($conexao, $query_verifica_registro);
         $row_verifica_registro = mysqli_fetch_assoc($result_verifica_registro);
 
         if ($row_verifica_registro['num_registros'] == 0) {
             // Adicione as horas acumuladas à tabela registros_horas apenas se ainda não houver um registro para o dia de hoje
-            $query_horas_acumuladas = "INSERT INTO registros_horas (nome, horas_trabalhadas, data_registro) VALUES ('$nome', '$diferenca_formatada', CURDATE())";
+            $query_horas_acumuladas = "INSERT INTO registro_hora (nome, horas_trabalhadas, data_registro) VALUES ('$nome', '$diferenca_formatada', CURDATE())";
             mysqli_query($conexao, $query_horas_acumuladas);
         }
 
-        // Redirecione de volta para a página principal
         header("Location: principal.php");
         exit();
+
     } else {
         echo "Erro ao registrar a frequência: " . mysqli_error($conexao);
     }
@@ -106,7 +106,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if (mysqli_query($conexao, $query)) {
         // Redirecione de volta para a página principal
-        header("Location: principal.php");
+        header("Location: home.php");
         exit();
     } else {
         echo "Erro ao registrar a frequência: " . mysqli_error($conexao);
