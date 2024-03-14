@@ -185,8 +185,8 @@ $nome_mes = isset($meses_em_portugues[intval($mesSelecionado)]) ? $meses_em_port
         </div>
     </nav>
 
-    <div class="container">
-        <div class="p-1 mt-3">
+    <div class="container-fluid">
+        <div class="p-2 mt-3">
             <div class="card-body">
                 <h2>
                     <?php
@@ -201,7 +201,7 @@ $nome_mes = isset($meses_em_portugues[intval($mesSelecionado)]) ? $meses_em_port
                 <?php if ($_SESSION['tipo_usuario'] === 'Administrador') {
                     // Se for administrador, exiba o formulário de seleção do usuário e o restante do código para o administrador
                     echo '<form action="calendario_frequencia.php" method="POST" class="row g-3">
-                            <div class="col-md-5 text-center">
+                            <div class="col-md-2">
                                 <label for="usuario" class="form-label">Selecione o usuário:</label>
                                 <select name="usuario" id="usuario" class="form-select">';
 
@@ -216,8 +216,8 @@ $nome_mes = isset($meses_em_portugues[intval($mesSelecionado)]) ? $meses_em_port
 
                     echo '      </select>
                             </div>
-                        <div class="col-md-4 text-center">
-                            <button type="submit" class="btn btn-custom-color px-4 py-2 mt-4">Filtrar</button>
+                        <div class="col-md-2">
+                            <button type="submit" class="btn btn-custom-color px-3 py-2 mt-4">Filtrar</button>
                         </div>
                     </form>';
 
@@ -253,7 +253,6 @@ $nome_mes = isset($meses_em_portugues[intval($mesSelecionado)]) ? $meses_em_port
                     }
 
                 ?>
-
             </div>
         </div>
     </div>
@@ -328,7 +327,7 @@ $nome_mes = isset($meses_em_portugues[intval($mesSelecionado)]) ? $meses_em_port
 
     <?php if (!isset($_SESSION['tipo_usuario']) || $_SESSION['tipo_usuario'] !== 'Administrador') : ?>
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-2">
                 <form action="calendario_frequencia.php" method="POST" class="mt-2">
                     <label for="mes">Selecione o mês:</label>
                     <select name="mes" id="mes" class="form-select">
@@ -357,7 +356,7 @@ $nome_mes = isset($meses_em_portugues[intval($mesSelecionado)]) ? $meses_em_port
                     <input type="submit" value="Filtrar" class="btn btn-primary mt-3">
                 </form>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-3">
                 <h3 class="mt-4">Estatísticas de Presença</h3>
                 <?php
                 // Inicialize as variáveis de estatísticas
