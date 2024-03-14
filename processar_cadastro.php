@@ -86,12 +86,12 @@
         // Verificar se o CPF tem exatamente 11 números
         if (strlen($cpf) === 11) {
             // Verificar se o cadastro já existe no banco de dados
-            $check_query = "SELECT * FROM usuarios WHERE cpf = '$cpf'";
+            $check_query = "SELECT * FROM usuario WHERE cpf = '$cpf'";
             $check_result = mysqli_query($conexao, $check_query);
 
             if (mysqli_num_rows($check_result) == 0) {
                 // O cadastro não existe, então podemos inserir os dados
-                $insert_query = "INSERT INTO usuarios (nome, email, senha, cpf, telefone, tipo_usuario, turno) VALUES ('$nome', '$email', '$senha', '$cpf', '$telefone', '$tipo_usuario', '$turno')";
+                $insert_query = "INSERT INTO usuario (nome, email, senha, cpf, telefone, tipo_usuario, turno) VALUES ('$nome', '$email', '$senha', '$cpf', '$telefone', '$tipo_usuario', '$turno')";
 
                 if (mysqli_query($conexao, $insert_query)) {
                     // Cadastro realizado com sucesso

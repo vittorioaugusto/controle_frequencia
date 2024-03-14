@@ -122,7 +122,7 @@ $resultUsuarios = mysqli_query($conexao, $queryUsuarios);
                         <input type="date" name="data" id="data" class="form-control">
                     </div>
                     <div class="col-md-4 text-center">
-                        <button type="submit" class="btn btn-custom-color px-5 py-2 mt-4 ">Filtrar</button>
+                        <button type="submit" class="btn btn-custom-color px-5 py-2 mt-4">Filtrar</button>
                     </div>
                 </form>
             </div>
