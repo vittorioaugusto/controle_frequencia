@@ -19,8 +19,9 @@
     <!-- SweetAlert -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
-    <script type="text/javascript" src="assets/js/script.js"></script>
-    <link rel="stylesheet" href="assets/css/style.css">
+    <script type="text/javascript" src="../assets/js/script.js"></script>
+    <link rel="stylesheet" href="../assets/css/style.css">
+
     <title>Processar Cadastro Funcionários</title>
 </head>
 
@@ -72,7 +73,7 @@
 
     <?php
     session_start();
-    include 'SQL/conexao.php';
+    include '../SQL/conexao.php';
 
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $nome = $_POST['nome'];
@@ -103,7 +104,7 @@
                     showConfirmButton: false,
                     timer: 2000
                 }).then(function() {
-                    window.location.href = 'funcionarios.php';
+                    window.location.href = '../usuario/funcionarios.php';
                 });
             </script>";
                     exit();

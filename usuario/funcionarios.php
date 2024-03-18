@@ -1,10 +1,10 @@
 <?php
 session_start();
-include 'SQL/conexao.php';
+include '../SQL/conexao.php';
 
 
 if ($_SESSION['tipo_usuario'] !== 'Administrador') {
-    header("Location: principal.php");
+    header("Location: ../principal.php");
     exit();
 }
 
@@ -16,7 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Atualize o status do usuário no banco de dados
         $queryUpdateStatus = "UPDATE usuario SET status = $novoStatus WHERE id = $usuarioId";
         if (mysqli_query($conexao, $queryUpdateStatus)) {
-            header("Location: funcionarios.php");
+            header("Location: ../usuario/funcionarios.php");
             exit();
         } else {
             echo "Erro ao atualizar o status do usuário.";
@@ -42,7 +42,7 @@ $resultUsuarios = mysqli_query($conexao, $queryUsuarios);
     <!-- Biblioteca icones -->
     <script src="https://kit.fontawesome.com/f2c34800e3.js" crossorigin="anonymous"></script>
 
-    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/style.css">
     <title>Funcionários</title>
 </head>
 
@@ -66,33 +66,33 @@ $resultUsuarios = mysqli_query($conexao, $queryUsuarios);
                 <div class="offcanvas-body d-flex flex-column flex-lg-row p-3 p-lg-0">
                     <ul class="navbar-nav justify-content-center align-items-center fs-5 flex-grow-1 pe-3">
                         <li class="nav-item mx-1">
-                            <a class="nav-link" href="principal.php">Inícion</a>
+                            <a class="nav-link" href="../principal.php">Início</a>
                         </li>
                         <?php
                         if ($_SESSION['tipo_usuario'] !== 'Administrador') {
                             echo ' <li class="nav-item mx-1">
-                            <a class="nav-link" href="frequencia.php">Realizar Frequência</a>
+                            <a class="nav-link" href="../frequencia/frequencia.php">Realizar Frequência</a>
                         </li>';
                             echo '<li class="nav-item mx-1">
-                            <a class="nav-link" href="minha_frequencia.php">Minha Frequência</a>
+                            <a class="nav-link" href="../frequencia/minha_frequencia.php">Minha Frequência</a>
                         </li>';
                         } else {
                             echo '<li class="nav-item mx-1">
-                            <a class="nav-link" href="cadastro_funcionario.php">Cadastrar Funcionário</a>
+                            <a class="nav-link" href="../cadastro/cadastro_funcionario.php">Cadastrar Funcionário</a>
                         </li>';
                             echo ' <li class="nav-item mx-1">
-                            <a class="nav-link active" style="background-color: #8a50ff" aria-current="page" href="funcionarios.php">Funcionários</a>
+                            <a class="nav-link active" style="background-color: #8a50ff" aria-current="page" href="../usuario/funcionarios.php">Funcionários</a>
                         </li>';
                             echo '<li class="nav-item mx-1">
-                            <a class="nav-link" href="frequencia_funcionarios.php">Frequência dos Funcionários</a>
+                            <a class="nav-link" href="../frequencia/frequencia_funcionarios.php">Frequência dos Funcionários</a>
                         </li>';
                         }
                         ?>
                         <li class="nav-item mx-1">
-                            <a class="nav-link" href="calendario_frequencia.php">Calendário de Frequência</a>
+                            <a class="nav-link" href="../frequencia/calendario_frequencia.php">Calendário de Frequência</a>
                         </li>
                         <li class="nav-item mx-1">
-                            <a class="nav-link" href="perfil.php">Perfil</a>
+                            <a class="nav-link" href="../usuario/perfil.php">Perfil</a>
                         </li>
                     </ul>
                     <div class="d-flex flex-column flex-lg-row justify-content-center align-items-center gap-3">
@@ -233,7 +233,7 @@ $resultUsuarios = mysqli_query($conexao, $queryUsuarios);
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script type="text/javascript" src="assets/js/script.js"></script>
+    <script type="text/javascript" src="../assets/js/script.js"></script>
 </body>
 
 </html>

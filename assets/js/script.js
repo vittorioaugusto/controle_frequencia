@@ -133,6 +133,24 @@ function alterarStatus(usuarioId, novoStatus) {
     });
 }
 
+function confirmarSaidaPrincipal() {
+    Swal.fire({
+        title: "Confirmação",
+        text: "Deseja realmente sair do sistema?",
+        icon: "question",
+        iconColor: "#6E2CF3",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Sim",
+        cancelButtonText: "Cancelar"
+    }).then((result) => {
+        if (result.isConfirmed) {
+            window.location.href = "login/login.php";
+        }
+    });
+}
+
 function confirmarSaida() {
     Swal.fire({
         title: "Confirmação",
@@ -146,7 +164,7 @@ function confirmarSaida() {
         cancelButtonText: "Cancelar"
     }).then((result) => {
         if (result.isConfirmed) {
-            window.location.href = "login.php";
+            window.location.href = "../login/login.php";
         }
     });
 }

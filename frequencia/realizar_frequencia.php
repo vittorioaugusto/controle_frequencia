@@ -1,12 +1,12 @@
 <?php
 session_start();
-include 'SQL/conexao.php';
+include '../SQL/conexao.php';
 
 // Defina o fuso horário para o de São Paulo (ou o fuso horário apropriado)
 date_default_timezone_set('America/Sao_Paulo');
 
 if (!isset($_SESSION['nome']) || !isset($_SESSION['tipo_usuario'])) {
-    header("Location: login.php");
+    header("Location: ../login/login.php");
     exit();
 }
 
@@ -14,7 +14,7 @@ $tipo_usuario = $_SESSION['tipo_usuario'];
 $nome = $_SESSION['nome'];
 
 if ($tipo_usuario === 'Administrador') {
-    header("Location: principal.php");
+    header("Location: ../principal.php");
     exit();
 }
 
@@ -53,7 +53,7 @@ if ($row = mysqli_fetch_assoc($result)) {
     <!-- Biblioteca icones -->
     <script src="https://kit.fontawesome.com/f2c34800e3.js" crossorigin="anonymous"></script>
 
-    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/style.css">
     <title>Realizar Frequência</title>
 </head>
 
@@ -76,33 +76,33 @@ if ($row = mysqli_fetch_assoc($result)) {
                 <div class="offcanvas-body d-flex flex-column flex-lg-row p-3 p-lg-0">
                     <ul class="navbar-nav justify-content-center align-items-center fs-5 flex-grow-1 pe-3">
                         <li class="nav-item mx-1">
-                            <a class="nav-link" href="principal.php">Início</a>
+                            <a class="nav-link" href="../principal.php">Início</a>
                         </li>
                         <?php
                         if ($_SESSION['tipo_usuario'] !== 'Administrador') {
                             echo ' <li class="nav-item mx-1">
-                            <a class="nav-link active" style="background-color: #8a50ff" aria-current="page" href="frequencia.php">Realizar Frequência</a>
+                            <a class="nav-link active" style="background-color: #8a50ff" aria-current="page" href="../frequencia/realizar_frequencia.php">Realizar Frequência</a>
                         </li>';
                             echo '<li class="nav-item mx-1">
-                            <a class="nav-link" href="minha_frequencia.php">Minha Frequência</a>
+                            <a class="nav-link" href="../frequencia/minha_frequencia.php">Minha Frequência</a>
                         </li>';
                         } else {
                             echo '<li class="nav-item mx-1">
-                            <a class="nav-link" href="cadastro.php">Cadastrar Funcionário</a>
+                            <a class="nav-link" href="../cadastro/cadastro_funcionario.php">Cadastrar Funcionário</a>
                         </li>';
                             echo ' <li class="nav-item mx-1">
-                            <a class="nav-link" href="funcionarios.php">Funcionários</a>
+                            <a class="nav-link" href="../usuario/funcionarios.php">Funcionários</a>
                         </li>';
                             echo '<li class="nav-item mx-1">
-                            <a class="nav-link" href="frequencia_funcionarios.php">Frequência dos Funcionários</a>
+                            <a class="nav-link" href="../frequencia/frequencia_funcionarios.php">Frequência dos Funcionários</a>
                         </li>';
                         }
                         ?>
                         <li class="nav-item mx-1">
-                            <a class="nav-link" href="calendario_frequencia.php">Calendário de Frequência</a>
+                            <a class="nav-link" href="../frequencia/calendario_frequencia.php">Calendário de Frequência</a>
                         </li>
                         <li class="nav-item mx-1">
-                            <a class="nav-link" href="perfil.php">Perfil</a>
+                            <a class="nav-link" href="../usuario/perfil.php">Perfil</a>
                         </li>
                     </ul>
                     <div class="d-flex flex-column flex-lg-row justify-content-center align-items-center gap-3">
@@ -160,7 +160,7 @@ if ($row = mysqli_fetch_assoc($result)) {
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script type="text/javascript" src="assets/js/script.js"></script>
+    <script type="text/javascript" src="../assets/js/script.js"></script>
 </body>
 
 </html>

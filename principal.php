@@ -4,7 +4,7 @@ include 'SQL/conexao.php';
 
 // Verifique se o usuário está logado
 if (!isset($_SESSION['nome']) || !isset($_SESSION['tipo_usuario'])) {
-    header("Location: index.php");
+    header("Location: login.php");
     exit();
 }
 
@@ -60,32 +60,32 @@ if ($_SESSION['tipo_usuario'] === 'Administrador') {
                         <?php
                         if ($_SESSION['tipo_usuario'] !== 'Administrador') {
                             echo ' <li class="nav-item mx-1">
-                            <a class="nav-link" href="realizar_frequencia.php">Realizar Frequência</a>
+                            <a class="nav-link" href="frequencia/realizar_frequencia.php">Realizar Frequência</a>
                         </li>';
                             echo '<li class="nav-item mx-1">
-                            <a class="nav-link" href="minha_frequencia.php">Minha Frequência</a>
+                            <a class="nav-link" href="frequencia/minha_frequencia.php">Minha Frequência</a>
                         </li>';
                         } else {
                             echo '<li class="nav-item mx-1">
-                            <a class="nav-link" href="cadastro_funcionario.php">Cadastrar Funcionário</a>
+                            <a class="nav-link" href="cadastro/cadastro_funcionario.php">Cadastrar Funcionário</a>
                         </li>';
                             echo ' <li class="nav-item mx-1">
-                            <a class="nav-link" href="funcionarios.php">Funcionários</a>
+                            <a class="nav-link" href="usuario/funcionarios.php">Funcionários</a>
                         </li>';
                             echo '<li class="nav-item mx-1">
-                            <a class="nav-link" href="frequencia_funcionarios.php">Frequência dos Funcionários</a>
+                            <a class="nav-link" href="frequencia/frequencia_funcionarios.php">Frequência dos Funcionários</a>
                         </li>';
                         }
                         ?>
                         <li class="nav-item mx-1">
-                            <a class="nav-link" href="calendario_frequencia.php">Calendário de Frequência</a>
+                            <a class="nav-link" href="frequencia/calendario_frequencia.php">Calendário de Frequência</a>
                         </li>
                         <li class="nav-item mx-1">
-                            <a class="nav-link" href="perfil.php">Perfil</a>
+                            <a class="nav-link" href="usuario/perfil.php">Perfil</a>
                         </li>
                     </ul>
                     <div class="d-flex flex-column flex-lg-row justify-content-center align-items-center gap-3">
-                        <a href="javascript:void(0);" onclick="confirmarSaida();" class="text-white text-decoration-none px-3 py-1 rounded-4 sair-btn" title="Sair"><i class="fa fa-sign-out" aria-hidden="true"></i></a>
+                        <a href="javascript:void(0);" onclick="confirmarSaidaPrincipal();" class="text-white text-decoration-none px-3 py-1 rounded-4 sair-btn" title="Sair"><i class="fa fa-sign-out" aria-hidden="true"></i></a>
                     </div>
                 </div>
             </div>
