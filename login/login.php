@@ -13,7 +13,7 @@
     <script src="https://kit.fontawesome.com/f2c34800e3.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
 
-    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/style.css">
     <title>Login</title>
 </head>
 
@@ -21,12 +21,12 @@
 
     <nav class="navbar navbar-expand-lg">
         <div class="container-fluid">
-            <a href="home.php" class="text-decoration-none">
+            <a href="../home.php" class="text-decoration-none">
                 <h1 class="navbar-brand no-hover-color">Frequência Master<i class="fa fa-check-circle-o ms-1" aria-hidden="true"></i></h1>
             </a>
             <div class="d-flex flex-column flex-lg-row justify-content-center align-items-center gap-2">
-                <a href="home.php" class="btn botao_nav-btn px-3 py-2">Home</a>
-                <a href="cadastro_administrador.php" class="btn botao_nav-btn px-3 py-2">Cadastrar Administrador</a>
+                <a href="../home.php" class="btn botao_nav-btn px-3 py-2">Home</a>
+                <a href="../cadastro/cadastro_administrador.php" class="btn botao_nav-btn px-3 py-2">Cadastrar Administrador</a>
             </div>
         </div>
     </nav>

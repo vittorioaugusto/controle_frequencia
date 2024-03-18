@@ -37,7 +37,7 @@
 
     <?php
     session_start();
-    include 'SQL/conexao.php';
+    include '../SQL/conexao.php';
 
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $email = $_POST['email'];
@@ -58,7 +58,7 @@
                 $_SESSION['tipo_usuario'] = $row['tipo_usuario'];
                 $_SESSION['turno'] = $row['turno'];
 
-                header("Location: principal.php");
+                header("Location: ../principal.php");
                 exit();
             } else {
                 // Usuário desativado, exiba uma mensagem de erro

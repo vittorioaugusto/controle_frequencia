@@ -23,8 +23,8 @@
         <div class="container-fluid">
             <h1 class="navbar-brand no-hover-color">Frequência Master<i class="fa fa-check-circle-o ms-1" aria-hidden="true"></i></h1>
             <div class="d-flex flex-column flex-lg-row justify-content-center align-items-center gap-2">
-                <a href="login.php" class="btn botao_nav-btn px-3 py-2">Login</a>
-                <a href="cadastro_administrador.php" class="btn botao_nav-btn px-3 py-2">Criar Conta</a>
+                <a href="login/login.php" class="btn botao_nav-btn px-3 py-2">Login</a>
+                <a href="cadastro/cadastro_administrador.php" class="btn botao_nav-btn px-3 py-2">Criar Conta</a>
             </div>
         </div>
     </nav>
