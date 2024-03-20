@@ -203,7 +203,7 @@ $resultUsuarios = mysqli_query($conexao, $queryUsuarios);
                                 $nomeArquivoPerfil = $rowFuncionario['nome'] . '_perfil.jpg';
 
                                 // Construa o caminho completo para a imagem de perfil
-                                $caminhoImagemPerfil = 'assets/imagens_perfil/' . $nomeArquivoPerfil;
+                                $caminhoImagemPerfil = '../usuario/imagens_perfil/' . $nomeArquivoPerfil;
 
                                 // Adicione a tag <img> com o caminho da imagem de perfil
                                 echo "<td><img src='$caminhoImagemPerfil' alt='Imagem de Perfil' style='width: 100px; height: 100px;'></td>";
@@ -232,7 +232,7 @@ $resultUsuarios = mysqli_query($conexao, $queryUsuarios);
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
     <script type="text/javascript" src="../assets/js/script.js"></script>
 </body>
 

@@ -164,7 +164,7 @@ $resultUsuarios = mysqli_query($conexao, $queryUsuarios);
                         <?php
                         // Inicialize a variável $presencasPorDia
                         $presencasPorDia = array();
-                        
+
                         // Inicialize as variáveis para contar a presença e a ausência
                         $presencasContador = array();
                         $ausenciasContador = array();
@@ -201,7 +201,6 @@ $resultUsuarios = mysqli_query($conexao, $queryUsuarios);
                                 echo "<td>" . $rowFuncionario['hora'] . "</td>";
                                 echo "<td>" . $rowFuncionario['turno'] . "</td>";
                                 echo "<td>" . $rowFuncionario['presenca'] . "</td>";
-                                echo "<td>";
 
                                 // Determinar se a presença é uma entrada ou saída com base no número de presenças
                                 if ($rowFuncionario['presenca'] == 'Presente') {
@@ -220,9 +219,9 @@ $resultUsuarios = mysqli_query($conexao, $queryUsuarios);
 
                                     $tipo = '';
                                     if ($presencasPorDia[$rowFuncionario['nome']][$rowFuncionario['dia']] % 2 == 0) {
-                                        $tipo = "Entrada";
+                                        $tipo = "<td style='background-color: #28a745; color: #000;'>Entrada</td>";
                                     } else {
-                                        $tipo = "Saída";
+                                        $tipo = "<td style='background-color: #dc3545; color: #000;'>Saída</td>";
                                     }
 
                                     echo $tipo;
@@ -262,7 +261,7 @@ $resultUsuarios = mysqli_query($conexao, $queryUsuarios);
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
     <script type="text/javascript" src="../assets/js/script.js"></script>
 </body>
 

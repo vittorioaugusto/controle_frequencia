@@ -88,7 +88,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             mysqli_query($conexao, $query_horas_acumuladas);
         }
 
-        header("Location: principal.php");
+        header("Location: ../principal.php");
         exit();
 
     } else {
@@ -106,7 +106,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if (mysqli_query($conexao, $query)) {
         // Redirecione de volta para a página principal
-        header("Location: home.php");
+        header("Location: ../principal.php");
         exit();
     } else {
         echo "Erro ao registrar a frequência: " . mysqli_error($conexao);
