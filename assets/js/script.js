@@ -7,16 +7,8 @@ function mostrarOcultarSenha() {
     }
 }
 
-document.addEventListener('DOMContentLoaded', function() {
-    // Seleciona o campo de telefone
-    var telefoneInput = document.querySelector('input[name="telefone"]');
-
-    // Adiciona um evento de input para formatar o telefone
-    telefoneInput.addEventListener('input', function() {
-        var telefone = telefoneInput.value.replace(/\D/g, ''); // Remove todos os caracteres que não são dígitos
-        var formattedTelefone = telefone.replace(/(\d{2})(\d{4,5})(\d{4})/, '($1) $2-$3'); // Formata o telefone conforme o padrão (00) 0000-0000
-        telefoneInput.value = formattedTelefone; // Define o valor formatado de volta no campo
-    });
+$(document).ready(function () {
+    $('input[name="telefone"]').mask('(00) 00000-0000');
 });
 
 function validarFormularioCpf() {

@@ -25,24 +25,24 @@
         </div>
     </nav>
 
-    <div class="container">
-        <div class="card p-4 mt-5">
+    <div class="container d-flex justify-content-center align-items-center border-dark">
+        <div class="card p-4 mt-5 border-dark">
             <div class="card-body">
                 <form action="processar_redefinir_senha.php" method="POST">
                     <h3 class="card-title mb-4 text-center">Redefinir Senha</h3>
-                    <div class="mb-3 input-group">
-                        <span class="input-group-text">
+                    <div class="mb-3 input-group border-dark">
+                        <span class="input-group-text border-dark">
                             <i class="fas fa-envelope fa-1x"></i>
                         </span>
                         <label for="email" class="form-label visually-hidden">Email:</label>
-                        <input type="text" name="email" class="form-control" placeholder="Digite seu email" required>
+                        <input type="text" name="email" class="form-control border-dark" placeholder="Digite seu email" required>
                     </div>
-                    <div class="mb-3 input-group">
-                        <span class="input-group-text">
+                    <div class="mb-3 input-group border-dark">
+                        <span class="input-group-text border-dark">
                             <i class="fas fa-lock fa-1x"></i>
                         </span>
                         <label for="senha" class="form-label visually-hidden">Nova Senha:</label>
-                        <input type="text" name="nova_senha" id="senha" class="form-control" placeholder="Digite sua Nova Senha" required>
+                        <input type="text" name="nova_senha" id="senha" class="form-control border-dark" placeholder="Digite sua Nova Senha" required>
                     </div>
                     <div class="text-center">
                         <button type="submit" class="btn btn-custom-color px-4 py-2">Atualizar senha</button>
@@ -55,8 +55,10 @@
         </div>
     </div>
 
+    <!-- Bootstrap JS link -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-    <script type="text/javascript" src="assets/js/script.js"></script>
+    
+    <script type="text/javascript" src="../assets/js/script.js"></script>
 </body>
 
 </html>

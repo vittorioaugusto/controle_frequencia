@@ -31,24 +31,24 @@
         </div>
     </nav>
 
-    <div class="container d-flex justify-content-center align-items-center">
-        <div class="card p-4 mt-5">
+    <div class="container d-flex justify-content-center align-items-center border-dark">
+        <div class="card p-4 mt-5 border-dark">
             <div class="card-body">
                 <form action="processar_login.php" method="POST">
                     <h2 class="card-title mb-4 text-center">Login</h2>
-                    <div class="mb-3 input-group">
-                        <span class="input-group-text">
+                    <div class="mb-3 input-group border-dark">
+                        <span class="input-group-text border-dark">
                             <i class="fas fa-envelope fa-1x"></i>
                         </span>
                         <label for="email" class="form-label visually-hidden">Email:</label>
-                        <input type="text" name="email" class="form-control" placeholder="Digite seu email" required>
+                        <input type="text" name="email" class="form-control border-dark" placeholder="Digite seu email" required>
                     </div>
-                    <div class="mb-3 input-group">
-                        <span class="input-group-text">
+                    <div class="mb-3 input-group border-dark">
+                        <span class="input-group-text border-dark">
                             <i class="fas fa-lock fa-1x"></i>
                         </span>
                         <label for="senha" class="form-label visually-hidden">Senha:</label>
-                        <input type="password" name="senha" id="senha" class="form-control" placeholder="Digite sua senha" required>
+                        <input type="password" name="senha" id="senha" class="form-control border-dark" placeholder="Digite sua senha" required>
                     </div>
                     <div class="mb-4 form-check">
                         <input type="checkbox" class="form-check-input" id="mostrarSenha" onclick="mostrarOcultarSenha()">
@@ -63,8 +63,10 @@
         </div>
     </div>
 
+    <!-- Bootstrap JS link -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-    <script type="text/javascript" src="assets/js/script.js"></script>
+    
+    <script type="text/javascript" src="../assets/js/script.js"></script>
 </body>
 
 </html>
