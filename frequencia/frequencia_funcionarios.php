@@ -37,7 +37,7 @@ $resultUsuarios = mysqli_query($conexao, $queryUsuarios);
     <title>Frequência dos Funcionários</title>
 </head>
 
-<body class="vh-100">
+<body>
 
     <nav class="navbar navbar-expand-lg navbar-dark">
         <div class="container-fluid">
@@ -102,7 +102,7 @@ $resultUsuarios = mysqli_query($conexao, $queryUsuarios);
 
                     <div class="col-md-4 text-center">
                         <label for="usuario" class="form-label">Selecione o usuário:</label>
-                        <select name="usuario" id="usuario" class="form-select">
+                        <select name="usuario" id="usuario" class="form-select border-dark">
                             <option value="">Todos os Usuários</option>
                             <?php
                             // Consulta SQL para obter os nomes dos usuários
@@ -119,7 +119,7 @@ $resultUsuarios = mysqli_query($conexao, $queryUsuarios);
 
                     <div class="col-md-4 text-center">
                         <label for="data" class="form-label">Data:</label>
-                        <input type="date" name="data" id="data" class="form-control">
+                        <input type="date" name="data" id="data" class="form-control border-dark">
                     </div>
                     <div class="col-md-4 text-center">
                         <button type="submit" class="btn btn-custom-color px-5 py-2 mt-4">Filtrar</button>
@@ -133,7 +133,7 @@ $resultUsuarios = mysqli_query($conexao, $queryUsuarios);
         <section class="w-100 d-flex flex-column 
         justify-content-center align-items-center text-dark fs-5">
 
-            <table class="table w-75 table-bordered">
+            <table class="table w-75 table-bordered border-dark">
                 <div class="card-body">
                     <thead>
                         <h3>
@@ -150,7 +150,7 @@ $resultUsuarios = mysqli_query($conexao, $queryUsuarios);
                             }
                             ?>
                         </h3>
-                        <tr class="table-info">
+                        <tr class="table-info text-center border-dark">
                             <th scope="col">Função</th>
                             <th scope="col">Nome</th>
                             <th scope="col">Dia</th>
@@ -194,7 +194,7 @@ $resultUsuarios = mysqli_query($conexao, $queryUsuarios);
                             $resultFuncionarios = mysqli_query($conexao, $queryFuncionarios);
 
                             while ($rowFuncionario = mysqli_fetch_assoc($resultFuncionarios)) {
-                                echo "<tr>";
+                                echo "<tr class='text-center'>";
                                 echo "<td>" . $rowFuncionario['tipo_usuario'] . "</td>";
                                 echo "<td>" . $rowFuncionario['nome'] . "</td>";
                                 echo "<td>" . $rowFuncionario['dia'] . "</td>";

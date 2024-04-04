@@ -128,7 +128,7 @@ $nome_mes = isset($meses_em_portugues[intval($mesSelecionado)]) ? $meses_em_port
     <title>Calendário Frequência</title>
 </head>
 
-<body class="vh-100">
+<body>
 
     <nav class="navbar navbar-expand-lg navbar-dark">
         <div class="container-fluid">
@@ -201,9 +201,9 @@ $nome_mes = isset($meses_em_portugues[intval($mesSelecionado)]) ? $meses_em_port
                 <?php if ($_SESSION['tipo_usuario'] === 'Administrador') {
                     // Se for administrador, exiba o formulário de seleção do usuário e o restante do código para o administrador
                     echo '<form action="calendario_frequencia.php" method="POST" class="row g-3">
-                            <div class="col-md-2">
+                            <div class="col-md-2 ">
                                 <label for="usuario" class="form-label">Selecione o usuário:</label>
-                                <select name="usuario" id="usuario" class="form-select">';
+                                <select name="usuario" id="usuario" class="form-select border-dark">';
 
                     // Consulta SQL para obter a lista de nomes de usuário (exceto o administrador)
                     $queryUsuarios = "SELECT nome FROM usuario WHERE tipo_usuario != 'Administrador'";
@@ -280,7 +280,15 @@ $nome_mes = isset($meses_em_portugues[intval($mesSelecionado)]) ? $meses_em_port
 
                         echo "<h4>$nomeMes</h4>";
                         echo "<table class='table table-bordered border-dark'>";
-                        echo "<tr class='table-info border-dark'><th>Dom</th><th>Seg</th><th>Ter</th><th>Qua</th><th>Qui</th><th>Sex</th><th>Sáb</th></tr>";
+                        echo "<tr class='table-info text-center border-dark'>
+                                <th>Domingo</th>
+                                <th>Segunda</th>
+                                <th>Terça</th>
+                                <th>Quarta</th>
+                                <th>Quinta</th>
+                                <th>Sexta</th>
+                                <th>Sábado</th>
+                            </tr>";
                         $primeiroDia = date('w', strtotime("$ano-$mes-01"));
 
                         echo "<tr>";
@@ -303,7 +311,7 @@ $nome_mes = isset($meses_em_portugues[intval($mesSelecionado)]) ? $meses_em_port
                             } elseif ($countPresente == 1) {
                                 echo "<td style='background-color: #dc3545; color: #000;'>$dia</td>"; // Vermelho para ausente
                             } else {
-                                echo "<td>$dia</td>"; // Padrão sem cor
+                                echo "<td class='text-center'>$dia</td>"; // Padrão sem cor
                             }
 
                             if (($dia + $primeiroDia) % 7 == 0) {
@@ -330,7 +338,7 @@ $nome_mes = isset($meses_em_portugues[intval($mesSelecionado)]) ? $meses_em_port
             <div class="col-md-2">
                 <form action="calendario_frequencia.php" method="POST" class="mt-2">
                     <label for="mes">Selecione o mês:</label>
-                    <select name="mes" id="mes" class="form-select">
+                    <select name="mes" id="mes" class="form-select border-dark">
                         <option value="01">Janeiro</option>
                         <option value="02">Fevereiro</option>
                         <option value="03">Março</option>
@@ -345,7 +353,7 @@ $nome_mes = isset($meses_em_portugues[intval($mesSelecionado)]) ? $meses_em_port
                         <option value="12">Dezembro</option>
                     </select>
                     <label for="ano" class="mt-2">Selecione o ano:</label>
-                    <select name="ano" id="ano" class="form-select">
+                    <select name="ano" id="ano" class="form-select border-dark">
                         <?php
                         $anoAtual = date("Y");
                         for ($ano = $anoAtual; $ano >= ($anoAtual - 5); $ano--) {
@@ -403,7 +411,15 @@ $nome_mes = isset($meses_em_portugues[intval($mesSelecionado)]) ? $meses_em_port
         $numeroDias = cal_days_in_month(CAL_GREGORIAN, $mesSelecionado, $anoSelecionado);
         echo "<h3 class='mt-3'>" . date('F', strtotime("$anoSelecionado-$mesSelecionado-01")) . " $anoSelecionado</h3>";
         echo "<table class='table table-bordered border-dark'>";
-        echo "<tr class='table-info border-dark'><th>Dom</th><th>Seg</th><th>Ter</th><th>Qua</th><th>Qui</th><th>Sex</th><th>Sáb</th></tr>";
+        echo "<tr class='table-info border-dark text-center'>
+                <th>Domingo</th>
+                <th>Segunda</th>
+                <th>Terça</th>
+                <th>Quarta</th>
+                <th>Quinta</th>
+                <th>Sexta</th>
+                <th>Sábado</th>
+        </tr>";
         $primeiroDia = date('w', strtotime("$anoSelecionado-$mesSelecionado-01"));
 
         echo "<tr>";
@@ -426,7 +442,7 @@ $nome_mes = isset($meses_em_portugues[intval($mesSelecionado)]) ? $meses_em_port
             } elseif ($countPresente == 1) {
                 echo "<td style='background-color: #dc3545; color: #000;'>$dia</td>"; // Vermelho para ausente
             } else {
-                echo "<td>$dia</td>"; // Padrão sem cor
+                echo "<td class='text-center'>$dia</td>"; // Padrão sem cor
             }
 
             if (($dia + $primeiroDia) % 7 == 0) {
@@ -449,9 +465,9 @@ $nome_mes = isset($meses_em_portugues[intval($mesSelecionado)]) ? $meses_em_port
 
 
     <h3 class="mt-4">Datas e Horas da Frequência:</h3>
-    <table class="table table-bordered border-dark">
+    <table class="table w-50 table-bordered border-dark text-center">
         <thead>
-            <tr class='table-info border-dark'>
+            <tr class='table-info border-dark text-center'>
                 <th>Data</th>
                 <th>Hora</th>
             </tr>

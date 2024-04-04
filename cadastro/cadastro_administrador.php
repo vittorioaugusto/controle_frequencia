@@ -17,7 +17,7 @@
     <title>Cadastrar Administrador</title>
 </head>
 
-<body class="vh-100">
+<body>
 
     <nav class="navbar navbar-expand-lg">
         <div class="container-fluid">
@@ -27,48 +27,48 @@
         </div>
     </nav>
 
-    <div class="container">
-        <div class="card p-3 mt-3">
+    <div class="container vh-100 d-flex justify-content-center align-items-center">
+        <div class="card p-3 border-dark">
             <div class="card-body">
                 <form action="processar_cadastro_admin.php" method="POST">
                     <h4 class="card-title mb-2 p-2 text-center">Cadastro Administrador</h4>
                     <div class="mb-2 input-group">
-                        <span class="input-group-text">
+                        <span class="input-group-text border-dark">
                             <i class="fas fa-user fa-1x"></i>
                         </span>
                         <label for="nome" class="form-label visually-hidden">Nome:</label>
-                        <input type="text" name="nome" class="form-control" placeholder="Digite o nome" required>
+                        <input type="text" name="nome" class="form-control border-dark" placeholder="Digite o nome" required>
                     </div>
                     <div class="mb-2 input-group">
-                        <span class="input-group-text">
+                        <span class="input-group-text border-dark">
                             <i class="fas fa-envelope fa-1x"></i>
                         </span>
                         <label for="email" class="form-label visually-hidden">Email:</label>
-                        <input type="email" name="email" class="form-control" placeholder="Digite o email" required>
+                        <input type="email" name="email" class="form-control border-dark" placeholder="Digite o email" required>
                     </div>
                     <div class="mb-2 input-group">
-                        <span class="input-group-text">
+                        <span class="input-group-text border-dark">
                             <i class="fas fa-lock fa-1x"></i>
                         </span>
                         <label for="senha" class="form-label visually-hidden">Senha:</label>
-                        <input type="text" name="senha" class="form-control" placeholder="Digite a senha" required>
+                        <input type="text" name="senha" class="form-control border-dark" placeholder="Digite a senha" required>
                     </div>
                     <div class="mb-2 input-group">
-                        <span class="input-group-text">
+                        <span class="input-group-text border-dark">
                             <i class="fas fa-id-card fa-1x"></i>
                         </span>
                         <label for="cpf" class="form-label visually-hidden">CPF:</label>
-                        <input type="number" name="cpf" class="form-control" placeholder="Digite o cpf" required>
+                        <input type="number" name="cpf" class="form-control border-dark" placeholder="Digite o cpf" required>
                     </div>
                     <div class="mb-2 input-group">
-                        <span class="input-group-text">
+                        <span class="input-group-text border-dark">
                             <i class="fas fa-phone fa-1x"></i>
                         </span>
                         <label for="telefone" class="form-label visually-hidden">Telefone:</label>
-                        <input type="tel" name="telefone" class="form-control" pattern="\([0-9]{2}\) [0-9]{4,5}-[0-9]{4}" placeholder="(00) 0000-0000" required>
+                        <input type="tel" name="telefone" class="form-control border-dark" pattern="\([0-9]{2}\) [0-9]{4,5}-[0-9]{4}" placeholder="(00) 0000-0000" required>
                     </div>
                     <label for="turno" class="form-label custom-label">Turno:</label>
-                    <select name="turno" class="form-select" required>
+                    <select name="turno" class="form-select border-dark" required>
                         <option value="Manhã">Manhã</option>
                         <option value="Tarde">Tarde</option>
                         <option value="Noite">Noite</option>
