@@ -31,8 +31,8 @@
 
     <section class="hero-section mt-5">
         <div class="container-fluid text-center">
-        <h2>Bem-vindo ao Frequência Master<i class="fa fa-check-circle-o ms-1" aria-hidden="true"></i></h2>
-            <p>Gerencie a frequência dos seus colaboradores de forma eficiente.</p>
+            <h2>Bem-vindo ao <strong>Frequência Master<i class="fa fa-check-circle-o ms-1" aria-hidden="true"></i></strong></h2>
+            <p>Gerencie a frequência dos seus funcionários de forma eficiente.</p>
         </div>
     </section>
 
@@ -41,6 +41,7 @@
             <div class="row justify-content-center">
                 <div class="col-md-5 mb-4 me-4 d-flex justify-content-center p-3" style="background-color: #6E2CF3; color: #fff; border-radius: 20px;">
                     <div>
+                        <img src="assets/img/home_administrador.png" alt="Imagem 1" class="img-fluid mb-3">
                         <h3 class="text-center">Registro de Frequência</h3>
                         <ul class="mt-3">
                             <li>Permite aos usuários registrarem sua presença de <strong>Entrada</strong> e <strong>Saída</strong>.</li>
@@ -51,6 +52,7 @@
                 </div>
                 <div class="col-md-5 mb-4 me-4 d-flex justify-content-center p-3" style="background-color: #6E2CF3; color: #fff; border-radius: 20px;">
                     <div>
+                        <img src="assets/img/home_administrador.png" alt="Imagem 2" class="img-fluid mb-3">
                         <h3 class="text-center">Calendário de Frequência</h3>
                         <ul class="mt-3">
                             <li>O Calendário permite aos funcionários visualizarem suas frequências durante o ano.</li>
@@ -60,10 +62,11 @@
                 </div>
                 <div class="col-md-5 mb-4 d-flex justify-content-center p-3" style="background-color: #6E2CF3; color: #fff; border-radius: 20px;">
                     <div>
+                        <img src="assets/img/home_administrador.png" alt="Imagem 3" class="img-fluid mb-3">
                         <h3 class="text-center">Gerenciamento de Usuários</h3>
                         <ul class="mt-3">
                             <li>Os Administradores fazem o cadastro do usuário, com os dados: nome, email, senha, cpf, telefone, a função e o turno</li>
-                            <li>Os Administradores podem filtrar todos os funcionários, com a funcionalidade de "Desativar" e "Ativar" o funcionário.</li>
+                            <li>Os Administradores podem filtrar todos os funcionários, com a funcionalidade de <strong>"Desativar"</strong> e <strong>"Ativar"</strong> o funcionário.</li>
                             <li>Os Administradores podem filtrar a frequência de todos os funcionários</li>
                         </ul>
                     </div>
@@ -71,6 +74,7 @@
             </div>
         </div>
     </section>
+
 
     <footer class="mt-auto">
         <div class="container text-center">

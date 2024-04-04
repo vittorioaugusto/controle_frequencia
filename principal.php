@@ -35,7 +35,7 @@ if ($_SESSION['tipo_usuario'] === 'Administrador') {
     <title>Início</title>
 </head>
 
-<body class="vh-100">
+<body>
 
     <nav class="navbar navbar-expand-lg navbar-dark">
         <div class="container-fluid">
@@ -104,10 +104,10 @@ if ($_SESSION['tipo_usuario'] === 'Administrador') {
                 </div>
             </div>
 
-            <table class="table w-50 border">
+            <table class="table w-75 table-bordered border border-dark">
                 <div class="card-body">
                     <thead>
-                        <tr class="table-info">
+                        <tr class="table-info border-dark text-center">
                             <?php
                             if ($_SESSION['tipo_usuario'] === 'Administrador') {
                                 echo '<h3>Frequência de Todos os Funcionários</h3>';
@@ -136,7 +136,7 @@ if ($_SESSION['tipo_usuario'] === 'Administrador') {
                                 $presencasPorDia[$nomeFuncionario][$dataPresenca] = 0;
                             }
 
-                            echo "<tr>";
+                            echo "<tr class='text-center'>";
                             echo "<td>" . $row['tipo_usuario'] . "</td>";
                             echo "<td>" . $row['nome'] . "</td>";
                             echo "<td>" . $row['dia'] . "</td>";

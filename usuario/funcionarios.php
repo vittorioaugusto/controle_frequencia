@@ -46,7 +46,7 @@ $resultUsuarios = mysqli_query($conexao, $queryUsuarios);
     <title>Funcionários</title>
 </head>
 
-<body class="vh-100">
+<body>
 
     <nav class="navbar navbar-expand-lg navbar-dark">
         <div class="container-fluid">
@@ -117,7 +117,7 @@ $resultUsuarios = mysqli_query($conexao, $queryUsuarios);
                     <div class="col-md-5">
                         <label for="filtrarTodos" class="form-label"></label>
                         <div class="mb-1">
-                            <input type="number" name="cpf" id="cpf" class="form-control" placeholder="Digite o CPF">
+                            <input type="number" name="cpf" id="cpf" class="form-control border-dark" placeholder="Digite o CPF">
                         </div>
                         <div class="text-center">
                             <button type="submit" name="filtrarPorCPF" value="Filtrar" class="btn btn-custom-color px-5 py-2 mt-3">Filtrar</button>
@@ -132,7 +132,7 @@ $resultUsuarios = mysqli_query($conexao, $queryUsuarios);
         <section class="w-100 d-flex flex-column 
         justify-content-center align-items-center text-dark fs-5">
 
-            <table class="table w-75 table-bordered">
+            <table class="table w-75 table-bordered border-dark">
                 <div class="card-body">
                     <thead>
                         <h3>
@@ -163,7 +163,7 @@ $resultUsuarios = mysqli_query($conexao, $queryUsuarios);
                             }
                             ?>
                         </h3>
-                        <tr class="table-info">
+                        <tr class="table-info text-center border-dark">
                             <th scope="col">Imagem de Perfil</th>
                             <th scope="col">Função</th>
                             <th scope="col">Nome</th>
@@ -198,7 +198,7 @@ $resultUsuarios = mysqli_query($conexao, $queryUsuarios);
                             $resultFuncionarios = mysqli_query($conexao, $queryFuncionarios);
 
                             while ($rowFuncionario = mysqli_fetch_assoc($resultFuncionarios)) {
-                                echo "<tr>";
+                                echo "<tr class='text-center'>";
                                 // Obtenha o nome do arquivo da imagem de perfil
                                 $nomeArquivoPerfil = $rowFuncionario['nome'] . '_perfil.jpg';
 
@@ -206,7 +206,7 @@ $resultUsuarios = mysqli_query($conexao, $queryUsuarios);
                                 $caminhoImagemPerfil = '../usuario/imagens_perfil/' . $nomeArquivoPerfil;
 
                                 // Adicione a tag <img> com o caminho da imagem de perfil
-                                echo "<td><img src='$caminhoImagemPerfil' alt='Imagem de Perfil' style='width: 100px; height: 100px;'></td>";
+                                echo "<td><img src='$caminhoImagemPerfil' alt='Imagem de Perfil' class='imagem_perfil_funcionarios'></td>";
                                 echo "<td>" . $rowFuncionario['tipo_usuario'] . "</td>";
                                 echo "<td>" . $rowFuncionario['nome'] . "</td>";
                                 echo "<td>" . $rowFuncionario['telefone'] . "</td>";

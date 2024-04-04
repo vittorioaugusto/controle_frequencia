@@ -36,7 +36,7 @@ $tipo_usuario = $_SESSION['tipo_usuario'];
     <title>Perfil</title>
 </head>
 
-<body class="vh-100">
+<body>
 
     <nav class="navbar navbar-expand-lg navbar-dark">
         <div class="container-fluid">
@@ -122,7 +122,7 @@ $tipo_usuario = $_SESSION['tipo_usuario'];
                 <form action="processar_imagem.php" method="POST" enctype="multipart/form-data">
                     <div class="mb-3">
                         <label for="imagem" class="form-label"><strong>Escolha uma imagem para o perfil:</strong></label>
-                        <input type="file" class="form-control" name="imagem" id="imagem" accept="image/*">
+                        <input type="file" class="form-control border-dark" name="imagem" id="imagem" accept="image/*">
                     </div>
                     <button type="submit" class="btn btn-primary" name="submit">Upload Imagem</button>
                 </form>

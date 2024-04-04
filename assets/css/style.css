@@ -126,3 +126,9 @@ body {
     width: 100px;
     height: 100px;
 }
+
+.imagem_perfil_funcionarios{
+    border-radius: 100px;
+    width: 100px; 
+    height: 100px;
+}
